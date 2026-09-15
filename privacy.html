@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy policy — Collared</title>
+  <meta name="description" content="How Collared stores your data, who can see it, and what we will never do with it.">
+  <meta property="og:title" content="Privacy policy — Collared">
+  <meta property="og:description" content="Tasks, journals, rewards, and a community of thousands — built by people in the lifestyle, for people in the lifestyle.">
+  <meta property="og:image" content="https://collared.app/assets/collared-tile.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://collared.app/privacy">
+  <link rel="icon" type="image/png" href="assets/collodis.png">
+  <link rel="apple-touch-icon" href="assets/collodis.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Reusable broken-circle mark (the collar, in two strokes) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="collar-mark" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="9"
+              stroke-dasharray="111.6 14.1" stroke-dashoffset="-7" />
+    </symbol>
+  </svg>
+
+  <!-- ============================== NAV ============================== -->
+  <header class="nav" id="top">
+    <div class="nav-inner">
+      <a class="nav-brand" href="/" aria-label="Collared — back to top">
+        <svg class="nav-mark" aria-hidden="true"><use href="#collar-mark"/></svg>
+        <img class="nav-wordmark" src="assets/collared-logo-purple.png" alt="Collared">
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#app">App</a>
+        <a href="/#community">Community</a>
+        <a href="/#podcast">Podcast</a>
+        <a href="/#merch">Merch</a>
+        <a href="/#events">Events</a>
+        <a href="/#join">Join the Team</a>
+      </nav>
+      <a class="btn btn-pill nav-cta" data-link="discord" href="/#community">Join the Discord</a>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <a href="/#app">App</a>
+      <a href="/#community">Community</a>
+      <a href="/#podcast">Podcast</a>
+      <a href="/#merch">Merch</a>
+      <a href="/#events">Events</a>
+      <a href="/#join">Join the Team</a>
+      <a class="btn btn-pill" data-link="discord" href="/#community">Join the Discord</a>
+    </div>
+  </header>
+
+  <main class="legal container">
+    <h1>Privacy policy</h1>
+    <p class="legal-meta">Effective 15 September 2026 · Applies to the Collared app and collared.app</p>
+    <p class="section-lede">Collared is built on a simple idea: what happens in your dynamic is yours. This page says, in plain words, what the app stores, who can see it, and what we will never do with it.</p>
+
+    <h2>What we store</h2>
+    <ul>
+      <li><strong>Your account.</strong> Email address, a username you choose, an optional display name and avatar, your role, and the date you confirmed you are 18 or older. If you sign in with Apple or Google, we receive the identifier and email those services share; we never see your password for those services.</li>
+      <li><strong>Your dynamics.</strong> Who you are connected to, the terms you both accepted (roles, honorifics, structure, rights), and the history of pauses, changes, and endings.</li>
+      <li><strong>Tasks, points, rewards, punishments.</strong> Everything assigned, completed, reviewed, redeemed, or issued inside a dynamic, including proof notes and proof photos, plus the points ledger.</li>
+      <li><strong>Your journal.</strong> Entries, photos, and the sharing windows you grant. Entry text is stored so it can sync to your devices, but nothing on our side reads it: no search index, no scanning, no automated processing of any kind.</li>
+      <li><strong>Agreements.</strong> Files or text you upload as your contract, and who has acknowledged each version. Agreement contents are treated exactly like journal text.</li>
+      <li><strong>Device tokens and preferences.</strong> A push-notification token for each device you sign in on, your notification choices, theme, and whether app lock is on.</li>
+      <li><strong>Invite links.</strong> Which invite link a new account arrived through, so we can credit the person who shared it. Only the account owner and the person who invited them can see this.</li>
+    </ul>
+
+    <h2>Who can see what</h2>
+    <ul>
+      <li><strong>Your partner in a dynamic</strong> sees what the dynamic's rights allow: tasks and proof they assigned or review, the points ledger, the reward shop, punishments, agreements, and any journal entries you choose to share with them for as long as you choose.</li>
+      <li><strong>Friends</strong> see counts only: tasks done, points, journal entries written. Never the content.</li>
+      <li><strong>Everyone else</strong> sees nothing. Profiles can be found by exact username or invite code only, never by email, and never by browsing.</li>
+      <li><strong>Blocking</strong> is silent and immediate. A blocked person disappears from your app and you from theirs.</li>
+    </ul>
+
+    <h2>What we never do</h2>
+    <ul>
+      <li>We never read your journal or your agreements. Our servers are built so they cannot, and our team policy is the same.</li>
+      <li>We never sell, rent, or share your data with advertisers or data brokers.</li>
+      <li>We run no analytics or tracking software in the app. The only diagnostic data we collect is a crash report when the app crashes, which contains technical details about the failure and never the content of your dynamic.</li>
+      <li>We never look up people by email, and we never show your email to anyone.</li>
+    </ul>
+
+    <h2>Who helps us run Collared</h2>
+    <p>Collared runs on <strong>Supabase</strong> (database, file storage, and sign-in, hosted in the United States) and sends push notifications through <strong>Expo's push service</strong>, which hands them to Apple and Google to deliver. These providers process data only to run the service for us. Sign in with Apple and Google sign-in are provided by Apple and Google under their own terms.</p>
+
+    <h2>Retention</h2>
+    <ul>
+      <li>Proof photos are deleted automatically 30 days after the task is resolved.</li>
+      <li>Data exports you request are deleted 24 hours after they are generated.</li>
+      <li>Everything else stays until you delete it or delete your account.</li>
+    </ul>
+
+    <h2>Your controls</h2>
+    <ul>
+      <li><strong>Export.</strong> Settings › Export my data gives you everything you wrote and every connection as one file.</li>
+      <li><strong>Delete.</strong> Settings › Delete account ends every dynamic, removes your photos, and deletes everything you wrote. It cannot be undone. Partners keep only the points history they could already see, with your name removed.</li>
+      <li><strong>Sharing.</strong> Every journal share has a window you set, and every share can be revoked at any time.</li>
+      <li><strong>Notifications.</strong> Per-type toggles, snooze, and a discreet mode that replaces lock-screen text with "You have an update."</li>
+      <li><strong>App lock.</strong> Face ID, Touch ID, or your device passcode, with nothing shown in the app switcher.</li>
+    </ul>
+
+    <h2>Adults only</h2>
+    <p>Collared is for people 18 and over. We do not knowingly keep accounts for anyone younger, and we remove any we find.</p>
+
+    <h2>Changes and contact</h2>
+    <p>If this policy changes in a way that matters, we will tell you in the app before it takes effect. Questions and requests go to <a href="mailto:hello@collared.app">hello@collared.app</a>.</p>
+  </main>
+
+<footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/collared-logo-white.png" alt="Collared" class="footer-wordmark">
+        <p class="footer-contact">hello@collared.app <span aria-hidden="true">·</span> <a data-link="discord" href="/#community">Discord</a></p>
+        <div class="footer-socials" aria-label="Social media">
+          <!-- Social slots — drop real URLs into the constants block in app.js -->
+          <a data-link="discord" href="#" aria-label="Discord">Discord</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="TikTok">TikTok</a>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="/#app">App</a>
+        <a href="/#community">Community</a>
+        <a href="/#podcast">Podcast</a>
+        <a href="/#merch">Merch</a>
+        <a href="/#events">Events</a>
+        <a href="/#join">Join the Team</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+    </div>
+    <p class="footer-disclaimer container">Collared is intended for adults 18+. All content relates to consensual adult dynamics. © 2026 Collared.</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
