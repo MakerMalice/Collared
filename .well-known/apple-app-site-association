@@ -1,0 +1,8 @@
+{
+  "applinks": {
+    "details": [
+      { "appIDs": ["44WLKXALYH.app.collared.mobile"], "components": [ { "/": "/i/*", "comment": "Invite links open the app" } ] }
+    ]
+  },
+  "webcredentials": { "apps": ["44WLKXALYH.app.collared.mobile"] }
+}
