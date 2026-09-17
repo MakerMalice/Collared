@@ -65,6 +65,25 @@ replaced by the transparent PNGs in the second session at the owner's request.
 - **Waitlist:** Kit (ConvertKit) form `9553709`, double opt-in off, wired June 2026 and verified
   live end-to-end (two test subscribers were created and flagged for deletion).
 
+## 2026-09-17 — the policy caught up with the app
+
+Both legal pages moved to **Effective 17 September 2026** for three changes shipped in app build 12:
+
+- **Deletion is no longer immediate.** Closing an account pauses the dynamics and hides the person,
+  and nothing is destroyed for **thirty days**; signing in inside that window restores everything.
+  The old wording ("it cannot be undone") was true when it was written and stopped being true, so it
+  is now explicit about both halves: reversible for thirty days, irrecoverable after. Changed in
+  `privacy.html` (Your controls, Retention) and `terms.html`.
+- **Feedback is a thing we store.** "Tell us what you think" keeps the message, the build, the
+  screen and the device, and a screenshot or recording if the person attaches one. Listed under What
+  we store, with the attachment called out, because that is the one place somebody can hand over
+  their own journal.
+- **Feedback attachments are deleted after 90 days**, the words kept. Added to Retention.
+
+The app's own declarations (`docs/10-STORE-PRIVACY.md` in the app repo) were updated in the same
+commit as the code, and this page is the public half of the same change. If one moves again, move
+both.
+
 ## Standing to-dos on the site
 
 - Delete the two `collared.site.test.delete.me*@gmail.com` test subscribers in Kit (if not done).
