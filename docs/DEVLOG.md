@@ -33,6 +33,8 @@ Written so any future session — human or Claude — can pick up the thread.
 | `collodis.png` (512², broken-circle icon on lavender tile) | `assets/` (source: ~/Documents) | Favicon / touch icon |
 | `collared-tile.png` (1200², wordmark on lavender tile) | `assets/` (from ~/Documents/COLLARED.png, 2500²) | OG / social-preview image (solid bg needed for link cards) |
 | `looponCOLLARED.png` (collar-with-O-ring variant) | ~/Documents only | Unused so far — candidate for podcast art or app icon exploration |
+| `collared-avatar.png` (512², white wordmark on app-violet gradient) | `assets/` (generated with Pillow from `collared-logo-white.png`) | Discord webhook avatar / embed icons — app palette on purpose, not site lavender |
+| `team-banner.png` (1600×640, "We're growing the team." on app-violet gradient with broken-circle motif) | `assets/` (generated with Pillow, Avenir Next) | Wide image for the Discord team-openings announcement embed |
 | Broken-circle motif | inline SVG `#collar-mark` in `index.html` | Drawn as a stroked circle with `stroke-dasharray` gaps — no image needed |
 
 The wordmark must never be recreated in a webfont — always use the supplied PNGs.
