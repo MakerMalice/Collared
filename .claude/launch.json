@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "collared-site",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173"],
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "cd /Users/toxtrepla/Documents/APPS/SITES/Collared && exec /usr/bin/python3 -m http.server 4173"],
       "port": 4173
     }
   ]

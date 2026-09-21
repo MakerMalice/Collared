@@ -1,11 +1,15 @@
 /* ════════════════════════════════════════════════════════════════════
-   Collared — landing page behavior
+   Collared — site-wide behavior
+   Loaded on every page. Nav, scroll reveals, and link wiring are
+   universal; every homepage demo block below is guarded by an
+   element-existence check so secondary pages (privacy, terms, team)
+   run this file with zero console errors.
    All demo-panel state is plain in-memory JS. Nothing is persisted.
    ════════════════════════════════════════════════════════════════════ */
 
 /* ── EXTERNAL LINKS — update everything in this one block ──────────── */
 const DISCORD_INVITE_URL = "https://discord.gg/collared";   // real invite link
-const STAFF_FORM_URL     = "https://docs.google.com/forms/d/e/1FAIpQLSeWlgs-YBYfgfQ5FaggQWl53DoCqNnbCs7KPmqSLheb6_qUSQ/viewform?pli=1";    // Google Form for staff applications
+const STAFF_FORM_URL     = "/team";                           // team application page on this site
 const APP_STORE_URL      = "";                                // fill at launch
 const PLAY_STORE_URL     = "";                                // fill at launch
 const SPOTIFY_URL        = "";                                // fill when the podcast ships
@@ -37,9 +41,18 @@ document.querySelectorAll('[data-link="discord"]').forEach((a) => {
     a.rel = "noopener";
   }
 });
+/* Internal paths ("/team") stay in the same tab; only off-site URLs open a new one. */
+const isExternalLink = (url) => /^https?:\/\//i.test(url);
 document.querySelectorAll('[data-link="staff"]').forEach((a) => {
-  a.href = STAFF_FORM_URL.includes("REPLACE_ME") ? "#join" : STAFF_FORM_URL;
-  if (!STAFF_FORM_URL.includes("REPLACE_ME")) { a.target = "_blank"; a.rel = "noopener"; }
+  const unset = !STAFF_FORM_URL || STAFF_FORM_URL.includes("REPLACE_ME");
+  a.href = unset ? "#join" : STAFF_FORM_URL;
+  if (!unset && isExternalLink(STAFF_FORM_URL)) {
+    a.target = "_blank";
+    a.rel = "noopener";
+  } else {
+    a.removeAttribute("target");
+    a.removeAttribute("rel");
+  }
 });
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -47,18 +60,20 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matc
 /* ════════════════ mobile nav ════════════════ */
 const burger = document.querySelector(".nav-burger");
 const mobileMenu = document.getElementById("mobile-menu");
-burger.addEventListener("click", () => {
-  const open = burger.getAttribute("aria-expanded") === "true";
-  burger.setAttribute("aria-expanded", String(!open));
-  burger.setAttribute("aria-label", open ? "Open menu" : "Close menu");
-  mobileMenu.hidden = open;
-});
-mobileMenu.querySelectorAll("a").forEach((a) =>
-  a.addEventListener("click", () => {
-    burger.setAttribute("aria-expanded", "false");
-    mobileMenu.hidden = true;
-  })
-);
+if (burger && mobileMenu) {
+  burger.addEventListener("click", () => {
+    const open = burger.getAttribute("aria-expanded") === "true";
+    burger.setAttribute("aria-expanded", String(!open));
+    burger.setAttribute("aria-label", open ? "Open menu" : "Close menu");
+    mobileMenu.hidden = open;
+  });
+  mobileMenu.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => {
+      burger.setAttribute("aria-expanded", "false");
+      mobileMenu.hidden = true;
+    })
+  );
+}
 
 /* ════════════════ scroll reveals (one-time) ════════════════ */
 if (!reducedMotion && "IntersectionObserver" in window) {
@@ -211,40 +226,44 @@ function createTaskDemo(container, opts = {}) {
 
 /* ── hero phone: interactive + gentle auto-loop ── */
 const heroEl = document.getElementById("hero-task-demo");
-let heroLoopStopped = false;
-const heroDemo = createTaskDemo(heroEl, {
-  startPoints: 180,
-  onInteract: () => { heroLoopStopped = true; }, // pause auto-loop on first interaction
-});
+if (heroEl) {
+  let heroLoopStopped = false;
+  const heroDemo = createTaskDemo(heroEl, {
+    startPoints: 180,
+    onInteract: () => { heroLoopStopped = true; }, // pause auto-loop on first interaction
+  });
 
-if (!reducedMotion) {
-  let loopTimer = setInterval(() => {
-    if (heroLoopStopped) { clearInterval(loopTimer); return; }
-    const next = heroDemo.state.tasks.find((t) => !t.done);
-    if (next) {
-      heroDemo.completeTask(next.id);
-    } else {
-      setTimeout(() => { if (!heroLoopStopped) heroDemo.reset(); }, 1800);
-    }
-  }, 3400);
+  if (!reducedMotion) {
+    let loopTimer = setInterval(() => {
+      if (heroLoopStopped) { clearInterval(loopTimer); return; }
+      const next = heroDemo.state.tasks.find((t) => !t.done);
+      if (next) {
+        heroDemo.completeTask(next.id);
+      } else {
+        setTimeout(() => { if (!heroLoopStopped) heroDemo.reset(); }, 1800);
+      }
+    }, 3400);
+  }
 }
 
 /* ── §2 feature panel: same engine, fully manual ── */
-createTaskDemo(document.getElementById("feature-task-demo"), { startPoints: 180 });
+const featureTaskEl = document.getElementById("feature-task-demo");
+if (featureTaskEl) createTaskDemo(featureTaskEl, { startPoints: 180 });
 
 /* ════════════════ rewards demo ════════════════ */
 const balanceEl = document.getElementById("rewards-balance-num");
 const redeemAffordable = document.getElementById("redeem-affordable");
-let rewardsBalance = 180;
-
-redeemAffordable.addEventListener("click", () => {
-  if (redeemAffordable.classList.contains("is-redeemed")) return;
-  rewardsBalance -= 150;
-  balanceEl.textContent = rewardsBalance;
-  redeemAffordable.classList.add("is-redeemed");
-  redeemAffordable.innerHTML = "✓ Redeemed";
-  redeemAffordable.setAttribute("aria-disabled", "true");
-});
+if (balanceEl && redeemAffordable) {
+  let rewardsBalance = 180;
+  redeemAffordable.addEventListener("click", () => {
+    if (redeemAffordable.classList.contains("is-redeemed")) return;
+    rewardsBalance -= 150;
+    balanceEl.textContent = rewardsBalance;
+    redeemAffordable.classList.add("is-redeemed");
+    redeemAffordable.innerHTML = "✓ Redeemed";
+    redeemAffordable.setAttribute("aria-disabled", "true");
+  });
+}
 
 /* ════════════════ profile pill selectors ════════════════ */
 function wirePillGroup(groupEl) {
@@ -254,27 +273,31 @@ function wirePillGroup(groupEl) {
     groupEl.querySelectorAll(".app-pill").forEach((p) => p.setAttribute("aria-pressed", String(p === pill)));
   });
 }
-wirePillGroup(document.getElementById("role-pills"));
-wirePillGroup(document.getElementById("status-pills"));
+["role-pills", "status-pills"].forEach((id) => {
+  const el = document.getElementById(id);
+  if (el) wirePillGroup(el);
+});
 
 /* ════════════════ theme micro-demo (flips the DEMOS, not the site) ════════════════ */
 const themePills = document.getElementById("theme-pills");
 const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
 
-function applyDemoTheme(mode) {
-  const dark = mode === "dark" || (mode === "system" && systemDark.matches);
-  document.body.classList.toggle("demos-dark", dark);
+if (themePills) {
+  const applyDemoTheme = (mode) => {
+    const dark = mode === "dark" || (mode === "system" && systemDark.matches);
+    document.body.classList.toggle("demos-dark", dark);
+  };
+  themePills.addEventListener("click", (e) => {
+    const card = e.target.closest(".theme-card");
+    if (!card) return;
+    themePills.querySelectorAll(".theme-card").forEach((c) => c.setAttribute("aria-pressed", String(c === card)));
+    applyDemoTheme(card.dataset.theme);
+  });
+  systemDark.addEventListener("change", () => {
+    const current = themePills.querySelector('[aria-pressed="true"]');
+    if (current?.dataset.theme === "system") applyDemoTheme("system");
+  });
 }
-themePills.addEventListener("click", (e) => {
-  const card = e.target.closest(".theme-card");
-  if (!card) return;
-  themePills.querySelectorAll(".theme-card").forEach((c) => c.setAttribute("aria-pressed", String(c === card)));
-  applyDemoTheme(card.dataset.theme);
-});
-systemDark.addEventListener("change", () => {
-  const current = themePills.querySelector('[aria-pressed="true"]');
-  if (current?.dataset.theme === "system") applyDemoTheme("system");
-});
 
 /* ════════════════ waitlist form (Kit) ════════════════
    Subscribes via a background fetch to Kit's public form endpoint so the
@@ -287,7 +310,7 @@ systemDark.addEventListener("change", () => {
    KIT_MERCH_FORM_ID above, merch-curious folks get subscribed to that
    form too, which makes segmenting in Kit one click. */
 const waitlistForm = document.getElementById("waitlist-form");
-waitlistForm.addEventListener("submit", async (e) => {
+waitlistForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const email = document.getElementById("waitlist-email").value.trim();
   const wantsMerch = document.getElementById("merch-checkbox").checked;
@@ -325,18 +348,20 @@ waitlistForm.addEventListener("submit", async (e) => {
 });
 
 /* merch band → waitlist, pre-ticking the merch checkbox */
-document.getElementById("merch-link").addEventListener("click", () => {
-  document.getElementById("merch-checkbox").checked = true;
+document.getElementById("merch-link")?.addEventListener("click", () => {
+  const box = document.getElementById("merch-checkbox");
+  if (box) box.checked = true;
 });
 
 /* ════════════════ events ════════════════ */
 function renderEvents() {
+  const upEl = document.getElementById("events-upcoming");
+  const pastEl = document.getElementById("events-past");
+  if (!upEl || !pastEl) return; // homepage only
+
   const today = new Date().toISOString().slice(0, 10);
   const upcoming = events.filter((ev) => ev.date >= today).sort((a, b) => a.date.localeCompare(b.date));
   const past = events.filter((ev) => ev.date < today).sort((a, b) => b.date.localeCompare(a.date));
-
-  const upEl = document.getElementById("events-upcoming");
-  const pastEl = document.getElementById("events-past");
 
   const card = (ev) => {
     const d = new Date(ev.date + "T12:00:00");

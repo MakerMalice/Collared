@@ -18,7 +18,8 @@ Vanilla HTML/CSS/JS — no framework, no build step. Three files plus assets:
 |---|---|
 | `index.html` | The entire page: nav, hero, pillars, app features, community, podcast, merch, events, join, footer |
 | `styles.css` | All styling. Two deliberate palettes (see below) |
-| `app.js` | Demo-panel logic, waitlist submission, events rendering, nav/reveal behavior |
+| `app.js` | Site-wide behavior: nav, scroll reveals, link wiring, plus the homepage demo panels (every homepage-only block is guarded by an element check, so it runs clean on every page) |
+| `team.html` / `team.css` / `team.js` | The **Join the Team** application page, served at `/team` |
 | `assets/` | Brand marks only (transparent logo PNGs, broken-circle icon, OG tile) |
 | `CNAME` | Custom-domain binding for GitHub Pages (`collared.app`) |
 
@@ -62,6 +63,30 @@ Submission happens via background fetch (visitor stays on-page, styled confirmat
 native-POST fallback to Kit's hosted thank-you page. The "tell me about merch too" checkbox is
 sent as the Kit custom field `merch_interest`; an optional `KIT_MERCH_FORM_ID` slot exists for a
 dedicated merch form.
+
+## The team application page (`/team`)
+
+`team.html` replaces the old Google Form. One page, sectioned, with a custom accessible
+team picker (button + listbox: arrows, Home/End, Enter/Space, Escape, type-ahead) that
+expands either the **Discord & Community Team** questionnaire or, for a team that isn't
+open yet, a short **interest** form.
+
+The questionnaire is 8 required questions in five titled sections, with a live segmented
+progress indicator ("3 of 8 answered") that sticks to the top on desktop. Answers are held
+in plain JS; validation runs on blur and on submit, and submit scrolls to and focuses the
+first unanswered question.
+
+Submission settings live in one constants block at the top of `team.js`:
+`TEAM_FORM_ENDPOINT` (the Google Apps Script web-app `/exec` URL) and `TEAM_FORM_KEY`.
+The POST is deliberately header-free so it stays a *simple* CORS request — Apps Script
+rejects the preflight that a `Content-Type` header would trigger. If the request throws,
+it retries once with `mode: "no-cors"` and treats completion as success; if
+`TEAM_FORM_ENDPOINT` is blank the page simulates a successful send so it stays previewable.
+Both payload shapes (`type: "application"` and `type: "interest"`) carry a hidden `website`
+honeypot field.
+
+`STAFF_FORM_URL` in `app.js` points at `/team`, so every `[data-link="staff"]` button —
+including the homepage join band — links there in the same tab.
 
 ## Deploying
 

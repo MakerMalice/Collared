@@ -84,6 +84,33 @@ The app's own declarations (`docs/10-STORE-PRIVACY.md` in the app repo) were upd
 commit as the code, and this page is the public half of the same change. If one moves again, move
 both.
 
+## 2026-09-20 — `/team`: the application page
+
+The staff application moved off a Google Form onto `team.html` (+ `team.css`, `team.js`). Built
+by an Opus agent from a detailed spec, then reviewed and end-to-end tested by the lead session.
+
+**Data capture, chosen over Formspree / Airtable / Workers:** a Google Sheet ("Collared Team
+Applications") fed by a Google Apps Script web app. Free, no vendor AUP risk, readable as a
+spreadsheet, dashboard-able via Looker Studio, and it's where the old Form's data already lived.
+The script appends a row to an **Applications** or **Interest** tab (auto-created), emails
+tox@collared.app, and posts a violet embed to a private Discord staff channel via webhook.
+The webhook URL and notify email live **only in the script** (owner's Google account) — never in
+this repo. The script source is kept privately by the owner; a shared key (`TEAM_FORM_KEY`) and a
+honeypot field filter drive-by posts.
+
+**Quirk worth remembering:** Apps Script answers a POST with a 302 to a
+`script.googleusercontent.com/macros/echo` URL. Browsers follow it fine as long as the request is a
+*simple* one (no `Content-Type` header — the page sends the JSON body header-free). curl needs to
+GET the `Location` manually; `curl -L` re-sends the content-type and gets "Page Not Found" even
+though the row was written.
+
+**Page design:** hero band → "Step one · Choose a team" custom listbox (Discord & Community Team
+active; Developer / Convention & Event / Podcast & Media muted "Coming soon", each opening an
+email-interest panel that feeds the Interest tab) → 8-question questionnaire in five sections with
+a segmented progress indicator, kind inline validation, device-timezone detection, honeypot,
+loading/success/error states. `app.js` was made safe for every page (element guards) and
+`STAFF_FORM_URL` now points at `/team` (same-tab).
+
 ## Standing to-dos on the site
 
 - Delete the two `collared.site.test.delete.me*@gmail.com` test subscribers in Kit (if not done).

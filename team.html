@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join the Team — Collared</title>
+  <meta name="description" content="Apply to help run Collared. The community is built by volunteers from the lifestyle, and we're growing the team across Discord, development, events, and media.">
+  <meta property="og:title" content="Join the Team — Collared">
+  <meta property="og:description" content="Tasks, journals, rewards, and a community of thousands — built by people in the lifestyle, for people in the lifestyle.">
+  <meta property="og:image" content="https://collared.app/assets/collared-tile.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://collared.app/team">
+  <link rel="icon" type="image/png" href="assets/collodis.png">
+  <link rel="apple-touch-icon" href="assets/collodis.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="team.css">
+</head>
+<body>
+
+  <!-- Reusable broken-circle mark (the collar, in two strokes) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="collar-mark" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="9"
+              stroke-dasharray="111.6 14.1" stroke-dashoffset="-7" />
+    </symbol>
+  </svg>
+
+  <!-- ============================== NAV ============================== -->
+  <header class="nav" id="top">
+    <div class="nav-inner">
+      <a class="nav-brand" href="/" aria-label="Collared — home">
+        <svg class="nav-mark" aria-hidden="true"><use href="#collar-mark"/></svg>
+        <img class="nav-wordmark" src="assets/collared-logo-purple.png" alt="Collared">
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#app">App</a>
+        <a href="/#community">Community</a>
+        <a href="/#podcast">Podcast</a>
+        <a href="/#merch">Merch</a>
+        <a href="/#events">Events</a>
+        <a href="/team" aria-current="page">Join the Team</a>
+      </nav>
+      <a class="btn btn-pill nav-cta" data-link="discord" href="/#community">Join the Discord</a>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <a href="/#app">App</a>
+      <a href="/#community">Community</a>
+      <a href="/#podcast">Podcast</a>
+      <a href="/#merch">Merch</a>
+      <a href="/#events">Events</a>
+      <a href="/team" aria-current="page">Join the Team</a>
+      <a class="btn btn-pill" data-link="discord" href="/#community">Join the Discord</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================== HERO BAND ============================== -->
+    <section class="team-hero">
+      <svg class="team-hero-geometry" aria-hidden="true"><use href="#collar-mark"/></svg>
+      <svg class="team-hero-geometry team-hero-geometry-2" aria-hidden="true"><use href="#collar-mark"/></svg>
+      <div class="container team-hero-inner">
+        <p class="eyebrow team-hero-eyebrow">Join the Team</p>
+        <h1 class="team-hero-title">Help build Collared.</h1>
+        <p class="team-hero-subline">Collared is run by volunteers from the lifestyle — people who moderate, build, organize, and host because they want this community to be good. We're growing the team across Discord, development, events, and media.</p>
+        <p class="team-hero-contact">Questions? Email <a href="mailto:tox@collared.app">tox@collared.app</a> or message <strong>tox</strong> in the official Discord.</p>
+      </div>
+    </section>
+
+    <!-- ============================== CHOOSE A TEAM ============================== -->
+    <section class="team-choose">
+      <div class="container">
+        <p class="eyebrow reveal">Step one</p>
+        <h2 class="reveal">Choose a team.</h2>
+        <p class="section-lede reveal">Pick where you'd like to help. Applications open one team at a time so every new member gets a proper welcome.</p>
+
+        <!-- Custom accessible select: button + listbox -->
+        <div class="tsel reveal" id="team-select">
+          <span class="tsel-label" id="tsel-label">Team</span>
+          <button type="button" class="tsel-button" id="tsel-button"
+                  aria-haspopup="listbox" aria-expanded="false"
+                  aria-labelledby="tsel-label tsel-button">
+            <span class="tsel-value is-placeholder" id="tsel-value">Select a team…</span>
+            <svg class="tsel-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9.5 6 6 6-6"/></svg>
+          </button>
+          <ul class="tsel-list" id="tsel-list" role="listbox" tabindex="-1"
+              aria-labelledby="tsel-label" hidden>
+            <li class="tsel-option" role="option" id="tsel-opt-0" aria-selected="false"
+                data-value="Discord &amp; Community Team" data-panel="questionnaire">
+              <span class="tsel-option-text">
+                <span class="tsel-option-name">Discord &amp; Community Team</span>
+                <span class="tsel-option-desc">Moderation, daily discussion, welcoming newcomers</span>
+              </span>
+              <svg class="tsel-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+            </li>
+            <li class="tsel-option is-soon" role="option" id="tsel-opt-1" aria-selected="false"
+                data-value="Developer Team" data-panel="interest">
+              <span class="tsel-option-text">
+                <span class="tsel-option-name">Developer Team</span>
+                <span class="tsel-option-desc">App and web development, testing, release support</span>
+              </span>
+              <span class="tsel-tag">Coming soon</span>
+              <svg class="tsel-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+            </li>
+            <li class="tsel-option is-soon" role="option" id="tsel-opt-2" aria-selected="false"
+                data-value="Convention &amp; Event Team" data-panel="interest">
+              <span class="tsel-option-text">
+                <span class="tsel-option-name">Convention &amp; Event Team</span>
+                <span class="tsel-option-desc">Meetups, conventions, and everything they take to run</span>
+              </span>
+              <span class="tsel-tag">Coming soon</span>
+              <svg class="tsel-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+            </li>
+            <li class="tsel-option is-soon" role="option" id="tsel-opt-3" aria-selected="false"
+                data-value="Podcast &amp; Media Team" data-panel="interest">
+              <span class="tsel-option-text">
+                <span class="tsel-option-name">Podcast &amp; Media Team</span>
+                <span class="tsel-option-desc">Episodes, editing, clips, and social media</span>
+              </span>
+              <span class="tsel-tag">Coming soon</span>
+              <svg class="tsel-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ─────────── PANEL A: interest (coming-soon teams) ─────────── -->
+        <div class="team-panel" id="interest-panel" hidden>
+          <div class="team-panel-inner">
+            <form class="interest-form" id="interest-form" novalidate>
+              <p class="tq-eyebrow">Not open yet</p>
+              <p class="interest-lede" id="interest-lede"></p>
+
+              <div class="tq-field">
+                <label class="tq-label" for="interest-email">Email address <span class="tq-req" aria-hidden="true">*</span></label>
+                <input class="tq-input" type="email" id="interest-email" name="email"
+                       autocomplete="email" inputmode="email"
+                       aria-describedby="interest-email-error" required>
+                <p class="tq-error" id="interest-email-error" hidden></p>
+              </div>
+
+              <div class="tq-field">
+                <label class="tq-label" for="interest-discord">Discord username <span class="tq-optional">Optional</span></label>
+                <input class="tq-input" type="text" id="interest-discord" name="discord" autocomplete="off">
+              </div>
+
+              <!-- honeypot -->
+              <div class="tq-hp" aria-hidden="true">
+                <label for="interest-website">Website</label>
+                <input type="text" id="interest-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="tq-actions">
+                <button class="btn btn-primary" type="submit" id="interest-submit">Notify me</button>
+              </div>
+              <p class="tq-formerror" id="interest-formerror" role="alert" hidden></p>
+            </form>
+
+            <div class="tq-success" id="interest-success" hidden>
+              <svg class="tq-success-mark" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="9"
+                        stroke-linecap="round" stroke-dasharray="111.6 14.1" stroke-dashoffset="-7" />
+              </svg>
+              <h3>You're on the list.</h3>
+              <p id="interest-success-text">We'll email you the moment applications open.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────── PANEL B: the questionnaire ─────────── -->
+        <div class="team-panel" id="questionnaire-panel" hidden>
+          <div class="team-panel-inner">
+
+            <div class="tq-progress" id="tq-progress">
+              <div class="tq-progress-bar" role="img" aria-label="Application progress" id="tq-progress-bar">
+                <span class="tq-seg"></span><span class="tq-seg"></span><span class="tq-seg"></span>
+                <span class="tq-seg"></span><span class="tq-seg"></span><span class="tq-seg"></span>
+                <span class="tq-seg"></span><span class="tq-seg"></span>
+              </div>
+              <p class="tq-progress-text" id="tq-progress-text" aria-live="polite">0 of 8 answered</p>
+            </div>
+
+            <form class="tq-form" id="tq-form" novalidate>
+
+              <!-- ── About you ── -->
+              <fieldset class="tq-section">
+                <legend class="tq-eyebrow">About you</legend>
+
+                <div class="tq-field" data-q="discord">
+                  <label class="tq-label" for="q-discord">Your Discord username <span class="tq-req" aria-hidden="true">*</span></label>
+                  <input class="tq-input" type="text" id="q-discord" name="discord"
+                         autocomplete="off" aria-describedby="q-discord-error" required>
+                  <p class="tq-error" id="q-discord-error" hidden></p>
+                </div>
+
+                <div class="tq-field" data-q="timezone">
+                  <label class="tq-label" for="q-timezone">Your timezone <span class="tq-req" aria-hidden="true">*</span></label>
+                  <div class="tq-input-row">
+                    <input class="tq-input" type="text" id="q-timezone" name="timezone"
+                           list="tz-list" autocomplete="off" placeholder="e.g. America/New_York"
+                           aria-describedby="q-timezone-help q-timezone-error" required>
+                    <button class="tq-inline-btn" type="button" id="tz-detect">Use my device's timezone</button>
+                  </div>
+                  <datalist id="tz-list">
+                    <option value="America/Los_Angeles">Pacific — US &amp; Canada</option>
+                    <option value="America/Denver">Mountain — US &amp; Canada</option>
+                    <option value="America/Chicago">Central — US &amp; Canada</option>
+                    <option value="America/New_York">Eastern — US &amp; Canada</option>
+                    <option value="America/Sao_Paulo">Brazil</option>
+                    <option value="Europe/London">United Kingdom &amp; Ireland</option>
+                    <option value="Europe/Berlin">Central Europe</option>
+                    <option value="Europe/Athens">Eastern Europe</option>
+                    <option value="Africa/Johannesburg">South Africa</option>
+                    <option value="Asia/Dubai">Gulf</option>
+                    <option value="Asia/Kolkata">India</option>
+                    <option value="Asia/Singapore">Singapore &amp; Malaysia</option>
+                    <option value="Asia/Tokyo">Japan</option>
+                    <option value="Australia/Perth">Western Australia</option>
+                    <option value="Australia/Sydney">Eastern Australia</option>
+                    <option value="Pacific/Auckland">New Zealand</option>
+                  </datalist>
+                  <p class="tq-help" id="q-timezone-help">Pick from the list or type your own.</p>
+                  <p class="tq-error" id="q-timezone-error" hidden></p>
+                </div>
+              </fieldset>
+
+              <!-- ── Availability ── -->
+              <fieldset class="tq-section">
+                <legend class="tq-eyebrow">Availability</legend>
+
+                <div class="tq-field" data-q="hours">
+                  <p class="tq-label" id="q-hours-label">Hours per week you can dedicate to the server <span class="tq-req" aria-hidden="true">*</span></p>
+                  <div class="tq-pills" role="group" aria-labelledby="q-hours-label"
+                       aria-describedby="q-hours-help q-hours-error" data-pills="hours" data-mode="single">
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="1–10">1–10</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="11–20">11–20</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="21–30">21–30</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="31+">31+</button>
+                  </div>
+                  <p class="tq-help" id="q-hours-help">There's no wrong answer.</p>
+                  <p class="tq-error" id="q-hours-error" hidden></p>
+                </div>
+
+                <div class="tq-field" data-q="availability">
+                  <p class="tq-label" id="q-availability-label">When are you typically online? <span class="tq-req" aria-hidden="true">*</span></p>
+                  <div class="tq-pills" role="group" aria-labelledby="q-availability-label"
+                       aria-describedby="q-availability-help q-availability-error" data-pills="availability" data-mode="multi">
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Morning">Morning</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Midday">Midday</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Evening">Evening</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Overnight">Overnight</button>
+                  </div>
+                  <p class="tq-help" id="q-availability-help">Relative to your own timezone. Select all that apply.</p>
+                  <p class="tq-error" id="q-availability-error" hidden></p>
+                </div>
+              </fieldset>
+
+              <!-- ── Experience ── -->
+              <fieldset class="tq-section">
+                <legend class="tq-eyebrow">Experience</legend>
+
+                <div class="tq-field" data-q="moderated">
+                  <p class="tq-label" id="q-moderated-label">Have you moderated another Discord community before? <span class="tq-req" aria-hidden="true">*</span></p>
+                  <div class="tq-pills" role="group" aria-labelledby="q-moderated-label"
+                       aria-describedby="q-moderated-help q-moderated-error" data-pills="moderated" data-mode="single">
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Yes">Yes</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="No">No</button>
+                  </div>
+                  <p class="tq-help" id="q-moderated-help">No prior experience is needed — it just helps us plan.</p>
+                  <p class="tq-error" id="q-moderated-error" hidden></p>
+                </div>
+
+                <div class="tq-field" data-q="familiarity">
+                  <p class="tq-label" id="q-familiarity-label">How familiar are you with Discord management? <span class="tq-req" aria-hidden="true">*</span></p>
+                  <div class="tq-scale">
+                    <span class="tq-scale-end" aria-hidden="true">Total beginner</span>
+                    <div class="tq-pills tq-pills-scale" role="group" aria-labelledby="q-familiarity-label"
+                         aria-describedby="q-familiarity-help q-familiarity-error" data-pills="familiarity" data-mode="single">
+                      <button class="tq-pill tq-pill-num" type="button" aria-pressed="false" data-value="1" aria-label="1 — total beginner">1</button>
+                      <button class="tq-pill tq-pill-num" type="button" aria-pressed="false" data-value="2">2</button>
+                      <button class="tq-pill tq-pill-num" type="button" aria-pressed="false" data-value="3">3</button>
+                      <button class="tq-pill tq-pill-num" type="button" aria-pressed="false" data-value="4">4</button>
+                      <button class="tq-pill tq-pill-num" type="button" aria-pressed="false" data-value="5" aria-label="5 — Discord expert">5</button>
+                    </div>
+                    <span class="tq-scale-end tq-scale-end-right" aria-hidden="true">Discord expert</span>
+                  </div>
+                  <p class="tq-help" id="q-familiarity-help">Assigning roles, verifying members, permissions, and channel settings.</p>
+                  <p class="tq-error" id="q-familiarity-error" hidden></p>
+                </div>
+              </fieldset>
+
+              <!-- ── Your ideas ── -->
+              <fieldset class="tq-section">
+                <legend class="tq-eyebrow">Your ideas</legend>
+
+                <div class="tq-field" data-q="improvements">
+                  <label class="tq-label" for="q-improvements">What would you like to see improved or added to the Collared server? <span class="tq-req" aria-hidden="true">*</span></label>
+                  <textarea class="tq-input tq-textarea" id="q-improvements" name="improvements" rows="4"
+                            aria-describedby="q-improvements-count q-improvements-error" required></textarea>
+                  <p class="tq-count" id="q-improvements-count" aria-live="polite">0 characters — 20 minimum</p>
+                  <p class="tq-error" id="q-improvements-error" hidden></p>
+                </div>
+              </fieldset>
+
+              <!-- ── Acknowledgment ── -->
+              <fieldset class="tq-section">
+                <legend class="tq-eyebrow">Acknowledgment</legend>
+
+                <div class="tq-field" data-q="volunteer">
+                  <p class="tq-label" id="q-volunteer-label">Team roles are volunteer positions. Are you comfortable with that? <span class="tq-req" aria-hidden="true">*</span></p>
+                  <div class="tq-pills" role="group" aria-labelledby="q-volunteer-label"
+                       aria-describedby="q-volunteer-error" data-pills="volunteer" data-mode="single">
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Yes">Yes</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="No">No</button>
+                  </div>
+                  <p class="tq-error" id="q-volunteer-error" hidden></p>
+                </div>
+              </fieldset>
+
+              <!-- honeypot -->
+              <div class="tq-hp" aria-hidden="true">
+                <label for="q-website">Website</label>
+                <input type="text" id="q-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="tq-actions">
+                <button class="btn btn-primary btn-big" type="submit" id="tq-submit">Submit application</button>
+                <p class="tq-actions-note">We read every application. You'll hear from us on Discord.</p>
+              </div>
+              <p class="tq-formerror" id="tq-formerror" role="alert" hidden></p>
+            </form>
+
+            <div class="tq-success" id="tq-success" hidden>
+              <svg class="tq-success-mark" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="9"
+                        stroke-linecap="round" stroke-dasharray="111.6 14.1" stroke-dashoffset="-7" />
+              </svg>
+              <h3>Application received.</h3>
+              <p>We'll reach out to you on Discord. Thank you for wanting to help.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/collared-logo-white.png" alt="Collared" class="footer-wordmark">
+        <p class="footer-contact">hello@collared.app <span aria-hidden="true">·</span> <a data-link="discord" href="/#community">Discord</a></p>
+        <div class="footer-socials" aria-label="Social media">
+          <!-- Social slots — drop real URLs into the constants block in app.js -->
+          <a data-link="discord" href="#" aria-label="Discord">Discord</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="TikTok">TikTok</a>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="/#app">App</a>
+        <a href="/#community">Community</a>
+        <a href="/#podcast">Podcast</a>
+        <a href="/#merch">Merch</a>
+        <a href="/#events">Events</a>
+        <a href="/team">Join the Team</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+    </div>
+    <p class="footer-disclaimer container">Collared is intended for adults 18+. All content relates to consensual adult dynamics. © 2026 Collared.</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="team.js"></script>
+</body>
+</html>
