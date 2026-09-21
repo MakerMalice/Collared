@@ -20,6 +20,7 @@ Vanilla HTML/CSS/JS — no framework, no build step. Three files plus assets:
 | `styles.css` | All styling. Two deliberate palettes (see below) |
 | `app.js` | Site-wide behavior: nav, scroll reveals, link wiring, plus the homepage demo panels (every homepage-only block is guarded by an element check, so it runs clean on every page) |
 | `team.html` / `team.css` / `team.js` | The **Join the Team** application page, served at `/team` |
+| `beta.html` / `beta.css` / `beta.js` | The **beta tester signup**, served at `/beta` — **unlisted** (noindex, not linked anywhere); reuses `team.css` components |
 | `assets/` | Brand marks only (transparent logo PNGs, broken-circle icon, OG tile) |
 | `CNAME` | Custom-domain binding for GitHub Pages (`collared.app`) |
 
@@ -87,6 +88,17 @@ honeypot field.
 
 `STAFF_FORM_URL` in `app.js` points at `/team`, so every `[data-link="staff"]` button —
 including the homepage join band — links there in the same tab.
+
+## The beta signup page (`/beta`)
+
+`beta.html` is the sibling of `/team` for the invite-only beta round. It is deliberately
+**unlisted** — `noindex`, no nav/footer/homepage link — and is shared by direct link. Two
+platform cards (iPhone / Android, a keyboard-operable radiogroup) open one questionnaire whose
+device and store-email fields swap per platform; Android gets a "invites start a few weeks
+after iPhone" callout and its own success copy. Eight questions, same progress bar and
+validation as `/team`. Constants (`BETA_FORM_ENDPOINT`, `BETA_FORM_KEY`) sit at the top of
+`beta.js`; the payload is `type: "beta"` and lands on the **Beta** tab of the same Google
+Sheet, notifying by email and a dedicated beta Discord webhook.
 
 ## Deploying
 

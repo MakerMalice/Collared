@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beta — Collared</title>
+  <meta name="description" content="Request an invite to the Collared beta. A small, controlled round of testers shaping the app before launch — iPhone first, Android a few weeks behind.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="Beta — Collared">
+  <meta property="og:description" content="A small, controlled round of testers shaping the app before launch — iPhone first, Android a few weeks behind.">
+  <meta property="og:image" content="https://collared.app/assets/collared-tile.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://collared.app/beta">
+  <link rel="icon" type="image/png" href="assets/collodis.png">
+  <link rel="apple-touch-icon" href="assets/collodis.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="team.css">
+  <link rel="stylesheet" href="beta.css">
+</head>
+<body>
+
+  <!-- Reusable broken-circle mark (the collar, in two strokes) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="collar-mark" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="9"
+              stroke-dasharray="111.6 14.1" stroke-dashoffset="-7" />
+    </symbol>
+  </svg>
+
+  <!-- ============================== NAV ============================== -->
+  <header class="nav" id="top">
+    <div class="nav-inner">
+      <a class="nav-brand" href="/" aria-label="Collared — home">
+        <svg class="nav-mark" aria-hidden="true"><use href="#collar-mark"/></svg>
+        <img class="nav-wordmark" src="assets/collared-logo-purple.png" alt="Collared">
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#app">App</a>
+        <a href="/#community">Community</a>
+        <a href="/#podcast">Podcast</a>
+        <a href="/#merch">Merch</a>
+        <a href="/#events">Events</a>
+        <a href="/team">Join the Team</a>
+      </nav>
+      <a class="btn btn-pill nav-cta" data-link="discord" href="/#community">Join the Discord</a>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <a href="/#app">App</a>
+      <a href="/#community">Community</a>
+      <a href="/#podcast">Podcast</a>
+      <a href="/#merch">Merch</a>
+      <a href="/#events">Events</a>
+      <a href="/team">Join the Team</a>
+      <a class="btn btn-pill" data-link="discord" href="/#community">Join the Discord</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================== HERO BAND ============================== -->
+    <section class="team-hero">
+      <svg class="team-hero-geometry" aria-hidden="true"><use href="#collar-mark"/></svg>
+      <svg class="team-hero-geometry team-hero-geometry-2" aria-hidden="true"><use href="#collar-mark"/></svg>
+      <div class="container team-hero-inner">
+        <p class="eyebrow team-hero-eyebrow">Collared Beta</p>
+        <h1 class="team-hero-title">Be one of the first inside.</h1>
+        <p class="team-hero-subline">This is a small, controlled round of testers helping shape the app before launch. iPhone invites go out first through TestFlight; Android follows a few weeks behind. Testers who send us feedback or feature requests earn special status in the app and the Discord when it launches.</p>
+        <p class="team-hero-contact">Questions? Email <a href="mailto:tox@collared.app">tox@collared.app</a> or message <strong>tox</strong> in the official Discord.</p>
+      </div>
+    </section>
+
+    <!-- ============================== STEP ONE: YOUR PHONE ============================== -->
+    <section class="team-choose beta-choose">
+      <div class="container">
+        <p class="eyebrow reveal">Step one</p>
+        <h2 class="reveal">Your phone.</h2>
+        <p class="section-lede reveal">Pick the phone you'd test on. Invites are sent per platform, so this decides which wave you're in.</p>
+
+        <!-- Platform cards (radiogroup) -->
+        <div class="tq-field beta-platform-field reveal" data-q="platform">
+          <p class="tq-label beta-visually-hidden" id="b-platform-label">Which phone would you test on?</p>
+          <div class="bp-cards" role="radiogroup" id="b-platform"
+               aria-labelledby="b-platform-label" aria-describedby="b-platform-error">
+
+            <button class="bp-card" type="button" role="radio" aria-checked="false" tabindex="0"
+                    data-value="iPhone" id="bp-iphone">
+              <span class="bp-card-glyph" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path fill="currentColor" d="M16.52 12.58c0-2.02 1.62-2.99 1.69-3.04-.92-1.36-2.36-1.55-2.87-1.57-1.22-.12-2.38.72-3 .72-.61 0-1.56-.7-2.56-.68-1.32.02-2.53.76-3.21 1.94-1.37 2.38-.35 5.9.98 7.83.65.95 1.43 2.01 2.45 1.97.98-.04 1.35-.63 2.54-.63 1.18 0 1.52.63 2.55.61 1.05-.02 1.72-.96 2.36-1.91.74-1.09 1.05-2.15 1.07-2.2-.02-.01-2.05-.79-2.07-3.11z"/>
+                  <path fill="currentColor" d="M14.63 6.58c.54-.66.91-1.57.81-2.48-.78.03-1.73.52-2.29 1.18-.5.58-.93 1.5-.81 2.39.87.07 1.76-.44 2.29-1.09z"/>
+                </svg>
+              </span>
+              <span class="bp-card-text">
+                <span class="bp-card-name">iPhone</span>
+                <span class="bp-card-sub">Invites via TestFlight — going out now</span>
+              </span>
+              <svg class="bp-card-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+            </button>
+
+            <button class="bp-card" type="button" role="radio" aria-checked="false" tabindex="-1"
+                    data-value="Android" id="bp-android">
+              <span class="bp-card-glyph" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path fill="currentColor" fill-rule="evenodd" d="M5 11.6a7 7 0 0 1 14 0z M10.4 9.1a.8.8 0 1 1-1.6 0 .8.8 0 1 1 1.6 0z M15.2 9.1a.8.8 0 1 1-1.6 0 .8.8 0 1 1 1.6 0z"/>
+                  <path fill="currentColor" d="M5 12.7h14v5.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 18.2z"/>
+                  <rect fill="currentColor" x="2" y="12.7" width="2.2" height="5.6" rx="1.1"/>
+                  <rect fill="currentColor" x="19.8" y="12.7" width="2.2" height="5.6" rx="1.1"/>
+                  <path fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" d="M7.2 4.2 8.9 6M16.8 4.2 15.1 6"/>
+                </svg>
+              </span>
+              <span class="bp-card-text">
+                <span class="bp-card-name">Android</span>
+                <span class="bp-card-sub">Invites via Google Play — a few weeks after iPhone</span>
+              </span>
+              <svg class="bp-card-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+            </button>
+          </div>
+          <p class="tq-error" id="b-platform-error" hidden></p>
+        </div>
+
+        <!-- ─────────── THE QUESTIONNAIRE PANEL ─────────── -->
+        <div class="team-panel" id="beta-panel" hidden>
+          <div class="team-panel-inner">
+
+            <div class="tq-progress" id="b-progress">
+              <div class="tq-progress-bar" role="img" aria-label="Beta request progress" id="b-progress-bar">
+                <span class="tq-seg"></span><span class="tq-seg"></span><span class="tq-seg"></span>
+                <span class="tq-seg"></span><span class="tq-seg"></span><span class="tq-seg"></span>
+                <span class="tq-seg"></span><span class="tq-seg"></span>
+              </div>
+              <p class="tq-progress-text" id="b-progress-text" aria-live="polite">0 of 8 answered</p>
+            </div>
+
+            <form class="tq-form" id="b-form" novalidate>
+
+              <!-- ── Your phone (platform-specific) ── -->
+              <fieldset class="tq-section">
+                <legend class="tq-eyebrow">Your phone</legend>
+
+                <!-- iPhone -->
+                <div class="beta-platform-fields" data-platform="iPhone" hidden>
+                  <div class="tq-field" data-q="device">
+                    <p class="tq-label" id="b-device-ios-label">Which iPhone do you use? <span class="tq-req" aria-hidden="true">*</span></p>
+                    <div class="tq-pills" role="group" aria-labelledby="b-device-ios-label"
+                         aria-describedby="b-device-ios-error" data-pills="device" data-mode="single">
+                      <button class="tq-pill" type="button" aria-pressed="false" data-value="iPhone 17 series (incl. Air)">iPhone 17 series (incl. Air)</button>
+                      <button class="tq-pill" type="button" aria-pressed="false" data-value="iPhone 16 series (incl. 16e)">iPhone 16 series (incl. 16e)</button>
+                      <button class="tq-pill" type="button" aria-pressed="false" data-value="iPhone 15 series">iPhone 15 series</button>
+                      <button class="tq-pill" type="button" aria-pressed="false" data-value="iPhone 14 or older">iPhone 14 or older</button>
+                      <button class="tq-pill" type="button" aria-pressed="false" data-value="Not sure">Not sure</button>
+                    </div>
+                    <p class="tq-error" id="b-device-ios-error" hidden></p>
+                  </div>
+
+                  <div class="tq-field" data-q="storeEmail">
+                    <label class="tq-label" for="b-store-email-ios">Apple ID email <span class="tq-req" aria-hidden="true">*</span></label>
+                    <input class="tq-input beta-store-email" type="email" id="b-store-email-ios" name="storeEmail"
+                           autocomplete="email" inputmode="email"
+                           aria-describedby="b-store-email-ios-help b-store-email-ios-error" required>
+                    <p class="tq-help" id="b-store-email-ios-help">TestFlight invites go to this address. Use the Apple ID that's signed in on your iPhone.</p>
+                    <p class="tq-error" id="b-store-email-ios-error" hidden></p>
+                  </div>
+                </div>
+
+                <!-- Android -->
+                <div class="beta-platform-fields" data-platform="Android" hidden>
+                  <div class="tq-field" data-q="device">
+                    <p class="tq-label" id="b-device-android-label">Which phone do you use? <span class="tq-req" aria-hidden="true">*</span></p>
+                    <div class="tq-pills" role="group" aria-labelledby="b-device-android-label"
+                         aria-describedby="b-device-android-error" data-pills="device" data-mode="single">
+                      <button class="tq-pill" type="button" aria-pressed="false" data-value="Google Pixel">Google Pixel</button>
+                      <button class="tq-pill" type="button" aria-pressed="false" data-value="Samsung Galaxy">Samsung Galaxy</button>
+                      <button class="tq-pill" type="button" aria-pressed="false" data-value="OnePlus">OnePlus</button>
+                      <button class="tq-pill" type="button" aria-pressed="false" data-value="Motorola">Motorola</button>
+                      <button class="tq-pill" type="button" aria-pressed="false" data-value="Other">Other</button>
+                    </div>
+                    <div class="beta-other" id="b-device-other-wrap" hidden>
+                      <label class="tq-label beta-other-label" for="b-device-other">Which one? <span class="tq-optional">Optional</span></label>
+                      <input class="tq-input beta-other-input" type="text" id="b-device-other" name="deviceOther" autocomplete="off">
+                    </div>
+                    <p class="tq-error" id="b-device-android-error" hidden></p>
+                  </div>
+
+                  <div class="tq-field" data-q="storeEmail">
+                    <label class="tq-label" for="b-store-email-android">Google Play email <span class="tq-req" aria-hidden="true">*</span></label>
+                    <input class="tq-input beta-store-email" type="email" id="b-store-email-android" name="storeEmail"
+                           autocomplete="email" inputmode="email"
+                           aria-describedby="b-store-email-android-help b-store-email-android-error" required>
+                    <p class="tq-help" id="b-store-email-android-help">Play Console invites go to this address. Use the Google account signed into the Play Store on that phone.</p>
+                    <p class="tq-error" id="b-store-email-android-error" hidden></p>
+                  </div>
+
+                  <div class="beta-callout">
+                    <svg class="beta-callout-mark" aria-hidden="true"><use href="#collar-mark"/></svg>
+                    <p>Android invites start a few weeks after iPhone. We'll reach you by email and on Discord when it's your turn — nothing else to do.</p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- ── About you ── -->
+              <fieldset class="tq-section">
+                <legend class="tq-eyebrow">About you</legend>
+
+                <div class="tq-field" data-q="discord">
+                  <label class="tq-label" for="b-discord">Your Discord username <span class="tq-req" aria-hidden="true">*</span></label>
+                  <input class="tq-input" type="text" id="b-discord" name="discord"
+                         autocomplete="off" aria-describedby="b-discord-help b-discord-error" required>
+                  <p class="tq-help" id="b-discord-help">tox may reach out about invites or issues.</p>
+                  <p class="tq-error" id="b-discord-error" hidden></p>
+                </div>
+              </fieldset>
+
+              <!-- ── Your experience ── -->
+              <fieldset class="tq-section">
+                <legend class="tq-eyebrow">Your experience</legend>
+
+                <div class="tq-field" data-q="appsUsed">
+                  <label class="tq-label" for="b-apps">Have you used an app to help manage your dynamic or lifestyle? Tell us what you use, what you love about it — and what you don't. <span class="tq-req" aria-hidden="true">*</span></label>
+                  <textarea class="tq-input tq-textarea" id="b-apps" name="appsUsed" rows="4"
+                            aria-describedby="b-apps-help b-apps-count b-apps-error" required></textarea>
+                  <p class="tq-help" id="b-apps-help">Obedience counts, and so does anything you use daily to stay organized: notes, task managers, journaling apps.</p>
+                  <p class="tq-count" id="b-apps-count" aria-live="polite">0 characters — 20 minimum</p>
+                  <p class="tq-error" id="b-apps-error" hidden></p>
+                </div>
+
+                <div class="tq-field" data-q="features">
+                  <label class="tq-label" for="b-features">What features would you want in a lifestyle-management app like Collared? <span class="tq-req" aria-hidden="true">*</span></label>
+                  <textarea class="tq-input tq-textarea" id="b-features" name="features" rows="4"
+                            aria-describedby="b-features-count b-features-error" required></textarea>
+                  <p class="tq-count" id="b-features-count" aria-live="polite">0 characters — 20 minimum</p>
+                  <p class="tq-error" id="b-features-error" hidden></p>
+                </div>
+              </fieldset>
+
+              <!-- ── How you'd use it ── -->
+              <fieldset class="tq-section">
+                <legend class="tq-eyebrow">How you'd use it</legend>
+
+                <div class="tq-field" data-q="usage">
+                  <p class="tq-label" id="b-usage-label">Collared can manage tasks, assignments, and reflections for a partner, for yourself, or both. How do you see yourself using it? <span class="tq-req" aria-hidden="true">*</span></p>
+                  <div class="tq-pills" role="group" aria-labelledby="b-usage-label"
+                       aria-describedby="b-usage-error" data-pills="usage" data-mode="single">
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="My partner(s)">My partner(s)</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Myself">Myself</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Both">Both</button>
+                  </div>
+                  <p class="tq-error" id="b-usage-error" hidden></p>
+                </div>
+              </fieldset>
+
+              <!-- ── One last thing ── -->
+              <fieldset class="tq-section">
+                <legend class="tq-eyebrow">One last thing</legend>
+
+                <div class="tq-field" data-q="soda">
+                  <p class="tq-label" id="b-soda-label">Lastly, and most importantly: Pepsi or Coke? <span class="tq-req" aria-hidden="true">*</span></p>
+                  <div class="tq-pills" role="group" aria-labelledby="b-soda-label"
+                       aria-describedby="b-soda-help b-soda-error" data-pills="soda" data-mode="single">
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Pepsi">Pepsi</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Coke">Coke</button>
+                    <button class="tq-pill" type="button" aria-pressed="false" data-value="Neither — I'm broken inside">Neither — I'm broken inside</button>
+                  </div>
+                  <p class="tq-help" id="b-soda-help">You will be judged for this answer.</p>
+                  <p class="tq-error" id="b-soda-error" hidden></p>
+                </div>
+              </fieldset>
+
+              <!-- honeypot -->
+              <div class="tq-hp" aria-hidden="true">
+                <label for="b-website">Website</label>
+                <input type="text" id="b-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="tq-actions">
+                <button class="btn btn-primary btn-big" type="submit" id="b-submit">Request a beta invite</button>
+                <p class="tq-actions-note">Invites go out in small waves. We read every request.</p>
+              </div>
+              <p class="tq-formerror" id="b-formerror" role="alert" hidden></p>
+            </form>
+
+            <div class="tq-success" id="b-success" hidden>
+              <svg class="tq-success-mark" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="9"
+                        stroke-linecap="round" stroke-dasharray="111.6 14.1" stroke-dashoffset="-7" />
+              </svg>
+              <h3 id="b-success-title">You're on the list.</h3>
+              <p id="b-success-text"></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/collared-logo-white.png" alt="Collared" class="footer-wordmark">
+        <p class="footer-contact">hello@collared.app <span aria-hidden="true">·</span> <a data-link="discord" href="/#community">Discord</a></p>
+        <div class="footer-socials" aria-label="Social media">
+          <!-- Social slots — drop real URLs into the constants block in app.js -->
+          <a data-link="discord" href="#" aria-label="Discord">Discord</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="TikTok">TikTok</a>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="/#app">App</a>
+        <a href="/#community">Community</a>
+        <a href="/#podcast">Podcast</a>
+        <a href="/#merch">Merch</a>
+        <a href="/#events">Events</a>
+        <a href="/team">Join the Team</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+    </div>
+    <p class="footer-disclaimer container">Collared is intended for adults 18+. All content relates to consensual adult dynamics. © 2026 Collared.</p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="beta.js"></script>
+</body>
+</html>

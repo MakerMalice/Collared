@@ -295,6 +295,7 @@
 .btn[aria-busy="true"], .btn:disabled { opacity: 0.6; cursor: default; transform: none !important; box-shadow: var(--shadow-soft); }
 
 /* ════════════════ PROGRESS ════════════════ */
+.tq-progress[hidden] { display: none; }
 .tq-progress {
   max-width: 760px;
   background: rgba(250, 250, 252, 0.92);

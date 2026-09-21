@@ -113,6 +113,27 @@ a segmented progress indicator, kind inline validation, device-timezone detectio
 loading/success/error states. `app.js` was made safe for every page (element guards) and
 `STAFF_FORM_URL` now points at `/team` (same-tab).
 
+## 2026-09-21 — `/beta`: the beta signup (unlisted)
+
+Replaced the "iOS & Android BETA Testing" Google Form with `beta.html` (+ `beta.css`, `beta.js`),
+built by an Opus agent on top of `team.css`'s component system and reviewed/tested by the lead.
+Reading the old form: Google Forms embeds every section (including branches) in
+`FB_PUBLIC_LOAD_DATA_` in the page source — parse that rather than clicking through.
+
+**Decisions:** iPhone invites first (TestFlight), Android queued a few weeks behind — Android
+testers still give their Play email and are told to watch email + Discord. Unlisted page
+(`noindex`, no links). "Pepsi or Coke" kept as the brand's sign-off. Device lists modernized
+(iPhone by series incl. Air/16e; Android adds Other → "Which one?"). Store-email help text now
+says to use the Apple ID / Google account signed in on that phone — the actual cause of failed
+invites. Contact standardized to tox@collared.app / "tox in the official Discord".
+
+**Pipeline:** same Apps Script and Sheet as `/team`; new **Beta** tab with an *Invite status*
+column (New → Invited → Testing), a separate beta Discord webhook, and `?read=beta` on the
+private read endpoint.
+
+**Bug found while at it:** `team.css` had no `[hidden]` rule for `.tq-progress`, so the progress
+pill survived the success swap on the live `/team` page. Fixed in `team.css`.
+
 ## Standing to-dos on the site
 
 - Delete the two `collared.site.test.delete.me*@gmail.com` test subscribers in Kit (if not done).
