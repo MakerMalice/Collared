@@ -134,6 +134,15 @@ private read endpoint.
 **Bug found while at it:** `team.css` had no `[hidden]` rule for `.tq-progress`, so the progress
 pill survived the success swap on the live `/team` page. Fixed in `team.css`.
 
+## 2026-09-23 — privacy: messages between friends
+
+Friend message threads ship in app build 25 with a dynamic term ("reads my friend messages")
+that lets a Dominant read those conversations. Added to `privacy.html` under "Who can see
+what", effective date moved to 23 September 2026. The app project drafted five more blocks
+(Social audiences, discovery/region, active count, Discord quoting, reports/moderation) for
+features that are not live yet; they are staged verbatim in `docs/PRIVACY-STAGED.md` with
+notes on which existing lines they will contradict, to be pasted when each feature ships.
+
 ## Standing to-dos on the site
 
 - Delete the two `collared.site.test.delete.me*@gmail.com` test subscribers in Kit (if not done).
