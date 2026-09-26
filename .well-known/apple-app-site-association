@@ -1,8 +1,26 @@
 {
   "applinks": {
     "details": [
-      { "appIDs": ["44WLKXALYH.app.collared.mobile"], "components": [ { "/": "/i/*", "comment": "Invite links open the app" } ] }
+      {
+        "appIDs": [
+          "44WLKXALYH.app.collared.mobile"
+        ],
+        "components": [
+          {
+            "/": "/i/*",
+            "comment": "Invite links open the app"
+          },
+          {
+            "/": "/t/*",
+            "comment": "NFC tags open the app"
+          }
+        ]
+      }
     ]
   },
-  "webcredentials": { "apps": ["44WLKXALYH.app.collared.mobile"] }
+  "webcredentials": {
+    "apps": [
+      "44WLKXALYH.app.collared.mobile"
+    ]
+  }
 }
