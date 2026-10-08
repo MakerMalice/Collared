@@ -37,6 +37,7 @@ Written so any future session — human or Claude — can pick up the thread.
 | `team-banner.png` (1600×640, "We're growing the team." on app-violet gradient with broken-circle motif) | `assets/` (generated with Pillow, Avenir Next) | Wide image for the Discord team-openings announcement embed |
 | `tox-pfp.png` (400², owner's Discord profile picture) | `assets/` (supplied by owner in chat) | Footer icon on Discord announcements signed //tox. Public by owner's OK; it is already their public Discord avatar |
 | `app-update-37.png` (1600×640, dark app-night style: big "37", tab bar mock, fictional "Luna" data) | `assets/` (generated with Pillow) | Banner for the build 37 beta-notes post. This dark style is the template for all app-update posts; make a new one per build, never reuse a filename (Discord caches) |
+| `app-update-37-part2.png` | `assets/` (same generator, label "Part 2") | Banner above the second half of a long update post. Banners are posted as their own image message above the text, because Discord draws embed images at the bottom |
 | Broken-circle motif | inline SVG `#collar-mark` in `index.html` | Drawn as a stroked circle with `stroke-dasharray` gaps — no image needed |
 
 The wordmark must never be recreated in a webfont — always use the supplied PNGs.
