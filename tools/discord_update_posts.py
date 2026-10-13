@@ -12,11 +12,13 @@
 - Writes the posted message ids next to --out so posts can be edited/deleted later.
 """
 import argparse, json, os, re, sys, time, datetime, urllib.request
+EMOJI=re.compile('[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\uFE0F\u200d]')
+def clean(t): return re.sub(r'  +',' ',EMOJI.sub('',t)).strip()
 AV="https://collared.app/assets/collared-avatar.png"; PFP="https://collared.app/assets/tox-pfp.png"
 ap=argparse.ArgumentParser(); ap.add_argument('md'); ap.add_argument('--parts',required=True)
 ap.add_argument('--banner',action='append',default=[]); ap.add_argument('--image',action='append',default=[])
 ap.add_argument('--out',default='payloads.json'); ap.add_argument('--send',action='store_true'); o=ap.parse_args()
-text=open(o.md).read()
+text=EMOJI.sub('',open(o.md).read())
 posts={}
 for m in re.finditer(r'^## Post (\d+)[^\n]*\n(.*?)(?=^## Post \d+|\Z)',text,re.S|re.M): posts[int(m.group(1))]=m.group(2).strip()
 def parse(block):
@@ -51,13 +53,13 @@ for pi,r in enumerate(rng):
         intro,secs,tail=parse(posts[k]); tails+=tail
         if intro: e['description']=' '.join(intro)
         for s in secs:
-            for i,c in enumerate(chunks(s['items'])): e['fields'].append({'name':s['name'] if i==0 else s['name']+' (continued)','value':c})
-    for t in tails: e['fields'].append({'name':'​','value':t})
+            for i,c in enumerate(chunks(s['items'])): e['fields'].append({'name':clean(s['name']) if i==0 else s['name']+' (continued)','value':c})
+    tries=[re.sub(r'^\*\*Try it:\*\*\s*','',t) for t in tails]
     for im in o.image:
         n,u=im.split('=',1)
         if int(n)==pi+1: e['image']={'url':u}
     if pi==len(rng)-1:
-        e['fields'].append({'name':'​','value':'//tox'})
+        e['fields'].append({'name':'Try it','value':(tries[0]+'\n\n' if tries else '')+'//tox'})
         e['footer']={'text':'tox · Collared','icon_url':PFP}; e['timestamp']=now
     assert size(e)<=5900 and all(len(f['value'])<=1024 and len(f['name'])<=256 for f in e['fields']),'embed too large'
     parts.append(e)
