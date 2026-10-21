@@ -384,7 +384,7 @@ const BETA_FORM_KEY = "collared-team-2026";
       if (platform === "Android") {
         successTitle.textContent = "You're on the Android list.";
         successText.textContent =
-          `Android invites start a few weeks after iPhone. We'll reach you at ${storeEmail} and on Discord when it's your turn.`;
+          `Google Play invites go out in waves — keep an eye on ${storeEmail} and Discord.`;
       } else {
         successTitle.textContent = "You're on the list.";
         successText.textContent =
