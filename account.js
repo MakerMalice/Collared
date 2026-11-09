@@ -178,6 +178,11 @@
       return go("new");
     }
     if (r.status === 401) return signOutHere("expired");
+    if (r.body && r.body.error === "not_approved") {
+      // An account the beta hasn't let in yet: nothing here opens for it. It signs out and says so.
+      await sb.auth.signOut({ scope: "local" }).catch(function () {});
+      return go("waiting");
+    }
     if (r.status !== 200 || !r.body.account) {
       S.error = errText(r.body && r.body.error);
       await sb.auth.signOut({ scope: "local" }).catch(function () {});
@@ -294,6 +299,15 @@
         '<div class="acct-card"><h3>Already in the app?</h3><p class="mu">You may have joined another way. Sign in here the way you do on your phone.</p>' +
         '<button class="b b-soft" type="button" data-go="out">Try another way</button></div>';
       return ["No account here yet.", "There’s no Collared account for " + via + ".", html];
+    },
+
+    waiting: function () {
+      var html = '<div class="acct-card"><h3>Your account opens here once you’re in.</h3>' +
+        '<p class="mu">Collared is in a small beta. We’ll open the door as soon as we can, and the app tells you when we do. Until then, you can look after your account in the app.</p>' +
+        '<a class="b b-discord" href="' + esc(CFG.discord) + '" target="_blank" rel="noopener">' + I("i-discord") + "Join the Collared Discord</a>" +
+        '<button class="b b-soft" type="button" data-go="out">Back to sign in</button></div>' +
+        '<p class="foot">Want your account deleted? Write to hello@collared.app.</p>';
+      return ["You’re on the list.", "Thanks for waiting.", html];
     },
 
     home: function () {
