@@ -21,6 +21,8 @@ Vanilla HTML/CSS/JS — no framework, no build step. Three files plus assets:
 | `app.js` | Site-wide behavior: nav, scroll reveals, link wiring, plus the homepage demo panels (every homepage-only block is guarded by an element check, so it runs clean on every page) |
 | `team.html` / `team.css` / `team.js` | The **Join the Team** application page, served at `/team` |
 | `beta.html` / `beta.css` / `beta.js` | The **beta tester signup**, served at `/beta` — **unlisted** (noindex, not linked anywhere); reuses `team.css` components |
+| `account.html` / `account.css` / `account.js` / `account-config.js` | **Your account**, served at `/account` (noindex; linked from the footer and the privacy page). Signs in to the same Collared account as the app and talks only to Supabase and its `account-web` function. Loads no `app.js`, no fonts or scripts from anyone else, and a Content-Security-Policy says so. `account-config.js` holds the project URL and the **publishable** key only: never a secret key |
+| `vendor/` | Pinned copies used by `/account`: `supabase-js-2.116.0.js` (the UMD build, unmodified) and `qrcode-1.5.4.js` (node-qrcode's core with dijkstrajs, MIT, unmodified sources in one wrapper). Update by replacing the file and its version in the name |
 | `assets/` | Brand marks only (transparent logo PNGs, broken-circle icon, OG tile) |
 | `CNAME` | Custom-domain binding for GitHub Pages (`collared.app`) |
 

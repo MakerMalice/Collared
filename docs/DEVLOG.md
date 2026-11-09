@@ -151,6 +151,25 @@ what", effective date moved to 23 September 2026. The app project drafted five m
 features that are not live yet; they are staged verbatim in `docs/PRIVACY-STAGED.md` with
 notes on which existing lines they will contradict, to be pasted when each feature ships.
 
+## 2026-11-09 — Your account (`/account`), app decision D2085
+
+A page to sign in with the same account as the app (Apple, Google, Discord, an email code, or a
+password; and, once the app build with the scanner ships, by scanning a code with a trusted phone).
+It shows the account, its phones, sign out everywhere and delete with thirty days to change your
+mind (this is now the Google Play web deletion page), and the Story time All the way switch, which
+stays hidden until the server switch is turned on after the lawyer gate.
+
+- **Nobody makes an account here.** The email code never makes one; Apple, Google or Discord making
+  a new one is removed by the server at once, and the page points to the Discord and `/beta`.
+- **Privacy:** the sign-in lives in the tab only (`sessionStorage`) and ends after 30 minutes idle.
+  No `app.js`, no Kit, no Google Fonts on this page: the display face falls back to Avenir Next or
+  the system font. A meta CSP allows only our own files and the Supabase project. The page refuses
+  to draw inside a frame. Nothing about a change goes in the address or the title.
+- **Follows system dark mode** (the rest of the site does not yet).
+- `account-config.js` points at the staging project today (where beta accounts live); it moves to
+  production with the CSP's `connect-src` when production exists.
+- Footer link "Your account" on every page; the privacy page's "Delete" line names it.
+
 ## Standing to-dos on the site
 
 - Delete the two `collared.site.test.delete.me*@gmail.com` test subscribers in Kit (if not done).

@@ -1,0 +1,183 @@
+/* ════════════════════════════════════════════════════════════════════
+   collared.app/account
+   The site's own chrome (nav, lavender band, footer) around the account
+   itself, drawn in the app's palette (#F6F0FF / #7444FF and its dark set),
+   because these are the app's settings. Follows the system's dark mode.
+   No web fonts here: the display face falls back to Avenir Next / the
+   system font, so nothing on this page loads from anyone but us.
+   ════════════════════════════════════════════════════════════════════ */
+
+.acct-page {
+  --a-bg: #F6F0FF; --a-card: #FFFFFF; --a-card-2: #FBF8FF; --a-ink: #2A2733; --a-sub: #6F6B7A;
+  --a-violet: #7444FF; --a-violet-soft: #EDE7FF; --a-red: #D44A5E; --a-red-soft: #FBE7EB; --a-green: #2E9E5B; --a-green-soft: #DFF3E7;
+  --a-amber: #8F6510; --a-amber-soft: #FBF0D2;
+  --a-border: rgba(116, 68, 255, 0.10); --a-shadow: 0 4px 18px rgba(116, 68, 255, 0.08); --a-field: #F3EEFF;
+  --a-switch-off: #D9D3E6;
+  --band-a: #C5C1DD; --band-b: #A29DC4; --band-ink: #2B2840;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  .acct-page {
+    --porcelain: #141219; --ink: #F2F0F7; --stone: #A7A2B3;
+    --a-bg: #1A1820; --a-card: #26232E; --a-card-2: #211E29; --a-ink: #F2F0F7; --a-sub: #A7A2B3;
+    --a-violet: #8B61FF; --a-violet-soft: #383052; --a-red: #E76A7C; --a-red-soft: #43242B; --a-green: #4CC380; --a-green-soft: #233B2E;
+    --a-amber: #E9B949; --a-amber-soft: #3B3020;
+    --a-border: rgba(139, 97, 255, 0.16); --a-shadow: 0 4px 18px rgba(0, 0, 0, 0.35); --a-field: #211E29;
+    --a-switch-off: #4A4458;
+    --band-a: #2A2540; --band-b: #1C1829; --band-ink: #EDEAF7;
+    color-scheme: dark;
+  }
+  .acct-page .nav { background: rgba(20, 18, 25, 0.85); border-bottom-color: rgba(169, 164, 201, 0.14); }
+  .acct-page .nav-links a, .acct-page .mobile-menu a { color: var(--ink); }
+  .acct-page .nav-burger span { background: var(--ink); }
+  .acct-page .mobile-menu, .acct-page .mobile-menu a { border-color: rgba(169, 164, 201, 0.14); }
+  .acct-page .acct-on-light { display: none; }
+  .acct-page .acct-on-dark { display: block; }
+  .acct-page .footer { background: #0E0D12; }
+}
+.acct-on-dark { display: none; }
+.acct-defs { position: absolute; }
+[hidden] { display: none !important; }
+
+/* ── nav: who is signed in ── */
+.acct-who { display: flex; align-items: center; gap: 10px; margin-left: 14px; white-space: nowrap; }
+.nav-links + .acct-who[hidden] + .nav-burger { margin-left: auto; }
+.acct-disc {
+  width: 30px; height: 30px; border-radius: 50%; background: var(--a-violet-soft); color: var(--a-violet);
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; flex: none;
+}
+.acct-who-name { font-size: 14px; color: var(--stone); max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
+.acct-signout { padding: 8px 16px; font-size: 14px; }
+@media (max-width: 860px) { .acct-who-name { display: none; } }
+@media (max-width: 760px) { .acct-who { margin-left: auto; } .acct-who + .nav-burger { margin-left: 4px; } }
+
+/* ── the band ── */
+.acct-band {
+  position: relative; overflow: hidden; color: var(--band-ink);
+  background: linear-gradient(160deg, var(--band-a) 0%, var(--lavender) 55%, var(--band-b) 100%);
+}
+@media (prefers-color-scheme: dark) {
+  .acct-band { background: linear-gradient(160deg, var(--band-a) 0%, #221E33 55%, var(--band-b) 100%); }
+}
+.acct-band-geo { position: absolute; width: 520px; height: 520px; top: -210px; right: -170px; color: rgba(255, 255, 255, 0.12); pointer-events: none; }
+.acct-band-in { position: relative; max-width: 680px; margin: 0 auto; padding: 48px 20px 42px; }
+.acct-eyebrow { color: var(--band-ink); opacity: 0.8; margin-bottom: 10px; }
+.acct-title { font-family: var(--font-display); font-weight: 300; font-size: clamp(2.25rem, 5.4vw, 3rem); line-height: 1.08; letter-spacing: -0.005em; margin: 0; color: var(--band-ink); }
+.acct-sub { margin: 12px 0 0; font-size: 16.5px; opacity: 0.86; overflow-wrap: anywhere; }
+
+/* ── the account ── */
+.acct { background: var(--a-bg); color: var(--a-ink); padding: 28px 20px 72px; min-height: 52vh; }
+.acct-col { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.acct-card { background: var(--a-card); border: 1px solid var(--a-border); border-radius: 20px; box-shadow: var(--a-shadow); padding: 20px; }
+.acct-card h2 { font-family: var(--font-body); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--a-sub); font-weight: 600; margin: 0 0 12px; }
+.acct-card h3 { font-family: var(--font-body); font-size: 19px; line-height: 1.3; margin: 0 0 6px; font-weight: 600; color: var(--a-ink); }
+.acct-card p { margin: 0 0 12px; }
+.acct-card p:last-child { margin-bottom: 0; }
+.acct-ui .mu { color: var(--a-sub); }
+.acct-ui .small { font-size: 14px; }
+.acct-ui .center { text-align: center; }
+.acct-ui a { color: var(--a-violet); font-weight: 600; }
+.acct-row { display: flex; align-items: center; gap: 12px; }
+.acct-row + .acct-row { border-top: 1px solid var(--a-border); padding-top: 14px; margin-top: 14px; }
+.acct-grow { flex: 1; min-width: 0; }
+.acct-ui .k { font-weight: 500; }
+.acct-ui .v { color: var(--a-sub); font-size: 14.5px; overflow-wrap: anywhere; }
+.acct-ui .v + .v, .acct-ui .v + .tag, .acct-ui .k + .tag { margin-top: 4px; }
+
+.acct-ui .b {
+  display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
+  border: 0; border-radius: 999px; padding: 13px 18px; min-height: 50px;
+  font-family: var(--font-body); font-weight: 600; font-size: 15.5px; cursor: pointer; text-decoration: none;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.acct-ui .b:active { transform: scale(0.985); }
+.acct-ui .b[disabled] { opacity: 0.55; cursor: default; transform: none; }
+.acct-ui .b + .b, .acct-ui form + .b, .acct-ui .err + .b { margin-top: 10px; }
+.acct-ui .b svg { width: 18px; height: 18px; flex: none; }
+.acct-ui .b-violet { background: var(--a-violet); color: #fff; }
+.acct-ui .b-soft { background: var(--a-violet-soft); color: var(--a-violet); }
+.acct-ui .b-red { background: var(--a-red); color: #fff; }
+.acct-ui .b-redsoft { background: var(--a-red-soft); color: var(--a-red); }
+.acct-ui .b-apple { background: #000; color: #fff; }
+.acct-ui .b-google { background: var(--a-card); color: var(--a-ink); border: 1px solid rgba(0, 0, 0, 0.16); }
+.acct-ui .b-discord { background: #5865F2; color: #fff; }
+@media (prefers-color-scheme: dark) {
+  .acct-ui .b-apple { background: #fff; color: #000; }
+  .acct-ui .b-google { border-color: rgba(255, 255, 255, 0.2); }
+}
+.acct-ui .b:focus-visible, .acct-ui .field:focus-visible, .acct-ui .linkbtn:focus-visible, .acct-ui .sw:focus-visible { outline: 3px solid var(--a-violet); outline-offset: 2px; }
+.acct-ui .linkbtn { background: none; border: 0; padding: 4px 2px; color: var(--a-violet); font-weight: 600; font-size: 15px; cursor: pointer; font-family: var(--font-body); }
+.acct-ui .or { display: flex; align-items: center; gap: 12px; color: var(--a-sub); font-size: 13px; margin: 18px 0; }
+.acct-ui .or::before, .acct-ui .or::after { content: ""; flex: 1; height: 1px; background: var(--a-border); }
+.acct-ui label.f { display: block; font-size: 14px; font-weight: 500; margin: 0 0 6px; }
+.acct-ui .field {
+  width: 100%; border: 1px solid var(--a-border); background: var(--a-field); color: var(--a-ink);
+  border-radius: 14px; padding: 13px 14px; font: inherit; font-size: 16px;
+}
+.acct-ui .field + label.f { margin-top: 12px; }
+.acct-ui .field.code { font-size: 28px; letter-spacing: 0.5em; text-align: center; font-weight: 600; padding-left: calc(14px + 0.5em); font-variant-numeric: tabular-nums; }
+.acct-ui .gap { margin-top: 12px; }
+.acct-ui .err { color: var(--a-red); font-size: 14.5px; font-weight: 500; margin: 10px 0 0; }
+.acct-ui .foot { margin: 4px 0 0; font-size: 14.5px; color: var(--a-sub); text-align: center; }
+.acct-ui .toast { background: var(--a-green-soft); color: var(--a-green); border-radius: 14px; padding: 12px 14px; font-weight: 500; font-size: 14.5px; }
+.acct-ui .note { background: var(--a-violet-soft); color: var(--a-ink); border-radius: 14px; padding: 12px 14px; font-size: 14.5px; }
+.acct-ui .tag { display: inline-block; font-size: 12px; font-weight: 600; border-radius: 7px; padding: 2px 7px; background: var(--a-violet-soft); color: var(--a-violet); white-space: nowrap; }
+.acct-ui .tag.g { background: var(--a-green-soft); color: var(--a-green); }
+.acct-ui .tag.a { background: var(--a-amber-soft); color: var(--a-amber); }
+.acct-ui .back { display: inline-flex; align-items: center; gap: 6px; color: var(--a-violet); font-weight: 600; font-size: 15px; background: none; border: 0; padding: 4px 0; cursor: pointer; align-self: flex-start; font-family: var(--font-body); }
+.acct-ui .back svg { width: 18px; height: 18px; }
+.acct-ui .ic { width: 38px; height: 38px; border-radius: 11px; background: var(--a-violet-soft); color: var(--a-violet); display: flex; align-items: center; justify-content: center; flex: none; }
+.acct-ui .ic svg { width: 19px; height: 19px; }
+.acct-ui .lamps { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.acct-ui .lamp { font-size: 12.5px; border-radius: 999px; padding: 4px 10px; background: var(--a-card-2); border: 1px solid var(--a-border); color: var(--a-sub); }
+.acct-ui .lamp.lit { background: var(--a-violet-soft); color: var(--a-violet); border-color: transparent; font-weight: 600; }
+.acct-ui ul.plain { list-style: none; margin: 0; padding: 0; }
+
+/* the switch */
+.acct-ui .sw { width: 52px; height: 32px; border-radius: 999px; background: var(--a-switch-off); position: relative; flex: none; border: 0; padding: 0; cursor: pointer; }
+.acct-ui .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); transition: transform 0.2s ease; }
+.acct-ui .sw[aria-checked="true"] { background: var(--a-violet); }
+.acct-ui .sw[aria-checked="true"]::after { transform: translateX(20px); }
+.acct-ui .sw[disabled] { opacity: 0.6; cursor: default; }
+
+/* the code to scan */
+.acct-ui .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; margin: 6px 0 4px; }
+.acct-ui .qr { width: 228px; height: 228px; padding: 14px; border-radius: 18px; background: #fff; box-shadow: 0 0 0 1px var(--a-border); }
+.acct-ui .qr svg { width: 100%; height: 100%; display: block; }
+.acct-ui .qr.dim { opacity: 0.18; }
+.acct-ui .qr-clock { font-variant-numeric: tabular-nums; font-size: 14.5px; color: var(--a-sub); }
+.acct-ui ol.steps { margin: 0 0 4px; padding-left: 20px; color: var(--a-sub); font-size: 15px; }
+.acct-ui ol.steps li + li { margin-top: 4px; }
+.acct-ui ol.steps b { color: var(--a-ink); font-weight: 600; }
+
+/* sheets: a confirm, or a fresh sign-in */
+.acct-scrim { position: fixed; inset: 0; background: rgba(20, 16, 30, 0.45); display: flex; align-items: flex-end; justify-content: center; z-index: 80; }
+.acct-sheet {
+  background: var(--a-card); color: var(--a-ink); width: 100%; max-width: 480px;
+  border-radius: 24px 24px 0 0; padding: 22px 20px calc(22px + env(safe-area-inset-bottom));
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2); max-height: 92vh; overflow: auto;
+}
+.acct-sheet h3 { font-family: var(--font-body); font-size: 21px; font-weight: 600; margin: 0 0 8px; }
+.acct-sheet p { margin: 0 0 12px; }
+.acct-sheet .grab { width: 40px; height: 5px; border-radius: 3px; background: var(--a-border); margin: -8px auto 14px; }
+@media (min-width: 700px) {
+  .acct-scrim { align-items: center; padding: 20px; }
+  .acct-sheet { border-radius: 24px; }
+  .acct-sheet .grab { display: none; }
+}
+
+@media (max-width: 520px) {
+  .acct-band-in { padding: 36px 20px 32px; }
+  .acct { padding: 20px 16px 56px; }
+  .acct-card { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .acct-ui .sw::after, .acct-ui .b { transition: none; }
+}
+
+/* the brand never shrinks to make room for who is signed in */
+.acct-page .nav-brand, .acct-page .nav-mark, .acct-page .nav-wordmark { flex: none; }
+@media (prefers-color-scheme: dark) {
+  .acct-page .acct-signout { background: #383052; color: #F2F0F7; }
+  .acct-page .acct-signout:hover { background: #463C66; }
+}
