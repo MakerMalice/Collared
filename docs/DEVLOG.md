@@ -226,3 +226,10 @@ From the app repo's `design/website-redo/CHANGES-2026-11-12.md`; proof frames in
   0.4 s fade from the last frame into the first so every loop is seamless.
 - **Copy:** no he or she anywhere on Home or the compare pages (they, names, or a rephrase); no *sealed* in the privacy
   band (the privacy policy keeps its own wording).
+- **Coordinator's fixes, same day:** one couple where it can be, Theo and Luna (the shared stack's scratch teaser accounts,
+  `tools/promo/teaser-data.sh`); the points and Read Together sections stay Mara and Luna, one pair each. No red tab badge
+  in any capture (the hero Duo cover's Social badge painted out against the rail; Social is a still of teaser Luna with
+  nothing waiting). No Plus chip: the cycle screen is captured without its Plus row (a dev-only harness in a scratch copy
+  of the app). The Glimpse lands live: Theo's thread is open and quiet, Luna's Private Glimpse is sent during the take
+  and arrives through the thread's own refresh, then opens on a tap. The first watch is Luna's meds (Log), not a task from
+  Mara. Every new clip carries the island on every frame (the simulator recorder drops it on a few).
