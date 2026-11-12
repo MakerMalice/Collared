@@ -41,8 +41,8 @@ The old lavender site (`styles.css`, `app.js`, `team.css`, `beta.css`) is no lon
 Every `.v[data-v]` holds its poster `<img>` (lazy). Near the screen, `site.js` swaps in a muted, looping, inline
 `<video>` (WebM first, MP4 second) and pauses it when it leaves. Reduce Motion keeps the posters and stops the
 CSS loops. Sources: the app repo's `design/website-redo/` (the teaser v4 takes), the NYC map recap recorded on a
-simulator for this site (landmarks only, fictional cast), and a cut of the Sub Studio launch film (v4) for its real
-3D iPhone.
+simulator for this site (landmarks only, fictional cast), and a cut of the final Sub Studio launch film (the 1080p master) for its
+real 3D iPhone.
 
 ## The team application page (`/team`)
 

@@ -193,8 +193,8 @@ order and claims). Built on the local branch `stage-redo`; not live until the ow
 - **Clips** are real app captures with the fictional cast. The location map is a new take for this site: the
   recap screen on an iPhone 17 Pro simulator, Theo watching Luna's afternoon in Manhattan (Washington Square
   Park, the High Line, Bryant Park, Times Square, Central Park), landmarks only, no Home, Apple's own tiles, not
-  blurred because there is nothing to hide. The old Brooklyn recap is not used. Sub Studio is a cut of the launch
-  film (v4, the real 3D iPhone), 6.55 to 12.0, 18.6 to 22.2 and 23.9 to 25.2 s, no titles.
+  blurred because there is nothing to hide. The old Brooklyn recap is not used. Sub Studio is a cut of the final launch
+  film (the 1080p master, the real 3D iPhone), 6.55 to 12.0, 18.6 to 22.2 and 23.9 to 25.2 s, no titles.
 - **Fonts** are the app's own (Nunito, Lora, Caveat), subset to Latin WOFF2 and served from `assets/fonts/`.
   Google Fonts are gone; `/account`'s policy gained `font-src 'self'`.
 - **/account**: account.js untouched; only its shell (nav, page head, footer) and colours changed. It is always
