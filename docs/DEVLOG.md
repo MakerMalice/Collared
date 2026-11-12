@@ -203,3 +203,26 @@ order and claims). Built on the local branch `stage-redo`; not live until the ow
   served; the three unreviewed drafts moved to `docs/drafts/`. After the first push, check that
   `/.well-known/apple-app-site-association` and `/.well-known/assetlinks.json` still answer, and that `/README`,
   `/docs/DEVLOG` and `/CLAUDE.md` don't.
+
+## 2026-11-12: the owner's notes on the Stage redo (`stage-redo`)
+
+From the app repo's `design/website-redo/CHANGES-2026-11-12.md`; proof frames in that repo's
+`design/website-redo/changes-2026-11-12/`.
+
+- **Watches:** one `.watch` frame true to the Apple Watch Series 11 46 mm (case 39 x 46 mm; the 416 x 496 display is 1,220
+  sq mm, so 82.0% x 82.9% of the case; concentric corners; crown and side button). Every watch uses it. The screens are
+  full 416 x 496 captures now (the collar closed, a task with *Done, on my word*), so no text is cut; the award screen is
+  a 40 mm capture centred on black at its own size, with the clock moved to where watchOS puts it on 46 mm.
+- **Done when:** the words and the pills move together (3.2 s), hover, focus or a tap holds it, a pill shows its own
+  example; Reduce Motion: nothing moves by itself.
+- **Points:** two iPhones tilted toward each other, the shop (a new capture) and the punishment. The Duo cover is gone here.
+- **Location, Held, journals, workouts, care, Glimpses:** no Obedience or Life360 callouts outside the comparison block
+  and pages; the hooks speak to togetherness and long distance instead.
+- **New captures** (wt-site simulator, iPhone 17 Pro, iOS 26.5, the shared dev client, fictional cast, 9:41 bar):
+  the journal shelf opening into the notebook; the Glimpse camera sending a Private sunset to Mistress and the same
+  Glimpse landing on Mara's phone; the meds pill case, a dose kept, and cycle tracking (*Blooming*, from the app's own
+  cycle fixtures); Mistress's shop. Sub Studio uses the film's own phone takes (11 November), not the film; their
+  charging battery glyph is replaced with the plain one from today's takes. Clips: H.264 + VP9, 400 x 870, poster, a
+  0.4 s fade from the last frame into the first so every loop is seamless.
+- **Copy:** no he or she anywhere on Home or the compare pages (they, names, or a rephrase); no *sealed* in the privacy
+  band (the privacy policy keeps its own wording).

@@ -17,7 +17,7 @@ a dark studio ground, the app's real screens on real devices, one colour field p
 
 | File | Purpose |
 |---|---|
-| `index.html` + `home.css` | Home: hero, the feature ribbon, eleven feature sections in the owner's order, the *Coming from Obedience or Life360?* block, the privacy band, every screen, community, end card |
+| `index.html` + `home.css` | Home: hero, the feature ribbon, eleven feature sections in the owner's order, the *Coming from Obedience or Life360?* block (the only place Home names them, with the footer's legal line), the privacy band, every screen, community, end card |
 | `compare/obedience.html`, `compare/life360.html` + `compare.css` | `/compare/obedience` and `/compare/life360`: dated facts about them, a side-by-side table with honest *Not yet* rows, sources |
 | `site.css` / `site.js` | The shared shell on every page but `/account`: self-hosted fonts, tokens, nav and mobile menu, buttons, devices, page heads, footer; the clips and the closing ring on Home |
 | `forms.css` | `/beta` and `/team` form styles (dark) |
@@ -40,9 +40,15 @@ The old lavender site (`styles.css`, `app.js`, `team.css`, `beta.css`) is no lon
 
 Every `.v[data-v]` holds its poster `<img>` (lazy). Near the screen, `site.js` swaps in a muted, looping, inline
 `<video>` (WebM first, MP4 second) and pauses it when it leaves. Reduce Motion keeps the posters and stops the
-CSS loops. Sources: the app repo's `design/website-redo/` (the teaser v4 takes), the NYC map recap recorded on a
-simulator for this site (landmarks only, fictional cast), and a cut of the final Sub Studio launch film (the 1080p master) for its
-real 3D iPhone.
+CSS loops. A `[data-sync]` pair (Glimpses, Sub Studio) is one story across two phones: both clips are the same length,
+the first keeps time and the second follows it, and a phone whose part hasn't started rests dimmed (`data-awake="from-to"`
+in seconds on its `.v`). The *Done when* card cycles its words and pills on a timer that holds on hover, focus or a tap.
+
+**Devices are one component each, true to the device:** `.phone` (iPhone 17 Pro), `.phone.open` (iPhone Duo open),
+`.watch` (Apple Watch Series 11, 46 mm). Every size is a percentage of the body, so the bezels match at any width.
+Watch screens are 416 x 496, the lit area's own shape, so nothing is cropped. Sources: the app repo's `design/website-redo/` (the teaser v4 takes), the NYC map recap recorded on a
+simulator for this site (landmarks only, fictional cast), and the Sub Studio film's own simulator takes (Luna's wardrobe capture and surprise look, Theo's Studio and the send), as
+two live phones rather than the film.
 
 ## The team application page (`/team`)
 
