@@ -2,445 +2,371 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Collared — Structure for your dynamic</title>
-  <meta name="description" content="Collared is structure for your dynamic: a task, journal, and rewards app for the power-exchange community, a Discord of 5,000+ members, and a podcast about life in the lifestyle.">
-  <meta property="og:title" content="Collared — Structure for your dynamic">
-  <meta property="og:description" content="Tasks, journals, rewards, and a community of thousands — built by people in the lifestyle, for people in the lifestyle.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Collared · Everything your dynamic runs on</title>
+  <meta name="description" content="Collared is one app for a D/s dynamic: tasks that check themselves, points and a shop, punishments you agreed, where they are, Held, journals, workouts, water and meds, reading together and Glimpses. Free while in beta, for adults 18 and over.">
+  <meta name="theme-color" content="#0E0A1A">
+  <meta property="og:title" content="Collared · Everything your dynamic runs on">
+  <meta property="og:description" content="Tasks that check themselves, points and a shop, where they are, and the closeness in between. One app for the two of you.">
   <meta property="og:image" content="https://collared.app/assets/collared-tile.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://collared.app/">
-  <link rel="icon" type="image/png" href="assets/collodis.png">
-  <link rel="apple-touch-icon" href="assets/collodis.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="canonical" href="https://collared.app/">
+  <link rel="icon" type="image/png" href="/assets/collodis.png">
+  <link rel="apple-touch-icon" href="/assets/collodis.png">
+  <link rel="preload" href="/assets/fonts/Nunito_800ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/home.css">
 </head>
 <body>
+<!--DEFS-->
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs><mask id="band"><rect width="1024" height="1024" fill="#fff"/><rect y="464" width="1024" height="96" fill="#000"/></mask></defs>
+  <symbol id="mark" viewBox="0 0 1024 1024"><circle cx="512" cy="512" r="300" fill="none" stroke="currentColor" stroke-width="92" mask="url(#band)"/></symbol>
+  <symbol id="g-tick" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="g-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="15.5" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="g-seal" viewBox="0 0 24 24"><path d="M3.5 7.5h17v11h-17z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 7.5l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="14" r="3" fill="currentColor"/></symbol>
+  <symbol id="g-eye" viewBox="0 0 24 24"><path d="M3 12c2.5-4 5.5-6 9-6s6.5 2 9 6c-2.5 4-5.5 6-9 6s-6.5-2-9-6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="g-swap" viewBox="0 0 24 24"><path d="M5 8h13l-3.5-3.5M19 16H6l3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="g-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></symbol>
+  <symbol id="g-home" viewBox="0 0 24 24"><path d="M4 11l8-6.5 8 6.5V20H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="14" width="4" height="6" rx="1" fill="currentColor"/></symbol>
+  <symbol id="g-heart" viewBox="0 0 24 24"><circle cx="9" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="15" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="g-book" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="g-drop" viewBox="0 0 24 24"><path d="M12 3.5s6 6.4 6 10.7a6 6 0 0 1-12 0C6 9.9 12 3.5 12 3.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="g-pace" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 17l4-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="g-star" viewBox="0 0 24 24"><path d="M12 3.8l2.4 5 5.4.6-4 3.7 1.1 5.4L12 15.8l-4.9 2.7 1.1-5.4-4-3.7 5.4-.6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="g-people" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16.5" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 19c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5M14.5 15c2.6-.4 4.8.8 5.8 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+<!--/DEFS-->
 
-  <!-- Reusable broken-circle mark (the collar, in two strokes) -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="collar-mark" viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="9"
-              stroke-dasharray="111.6 14.1" stroke-dashoffset="-7" />
-    </symbol>
-  </svg>
+<a class="skip" href="#main">Skip to content</a>
+<!--NAV-->
+<header class="nav">
+  <div class="in">
+    <a class="home" href="/" aria-label="Collared home"><img class="wm" src="/assets/collared-logo-white.png" alt="Collared" width="92" height="26"></a>
+    <nav class="links" aria-label="Primary"><a href="/#tasks">Features</a><a href="/#switch">Switching</a><a href="/beta">Beta</a><a href="/team">Team</a><a href="/#community">Community</a></nav>
+    <span class="sp"></span>
+    <a class="sign" href="/account">Sign in</a>
+    <a class="btn p sm" href="/beta">Join the beta</a>
+    <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Menu" hidden><a href="/#tasks">Features</a><a href="/#switch">Switching</a><a href="/beta">Beta</a><a href="/team">Team</a><a href="/#community">Community</a><a href="/account">Sign in</a></nav>
+</header>
+<!--/NAV-->
 
-  <!-- ============================== NAV ============================== -->
-  <header class="nav" id="top">
-    <div class="nav-inner">
-      <a class="nav-brand" href="#top" aria-label="Collared — back to top">
-        <svg class="nav-mark" aria-hidden="true"><use href="#collar-mark"/></svg>
-        <img class="nav-wordmark" src="assets/collared-logo-purple.png" alt="Collared">
-      </a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#app">App</a>
-        <a href="#community">Community</a>
-        <a href="#podcast">Podcast</a>
-        <a href="#merch">Merch</a>
-        <a href="#events">Events</a>
-        <a href="#join">Join the Team</a>
-      </nav>
-      <a class="btn btn-pill nav-cta" data-link="discord" href="#community">Join the Discord</a>
-      <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span><span></span><span></span>
-      </button>
+<main id="main">
+<!-- HERO -->
+<section class="hero" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="badge"><span class="dot"></span>Beta open on iPhone and Android</span>
+      <h1 class="big"><span class="l">Everything</span> your dynamic runs on.</h1>
+      <p class="lede">Tasks that check themselves, points and a shop, where they are, and the closeness in between. One app for the two of you.</p>
+      <div class="cta"><a class="btn p" href="/beta">Join the beta</a><a class="btn s" href="#tasks">See everything</a></div>
+      <div class="chipsw"><a href="#switch">Coming from Obedience?</a><a href="#switch">Coming from Life360?</a></div>
+      <p class="fine">iPhone, iPhone Duo, Apple Watch and Android. Free while in beta. For adults 18 and over.</p>
     </div>
-    <div class="mobile-menu" id="mobile-menu" hidden>
-      <a href="#app">App</a>
-      <a href="#community">Community</a>
-      <a href="#podcast">Podcast</a>
-      <a href="#merch">Merch</a>
-      <a href="#events">Events</a>
-      <a href="#join">Join the Team</a>
-      <a class="btn btn-pill" data-link="discord" href="#community">Join the Discord</a>
+    <div class="stage">
+      <svg class="ring" aria-hidden="true"><use href="#mark"/></svg>
+      <div class="phone duo p2"><img src="/assets/v2/duo-home-theo.jpg" width="440" height="640" alt="Theo's iPhone Duo cover: Luna's day at a glance"></div>
+      <div class="phone"><div class="v" data-v="/assets/v2/hero-home"><img src="/assets/v2/hero-home.jpg" width="400" height="870" fetchpriority="high" alt="Luna's Home: she marks Morning walk done and the day moves on"></div></div>
+      <div class="watch"><img src="/assets/v2/watch-closed.jpg" width="372" height="442" alt="Her watch: your collar is closed for the day"></div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <main>
-    <!-- ============================== §0 HERO ============================== -->
-    <section class="hero">
-      <svg class="hero-geometry" aria-hidden="true"><use href="#collar-mark"/></svg>
-      <svg class="hero-geometry hero-geometry-2" aria-hidden="true"><use href="#collar-mark"/></svg>
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <img class="hero-wordmark" src="assets/collared-logo-white.png" alt="Collared">
-          <h1 class="hero-tagline">Structure for your&nbsp;dynamic.</h1>
-          <p class="hero-subline">Tasks, journals, rewards, and a community of thousands — built by people in the lifestyle, for people in the lifestyle.</p>
-          <div class="hero-ctas">
-            <a class="btn btn-primary" data-link="discord" href="#community">Join the Discord</a>
-            <a class="btn btn-ghost" href="#waitlist">Get notified at launch</a>
-          </div>
-        </div>
+<nav class="ribbon" aria-label="Features"><div class="track"><a href="#tasks"><b>Smart tasks</b></a><i class="o"></i><a href="#points">Points and punishments</a><i class="o"></i><a href="#location"><b>Location</b></a><i class="o"></i><a href="#held">Held</a><i class="o"></i><a href="#journal"><b>Journals</b></a><i class="o"></i><a href="#workouts">Workouts</a><i class="o"></i><a href="#care"><b>Water and meds</b></a><i class="o"></i><a href="#read">Read Together</a><i class="o"></i><a href="#glimpses"><b>Glimpses</b></a><i class="o"></i><a href="#studio">Sub Studio</a><i class="o"></i><a href="#social"><b>Social</b></a></div></nav>
 
-        <!-- Live, working recreation of the app's Tasks screen — pure HTML/CSS/JS -->
-        <div class="hero-phone-wrap">
-          <div class="phone" aria-label="Interactive demo of the Collared app's Tasks screen">
-            <div class="phone-notch" aria-hidden="true"></div>
-            <div class="phone-screen app-ui">
-              <div id="hero-task-demo" class="task-demo"></div>
-              <nav class="app-tabbar" aria-hidden="true">
-                <span class="tab"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9h13v-9"/></svg>Home</span>
-                <span class="tab tab-active"><svg viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Tasks</span>
-                <span class="tab"><svg viewBox="0 0 24 24"><path d="M12 5.5C10 3.8 6.5 3.8 4.5 5.5v13c2-1.7 5.5-1.7 7.5 0 2-1.7 5.5-1.7 7.5 0v-13c-2-1.7-5.5-1.7-7.5 0z"/><path d="M12 5.5v13"/></svg>Journal</span>
-                <span class="tab"><svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M4 12h16M12 8v12M8 8c-2 0-3-1-3-2.5S6.5 3 8 4.5 12 8 12 8s2.5-2 4-3.5 3-.5 3 1S18 8 16 8"/></svg>Rewards</span>
-                <span class="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.5 3.5-5.5 7-5.5s6.2 2 7 5.5"/></svg>Profile</span>
-              </nav>
-            </div>
-          </div>
-          <p class="hero-phone-hint">Go ahead — tap around. It works.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== §1 THREE PILLARS ============================== -->
-    <section class="pillars">
-      <div class="container">
-        <p class="eyebrow reveal">What is Collared</p>
-        <h2 class="reveal">One brand. Three ways in.</h2>
-        <div class="pillar-grid">
-          <a class="pillar-card reveal" href="#app">
-            <svg class="pillar-glyph" aria-hidden="true"><use href="#collar-mark"/></svg>
-            <h3>The App</h3>
-            <p>Your dynamic, organized. Tasks, journaling, and rewards for Dominants, submissives, and Switches — coming to iOS and Android.</p>
-            <span class="pillar-more">See the app →</span>
-          </a>
-          <a class="pillar-card reveal" href="#community">
-            <svg class="pillar-glyph" aria-hidden="true"><use href="#collar-mark"/></svg>
-            <h3>The Community</h3>
-            <p>5,000+ members on Discord. Daily questions, honest advice, and conversations that take power exchange seriously.</p>
-            <span class="pillar-more">Meet the community →</span>
-          </a>
-          <a class="pillar-card reveal" href="#podcast">
-            <svg class="pillar-glyph" aria-hidden="true"><use href="#collar-mark"/></svg>
-            <h3>The Podcast</h3>
-            <p>Real conversations from the lifestyle, hosted by the founders of Collared. Listener questions, special guests, no scripts.</p>
-            <span class="pillar-more">Hear about it →</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== §2 THE APP ============================== -->
-    <section class="app-section" id="app">
-      <div class="container">
-        <p class="eyebrow reveal">The Collared App</p>
-        <h2 class="reveal">Coming soon to your pocket.</h2>
-        <p class="section-lede reveal">Everything a dynamic runs on — tasks, journals, points, rewards, profiles — in one calm, private place.</p>
-
-        <!-- Waitlist + store badges -->
-        <div class="waitlist-block reveal" id="waitlist">
-          <div class="store-badges" aria-label="App stores — coming soon">
-            <span class="store-badge" aria-disabled="true">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-2-.9-3.2-.9C6.4 7.1 4.9 8 4.1 9.5c-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-1-2.5-3.8zM14 5.6c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.6 2.8-1.4z"/></svg>
-              <span><small>Coming soon to the</small>App Store</span>
-            </span>
-            <span class="store-badge" aria-disabled="true">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3.5v17c0 .4.5.7.8.4l9.4-8.2c.2-.2.2-.5 0-.7L4.8 3.1c-.3-.3-.8 0-.8.4zM15.5 10l2.8-2.5 2.2 1.9c.4.3.4.9 0 1.2l-2.2 1.9L15.5 10zM6.5 4.7l8 7-8 7"/></svg>
-              <span><small>Coming soon to</small>Google Play</span>
-            </span>
-          </div>
-          <!--
-            WAITLIST — wired to Kit (ConvertKit).
-            The form ID lives in the constants block at the top of app.js
-            (KIT_WAITLIST_FORM_ID). app.js submits via background fetch so
-            visitors stay on the page; if that ever fails, the form falls
-            back to a normal POST to this action (Kit's hosted thank-you).
-          -->
-          <form class="waitlist-form" id="waitlist-form" action="https://app.kit.com/forms/9553709/subscriptions" method="post">
-            <label class="visually-hidden" for="waitlist-email">Email address</label>
-            <div class="waitlist-row">
-              <input id="waitlist-email" name="email_address" type="email" required placeholder="you@example.com" autocomplete="email">
-              <button class="btn btn-primary" type="submit">Notify me</button>
-            </div>
-            <label class="waitlist-merch">
-              <input type="checkbox" name="merch_interest" id="merch-checkbox">
-              <span>Tell me about merch too</span>
-            </label>
-            <p class="waitlist-success" hidden>You're on the list. We'll email you the moment Collared launches.</p>
-          </form>
-        </div>
-
-        <!-- Feature 1: Tasks -->
-        <div class="feature">
-          <div class="feature-copy reveal">
-            <p class="eyebrow">Task management</p>
-            <h3>Tasks that fit the way you actually run things.</h3>
-            <p>Assign tasks to your submissive, to yourself — or to your Dominant, when they need the reminder. One-time, recurring, or reminder-only.</p>
-            <p>Attach points for completion, or punishments for missing the mark. Both optional, both yours to define. Tasks are unlimited and never capped.</p>
-          </div>
-          <div class="feature-panel reveal">
-            <div class="app-panel app-ui">
-              <div id="feature-task-demo" class="task-demo"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Feature 2: Journaling -->
-        <div class="feature feature-flip">
-          <div class="feature-copy reveal">
-            <p class="eyebrow">Journaling</p>
-            <h3>A full journal, built in.</h3>
-            <p>Write freely, or let your Dom award points for entries past a chosen word count. Keep entries private, or share them with a partner — permanently, or just for a window of time.</p>
-            <p>The <strong>Collared Life Trend</strong> report shows how life is trending against a month ago, a year ago, or any point you choose.</p>
-          </div>
-          <div class="feature-panel reveal">
-            <div class="app-panel app-ui journal-panel">
-              <p class="app-date-header">Yesterday</p>
-              <article class="journal-card">
-                <div class="journal-meta">
-                  <span class="journal-date"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9.5h16M8 3.5v3M16 3.5v3"/></svg>March 11</span>
-                  <span class="journal-badge">Shared permanently</span>
-                </div>
-                <h4>Today's Reflections</h4>
-                <p>Today was a challenging day. I struggled with my morning routine but managed to complete all my tasks by the afternoon. I'm feeling proud of myself for pushing through…</p>
-                <div class="journal-foot">
-                  <span class="journal-words">247 words</span>
-                  <span class="journal-actions">
-                    <button class="app-chip-btn" type="button">Export</button>
-                    <button class="app-chip-btn" type="button">Share</button>
-                  </span>
-                </div>
-              </article>
-              <p class="app-date-header">Monday, March 10</p>
-              <article class="journal-card journal-card-dim">
-                <div class="journal-meta">
-                  <span class="journal-date"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9.5h16M8 3.5v3M16 3.5v3"/></svg>March 10</span>
-                  <span class="journal-badge journal-badge-muted">Private</span>
-                </div>
-                <h4>Lessons Learned</h4>
-                <p>I failed to complete my workout routine yesterday and had to confess. I'm determined to do better tomorrow…</p>
-                <div class="journal-foot"><span class="journal-words">183 words</span></div>
-              </article>
-            </div>
-          </div>
-        </div>
-
-        <!-- Feature 3: Rewards -->
-        <div class="feature">
-          <div class="feature-copy reveal">
-            <p class="eyebrow">Rewards shop</p>
-            <h3>Points earned. Rewards redeemed.</h3>
-            <p>Your Dom defines the shop: custom rewards, point costs, and photos. Keep items always available, or release limited editions that vanish on a timer.</p>
-            <p>Try it — you have <strong>180 points</strong> to spend.</p>
-          </div>
-          <div class="feature-panel reveal">
-            <div class="app-panel app-ui rewards-panel">
-              <div class="rewards-balance"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M9.5 13.5 8 21l4-2.5 4 2.5-1.5-7.5"/></svg><span id="rewards-balance-num">180</span>&nbsp;Points</div>
-              <p class="app-date-header">Featured Items</p>
-              <article class="reward-card">
-                <div class="reward-art reward-art-1" aria-hidden="true">🍿</div>
-                <div class="reward-body">
-                  <h4>Movie night &amp; popcorn</h4>
-                  <p>Your pick, my popcorn. One full feature, zero interruptions.</p>
-                  <p class="reward-cost"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M9.5 13.5 8 21l4-2.5 4 2.5-1.5-7.5"/></svg>150 points</p>
-                  <button class="app-btn-redeem" id="redeem-affordable" type="button">Redeem</button>
-                </div>
-              </article>
-              <article class="reward-card">
-                <div class="reward-art reward-art-2" aria-hidden="true">🎟️</div>
-                <div class="reward-body">
-                  <span class="reward-expires">Expires in 30 days</span>
-                  <h4>Concert tickets</h4>
-                  <p>Tickets to see your favorite band, limited edition.</p>
-                  <p class="reward-cost"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M9.5 13.5 8 21l4-2.5 4 2.5-1.5-7.5"/></svg>5,000 points</p>
-                  <button class="app-btn-redeem" id="redeem-expensive" type="button" disabled>Redeem</button>
-                  <p class="reward-no-points">Not enough points</p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-
-        <!-- Feature 4: Profile -->
-        <div class="feature feature-flip">
-          <div class="feature-copy reveal">
-            <p class="eyebrow">Collared profile</p>
-            <h3>Your profile, your terms.</h3>
-            <p>Find people by username, number, or email. Keep your profile public or private. Add friends — and set who you own, or who owns you, right on your profile.</p>
-            <p>Friends see counts — points, tasks, journals — never the content itself.</p>
-          </div>
-          <div class="feature-panel reveal">
-            <div class="app-panel app-ui profile-panel">
-              <div class="profile-stats">
-                <div class="pstat"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.8-5.5"/></svg><strong>12</strong><span>Tasks</span></div>
-                <div class="pstat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.5C10 3.8 6.5 3.8 4.5 5.5v13c2-1.7 5.5-1.7 7.5 0 2-1.7 5.5-1.7 7.5 0v-13c-2-1.7-5.5-1.7-7.5 0z"/><path d="M12 5.5v13"/></svg><strong>7</strong><span>Journals</span></div>
-                <div class="pstat"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M9.5 13.5 8 21l4-2.5 4 2.5-1.5-7.5"/></svg><strong>180</strong><span>Points</span></div>
-              </div>
-              <p class="profile-streak">🔥 5 day streak</p>
-              <div class="profile-group">
-                <p class="profile-label">Role</p>
-                <div class="pill-row" id="role-pills" role="group" aria-label="Choose a role">
-                  <button class="app-pill" type="button" aria-pressed="true">Dominant</button>
-                  <button class="app-pill" type="button" aria-pressed="false">Submissive</button>
-                  <button class="app-pill" type="button" aria-pressed="false">Switch</button>
-                </div>
-              </div>
-              <div class="profile-group">
-                <p class="profile-label">Relationship Status</p>
-                <div class="pill-row" id="status-pills" role="group" aria-label="Choose a relationship status">
-                  <button class="app-pill" type="button" aria-pressed="false">None</button>
-                  <button class="app-pill" type="button" aria-pressed="false">Seeking Master</button>
-                  <button class="app-pill" type="button" aria-pressed="false">Seeking Slave</button>
-                  <button class="app-pill" type="button" aria-pressed="false">Owned</button>
-                  <button class="app-pill" type="button" aria-pressed="true">Owner</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bonus: theme micro-demo -->
-        <div class="theme-demo reveal">
-          <div class="theme-demo-copy">
-            <p class="eyebrow">Make it yours</p>
-            <h3>Light, dark, or whatever your phone says.</h3>
-            <p>Dark mode isn't on a roadmap — it's already built. Tap a theme and watch every demo on this page follow.</p>
-          </div>
-          <div class="app-panel app-ui theme-panel">
-            <p class="profile-label">Theme</p>
-            <div class="theme-row" id="theme-pills" role="group" aria-label="Demo theme">
-              <button class="theme-card" type="button" data-theme="light" aria-pressed="true"><span class="theme-swatch theme-swatch-light"></span>Light</button>
-              <button class="theme-card" type="button" data-theme="dark" aria-pressed="false"><span class="theme-swatch theme-swatch-dark"></span>Dark</button>
-              <button class="theme-card" type="button" data-theme="system" aria-pressed="false"><span class="theme-swatch theme-swatch-system"></span>System</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Coming shortly after launch -->
-        <p class="eyebrow reveal soon-eyebrow">Coming shortly after launch</p>
-        <div class="soon-grid">
-          <div class="soon-card reveal">
-            <svg class="soon-glyph" aria-hidden="true"><use href="#collar-mark"/></svg>
-            <h4>Health integration</h4>
-            <p>HealthKit and Android Health: workouts, steps, weigh-ins, calories — all optional — with points for consistency and streaks.</p>
-          </div>
-          <div class="soon-card reveal">
-            <svg class="soon-glyph" aria-hidden="true"><use href="#collar-mark"/></svg>
-            <h4>Structured coaching</h4>
-            <p>Get matched with a Dom or sub for coaching and structure on the specific problems you want to work on.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== §3 COMMUNITY ============================== -->
-    <section class="community" id="community">
-      <div class="container">
-        <p class="eyebrow reveal">The Community</p>
-        <h2 class="reveal">5,000+ members. One community.</h2>
-        <p class="section-lede reveal">Daily questions and discussion topics, advice threads, and shared insights — for newcomers asking their first questions and veterans with decades in the power-exchange space alike.</p>
-        <div class="community-grid">
-          <div class="community-tile reveal">
-            <svg class="tile-glyph" aria-hidden="true"><use href="#collar-mark"/></svg>
-            <h3>Daily Q&amp;A</h3>
-            <p>A fresh question every day to get the whole server talking — playful some days, profound others.</p>
-          </div>
-          <div class="community-tile reveal">
-            <svg class="tile-glyph" aria-hidden="true"><use href="#collar-mark"/></svg>
-            <h3>Advice &amp; insights</h3>
-            <p>Real situations, thoughtful answers. Protocol, communication, aftercare, and everything in between.</p>
-          </div>
-          <div class="community-tile reveal">
-            <svg class="tile-glyph" aria-hidden="true"><use href="#collar-mark"/></svg>
-            <h3>Beginner-friendly, expert-deep</h3>
-            <p>No question too new, no conversation too seasoned. Every dynamic structure and experience level welcome.</p>
-          </div>
-        </div>
-        <div class="community-cta reveal">
-          <a class="btn btn-primary btn-big" data-link="discord" href="#">Join the Discord</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== §4 PODCAST ============================== -->
-    <section class="podcast" id="podcast">
-      <div class="container podcast-inner">
-        <div class="podcast-copy">
-          <p class="eyebrow reveal">The Podcast · Coming soon</p>
-          <h2 class="reveal">Real conversations about life in the lifestyle.</h2>
-          <p class="section-lede reveal">Hosted by the founders of Collared: listener questions pulled straight from the Discord, and special guests from the community and the wider BDSM space.</p>
-          <div class="podcast-ctas reveal">
-            <a class="btn btn-primary" data-link="discord" href="#community">Submit your questions in the Discord</a>
-          </div>
-          <div class="podcast-badges reveal" aria-label="Podcast platforms — coming soon">
-            <span class="platform-badge">Spotify · soon</span>
-            <span class="platform-badge">Apple Podcasts · soon</span>
-            <span class="platform-badge">YouTube · soon</span>
-          </div>
-        </div>
-        <div class="episode-card reveal" aria-label="Podcast episode preview">
-          <div class="episode-cover">
-            <svg aria-hidden="true"><use href="#collar-mark"/></svg>
-          </div>
-          <div class="episode-meta">
-            <p class="episode-label">Episode 01</p>
-            <h3>What structure actually gives you</h3>
-            <p class="episode-sub">Coming soon · The Collared Podcast</p>
-            <div class="episode-bar" aria-hidden="true"><span></span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== §5 MERCH ============================== -->
-    <section class="merch" id="merch">
-      <div class="container merch-inner reveal">
-        <img class="merch-wordmark" src="assets/collared-logo-white.png" alt="Collared">
-        <p>Merch is coming — quiet pieces you'd actually wear. Want first pick? <a href="#waitlist" id="merch-link">Join the waitlist</a> and check the merch box.</p>
-      </div>
-    </section>
-
-    <!-- ============================== §6 EVENTS ============================== -->
-    <section class="events" id="events">
-      <div class="container">
-        <p class="eyebrow reveal">Events</p>
-        <h2 class="reveal">Where Collared shows up.</h2>
-        <div id="events-upcoming" class="events-upcoming reveal"></div>
-        <div id="events-past" class="events-past reveal"></div>
-      </div>
-    </section>
-
-    <!-- ============================== §7 JOIN THE TEAM ============================== -->
-    <section class="join" id="join">
-      <div class="container join-inner reveal">
-        <svg class="join-glyph" aria-hidden="true"><use href="#collar-mark"/></svg>
-        <h2>Help build Collared.</h2>
-        <p>We're looking for moderators, contributors, and staff with real lifestyle experience.</p>
-        <a class="btn btn-primary btn-big" data-link="staff" href="#">Apply to join the team</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- ============================== FOOTER ============================== -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="assets/collared-logo-white.png" alt="Collared" class="footer-wordmark">
-        <p class="footer-contact">hello@collared.app <span aria-hidden="true">·</span> <a data-link="discord" href="#community">Discord</a></p>
-        <div class="footer-socials" aria-label="Social media">
-          <!-- Social slots — drop real URLs into the constants block in app.js -->
-          <a data-link="discord" href="#" aria-label="Discord">Discord</a>
-          <a href="#" aria-label="Instagram">Instagram</a>
-          <a href="#" aria-label="TikTok">TikTok</a>
-        </div>
-      </div>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="#app">App</a>
-        <a href="#community">Community</a>
-        <a href="#podcast">Podcast</a>
-        <a href="#merch">Merch</a>
-        <a href="#events">Events</a>
-        <a href="#join">Join the Team</a>
-        <a href="/account">Your account</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
-      </nav>
+<!-- 1 SMART TASKS -->
+<section class="ch c-tasks" id="tasks" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">01 · SMART TASKS</span>
+      <h2 class="h2">Tasks that<br><span class="l">check themselves.</span></h2>
+      <p class="lede">Set it once. Her phone confirms the run, the steps, the walk home or the photo taken right now, and the task closes on its own. Rituals in steps every morning, and her wrist taps when it's time.</p>
+      <ul class="points">
+        <li><svg width="22" height="22" style="color:#4CC380" aria-hidden="true"><use href="#g-tick"/></svg>A check can finish a task. It can never fail one.</li>
+        <li><svg width="22" height="22" style="color:#4CC380" aria-hidden="true"><use href="#g-tick"/></svg>A photo taken in Collared counts at once</li>
+        <li><svg width="22" height="22" style="color:#4CC380" aria-hidden="true"><use href="#g-tick"/></svg>Once, every Tuesday, or every morning at nine</li>
+      </ul>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-swap"/></svg></span><div><b>Coming from a habit tracker</b>Everything you tick by hand today, plus the part where the phone does the checking.</div></div>
     </div>
-    <p class="footer-disclaimer container">Collared is intended for adults 18+. All content relates to consensual adult dynamics. © 2026 Collared.</p>
-  </footer>
+    <div class="shots wrap">
+      <div class="phone"><div class="v" data-v="/assets/v2/tasks-proof"><img src="/assets/v2/tasks-proof.jpg" width="400" height="870" loading="lazy" alt="Make the bed: she takes the photo, sends it to Sir, and it's counted"></div></div>
+      <div class="float donewhen" aria-label="Done when: she runs 5 km, she's home by 6:00 pm, she taps the tag, 8,000 steps by 9:00 pm, or she takes the photo now">
+        <div class="lab">Done when</div>
+        <div class="rot" aria-hidden="true"><span>She runs 5 km</span><span>She's home by 6:00 pm</span><span>She taps the tag</span><span>8,000 steps by 9:00 pm</span><span>She takes the photo now</span></div>
+        <div class="chips" aria-hidden="true"><i>Her word</i><i class="on">Steps</i><i>A tag, tapped</i><i>Arriving</i><i>A photo</i></div>
+        <div class="ok"><svg width="16" height="16" aria-hidden="true"><use href="#g-tick"/></svg>Her phone counts. You see that it checked.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script src="app.js"></script>
+<!-- 2 POINTS, THE SHOP AND PUNISHMENTS -->
+<section class="ch c-shop light flip" id="points" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">02 · POINTS, THE SHOP AND PUNISHMENTS</span>
+      <h2 class="h2">Earn it, spend it,<br><span class="l">answer for it.</span></h2>
+      <p class="lede">Every kept task earns points. Spend them in a shop your Dominant stocks: a lie-in, the film you pick, a day off. When something slips, the punishment comes from the list you both agreed, with points taken or a restriction that ends on its own.</p>
+      <ul class="points">
+        <li><svg width="22" height="22" style="color:#7444FF" aria-hidden="true"><use href="#g-tick"/></svg>Featured rewards, and ones that leave on a date</li>
+        <li><svg width="22" height="22" style="color:#7444FF" aria-hidden="true"><use href="#g-tick"/></svg>Never takes the balance below zero</li>
+        <li><svg width="22" height="22" style="color:#7444FF" aria-hidden="true"><use href="#g-tick"/></svg>Rules, limits and asks, kept in one place</li>
+      </ul>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-swap"/></svg></span><div><b>Coming from Obedience</b>Your coins, rewards and punishments, with a ledger that's the same on both phones.</div></div>
+    </div>
+    <div class="shots">
+      <div class="phone duo sm"><div class="seq n2"><img src="/assets/v2/shop-home.jpg" width="687" height="1000" loading="lazy" alt="Nova's Home: 2,255 points with Mistress"><img src="/assets/v2/shop.jpg" width="687" height="1000" loading="lazy" alt="Mistress's shop: Pick the film, Lie-in"></div><span class="tap" style="left:22%;top:37%;--dur:7s;--at:2.6s"></span></div>
+      <div class="phone"><div class="seq n2"><img src="/assets/v2/pun-issue.jpg" width="506" height="1100" loading="lazy" alt="Mara issues a punishment from the agreed list"><img src="/assets/v2/pun-hers.jpg" width="506" height="1100" loading="lazy" alt="Luna's punishment: lines, fifty points taken"></div></div>
+      <div class="float pts" aria-hidden="true">+30</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 LOCATION -->
+<section class="ch c-loc" id="location" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">03 · WHERE THEY ARE</span>
+      <h2 class="h2">Know they<br><span class="l">got home.</span></h2>
+      <p class="lede">Live location, set once when your dynamic starts. Places that tell you when she arrives and leaves. Her day told back as a story, and the drive home as a road that ends when the porch light comes on.</p>
+      <ul class="points">
+        <li><svg width="22" height="22" style="color:#FF7A6B" aria-hidden="true"><use href="#g-home"/></svg>Expect her by a time, at a place</li>
+        <li><svg width="22" height="22" style="color:#FF7A6B" aria-hidden="true"><use href="#g-pace"/></svg>On the road: timers wait while she drives</li>
+        <li><svg width="22" height="22" style="color:#FF7A6B" aria-hidden="true"><use href="#g-pin"/></svg>A heads-up when her battery runs low</li>
+      </ul>
+      <p class="fine small">Shared with the person you chose. Never with an advertiser, a data broker or an insurer.</p>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-swap"/></svg></span><div><b>Coming from Life360</b>The live map, place alerts and history you pay a family app for, made for two people who chose this.</div></div>
+    </div>
+    <div class="shots">
+      <div class="phone sm"><div class="v" data-v="/assets/v2/loc-nyc"><img src="/assets/v2/loc-nyc.jpg" width="400" height="870" loading="lazy" alt="Luna's afternoon in Manhattan told back on the map: Washington Square Park, the High Line, Bryant Park, Times Square, then Central Park"></div></div>
+      <div class="phone"><div class="v" data-v="/assets/v2/loc-horizon"><img src="/assets/v2/loc-horizon.jpg" width="400" height="870" loading="lazy" alt="The Horizon: the road home, 2 minutes to go, then the porch light"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SWITCH BLOCK -->
+<section class="switch" id="switch" data-step>
+  <div class="in">
+    <div class="head">
+      <div><span class="kick">Switching</span><h2 class="h2">Coming from Obedience<br><span class="l">or Life360?</span></h2></div>
+      <p class="lede">Bring your routine. Here's where each thing you use today lives in Collared, and the two we don't do.</p>
+    </div>
+    <div class="cmp">
+      <div class="cmpc">
+        <h3>From Obedience</h3><p class="sub">The D/s task app</p>
+        <div class="row"><span class="them">Habits you tick</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Smart tasks her phone confirms, and rituals</span></div>
+        <div class="row"><span class="them">Coins and rewards</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Points and a shop the Dominant stocks</span></div>
+        <div class="row"><span class="them">Punishments, rules, limits</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">An agreed deck, restrictions that end, rules, limits, asks</span></div>
+        <div class="row"><span class="them">Chat</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Messages and Glimpses, end-to-end encrypted</span></div>
+        <div class="row"><span class="them">Embrace, a second app</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">The journal, built in</span></div>
+        <div class="row gap"><span class="them">A web app, nine languages</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-eye"/></svg><span class="us">Not yet. Phone, Duo and watch first, in English</span></div>
+        <a class="more" href="/compare/obedience">See the full comparison ›</a>
+      </div>
+      <div class="cmpc">
+        <h3>From Life360</h3><p class="sub">The family locator</p>
+        <div class="row"><span class="them">Live map</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Live location, agreed once by both of you</span></div>
+        <div class="row"><span class="them">Place alerts</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Arriving and leaving, and Expect her by</span></div>
+        <div class="row"><span class="them">Location history</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Trips and places, and her day told back</span></div>
+        <div class="row"><span class="them">SOS</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Held, a safe call to a friend, the emergency contact</span></div>
+        <div class="row"><span class="them">Driving summary</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Her drive live, and the road home</span></div>
+        <div class="row gap"><span class="them">Crash dispatch, roadside help</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-eye"/></svg><span class="us">Not offered. Collared isn't a family safety plan</span></div>
+        <a class="more" href="/compare/life360">See the full comparison ›</a>
+      </div>
+    </div>
+    <div class="cta"><a class="btn p" href="/beta">Join the beta</a><a class="btn s" href="#held">Then see what's new</a></div>
+  </div>
+</section>
+
+<!-- 4 HELD -->
+<section class="ch c-held flip" id="held" data-step>
+  <div class="in">
+    <div class="copy">
+      <div class="orbs" aria-hidden="true"><i></i><i></i></div>
+      <span class="num">04 · HELD</span>
+      <h2 class="h2">Ask to be Held.<br><span class="l">He's there in a breath.</span></h2>
+      <p class="lede">Press and hold, from the app, the Lock Screen or the Action button. He's told at once, and you're already breathing with his voice and his steady beat while he joins from wherever he is.</p>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-heart"/></svg></span><div><b>Coming from Life360</b>An SOS button calls for help. Held calls for him, and keeps sharing where you are until you say you're okay.</div></div>
+    </div>
+    <div class="shots"><div class="phone"><div class="v" data-v="/assets/v2/held"><img src="/assets/v2/held.jpg" width="400" height="870" loading="lazy" alt="Held with Theo: the two orbs breathing"></div></div></div>
+  </div>
+</section>
+
+<!-- 5 JOURNALS -->
+<section class="ch c-journal light" id="journal" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">05 · JOURNALS</span>
+      <h2 class="h2">Yours,<br><span class="l">until you share it.</span></h2>
+      <p class="lede">Write in your own hand, tape in a photo, seal a page until a date. Share an entry for a day, a week or for good, and take it back any time. On iPhone Duo it opens like a real book.</p>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-book"/></svg></span><div><b>Coming from Obedience</b>No second app for your journal, and no second subscription.</div></div>
+    </div>
+    <div class="shots"><div class="phone open"><div class="v" data-v="/assets/v2/journal-book"><img src="/assets/v2/journal-book.jpg" width="760" height="534" loading="lazy" alt="Luna's journal open on iPhone Duo, page 18, Lunch by the river"></div></div></div>
+  </div>
+</section>
+
+<!-- 6 WORKOUTS -->
+<section class="ch c-fit flip" id="workouts" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">06 · WORKOUTS</span>
+      <h2 class="h2">Move together,<br><span class="l">even apart.</span></h2>
+      <p class="lede">Start anything from a run to the rower. Lift with Sir's targets on every set. Run apart and he follows live, and his cheer lands on your wrist mid-stride.</p>
+      <ul class="points">
+        <li><svg width="22" height="22" style="color:#FF4F8B" aria-hidden="true"><use href="#g-pace"/></svg>Apart or side by side</li>
+        <li><svg width="22" height="22" style="color:#FF4F8B" aria-hidden="true"><use href="#g-pace"/></svg>Steps and goals he sets, saved to Health</li>
+      </ul>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-star"/></svg></span><div><b>New to you</b>Neither Obedience nor Life360 has this. It's the third app you were sharing runs in.</div></div>
+    </div>
+    <div class="shots">
+      <div class="phone sm"><div class="seq n2"><img src="/assets/v2/fit-hers.jpg" width="368" height="800" loading="lazy" alt="Lower A, together with Sir"><img src="/assets/v2/fit-his.jpg" width="368" height="800" loading="lazy" alt="His Fitness: Move together, Luna's steps"></div></div>
+      <div class="watch cw"><div class="v" data-v="/assets/v2/fit-cheer"><img src="/assets/v2/fit-cheer.jpg" width="416" height="496" loading="lazy" alt="Her watch on a live run: Cheered you on"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 WATER AND MEDS -->
+<section class="ch c-care light" id="care" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">07 · WATER AND MEDS</span>
+      <h2 class="h2">Looked after,<br><span class="l">every day.</span></h2>
+      <p class="lede">The water he asks for, counted in a tap. Her meds in a weekly pill case, a reminder with Taken right on the notification, and her last dose always in view. A skipped dose never ends a streak.</p>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-drop"/></svg></span><div><b>Coming from Obedience</b>The food and water log people keep asking a habit tracker for.</div></div>
+    </div>
+    <div class="shots">
+      <div class="phone"><div class="seq n2"><img src="/assets/v2/water.jpg" width="506" height="1100" loading="lazy" alt="Water: 52 of 68 oz, a new task from Mistress"><img src="/assets/v2/meds.jpg" width="506" height="1100" loading="lazy" alt="Her meds: taken at 11:00 am"></div><span class="tap" style="left:30%;top:51%;--dur:7s;--at:1.2s"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 READ TOGETHER -->
+<section class="ch c-read flip" id="read" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">08 · READ TOGETHER</span>
+      <h2 class="h2">The same page,<br><span class="l">miles apart.</span></h2>
+      <p class="lede">Bring your own books or open a classic. See who's ahead, pass a page with a note, and read the bedtime stories written for two.</p>
+      <ul class="points">
+        <li><svg width="22" height="22" style="color:#FFD25E" aria-hidden="true"><use href="#g-book"/></svg>Your EPUBs and PDFs, shared with the people you choose</li>
+        <li><svg width="22" height="22" style="color:#FFD25E" aria-hidden="true"><use href="#g-book"/></svg>Story time books are end-to-end encrypted</li>
+      </ul>
+    </div>
+    <div class="shots">
+      <div class="phone"><div class="seq n3"><img src="/assets/v2/read-now.jpg" width="506" height="1100" loading="lazy" alt="Reading now: Mara is two pages ahead"><img src="/assets/v2/read-pass.jpg" width="506" height="1100" loading="lazy" alt="Luna passed you a page: read this one to me tonight"><img src="/assets/v2/read-page.jpg" width="506" height="1100" loading="lazy" alt="The Secret Garden, page 10"></div><span class="tap" style="left:56%;top:57%;--at:1.4s"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 GLIMPSES -->
+<section class="ch c-glimpse" id="glimpses" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">09 · GLIMPSES</span>
+      <h2 class="h2">A glimpse of your day,<br><span class="l">for one person.</span></h2>
+      <p class="lede">A photo taken in the moment and sent to them. Private ones stay blurred until tapped, and every Glimpse is end-to-end encrypted.</p>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-seal"/></svg></span><div><b>Coming from Obedience</b>Photos in chat is their most asked-for feature. Here it has its own camera.</div></div>
+    </div>
+    <div class="shots">
+      <div class="phone sm"><div class="v" data-v="/assets/v2/glimpse-cam"><img src="/assets/v2/glimpse-cam.jpg" width="400" height="870" loading="lazy" alt="The Glimpse camera: First coffee"></div></div>
+      <div class="phone"><div class="v" data-v="/assets/v2/glimpse-priv"><img src="/assets/v2/glimpse-priv.jpg" width="400" height="870" loading="lazy" alt="A Private Glimpse arrives blurred, then opens on his tap"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVATE ON PURPOSE -->
+<section class="private" data-step>
+  <div class="in">
+    <span class="kick">Private on purpose</span>
+    <h2 class="h2">What's yours<br><span class="l">stays yours.</span></h2>
+    <p class="lede">Messages, Glimpses and your Story time books are end-to-end encrypted. No ads, no tracking, nothing sold, and every share is agreed once, by both of you.</p>
+    <div class="glyphs"><span><svg width="18" height="18" aria-hidden="true"><use href="#g-seal"/></svg>Sealed on your phone</span><span><svg width="18" height="18" aria-hidden="true"><use href="#g-lock"/></svg>App lock and a discreet icon</span><span><svg width="18" height="18" aria-hidden="true"><use href="#g-eye"/></svg>No ads, nothing sold</span></div>
+  </div>
+</section>
+
+<!-- 10 SUB STUDIO -->
+<section class="ch c-studio light" id="studio" data-step>
+  <span class="blob b1" aria-hidden="true"></span><span class="blob b2" aria-hidden="true"></span>
+  <div class="in">
+    <div class="copy">
+      <span class="num">10 · SUB STUDIO</span>
+      <h2 class="h2">Dressed<br><span class="l">by you.</span></h2>
+      <p class="lede">Her wardrobe, from her own clothes. He picks her look for the day, paints her nails within his rules, and seals a surprise she opens the night before.</p>
+      <p class="note">Coffee first, then the gallery.</p>
+    </div>
+    <div class="shots wide">
+      <div class="film"><div class="v" data-v="/assets/v2/studio-film"><img src="/assets/v2/studio-film.jpg" width="880" height="496" loading="lazy" alt="Sub Studio on iPhone: he dresses her figure in a shirt, a camel skirt and slingbacks, sends the look to Luna as a surprise, and it arrives sealed in an envelope"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 SOCIAL -->
+<section class="ch c-social flip" id="social" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">11 · SOCIAL</span>
+      <h2 class="h2">Your people,<br><span class="l">at your distance.</span></h2>
+      <p class="lede">Friends see counts, never content. Join a challenge where everyone else is a number, and the community is a tap away.</p>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-people"/></svg></span><div><b>Already here</b>More than 5,000 people in the Collared Discord.</div></div>
+    </div>
+    <div class="shots"><div class="phone"><div class="v" data-v="/assets/v2/social"><img src="/assets/v2/social.jpg" width="400" height="870" loading="lazy" alt="Luna's Social: her circle, From your people, the community"></div></div></div>
+  </div>
+</section>
+
+<!-- EVERY SCREEN -->
+<section class="ch c-duo" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">ON EVERY SCREEN YOU OWN</span>
+      <h2 class="h2">Open it, and see<br><span class="l">the whole day.</span></h2>
+      <p class="lede">iPhone, iPhone Duo in every pose, Apple Watch and Android. When she keeps the last thing, his stage says so.</p>
+    </div>
+    <div class="phone open wide"><div class="v" data-v="/assets/v2/duo-stage"><img src="/assets/v2/duo-stage.jpg" width="760" height="534" loading="lazy" alt="Theo's iPhone Duo open: the stage ticks to 6 of 6, Luna has kept everything"></div></div>
+    <div class="watches">
+      <div class="watch"><img src="/assets/v2/watch-task.jpg" width="349" height="442" loading="lazy" alt="Her watch: a task, Tidy the kitchen"></div>
+      <div class="watch"><img src="/assets/v2/watch-award.jpg" width="349" height="442" loading="lazy" alt="His watch: award Luna points"></div>
+      <div class="watch"><img src="/assets/v2/watch-closed.jpg" width="372" height="442" loading="lazy" alt="Her watch: your collar is closed for the day"></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="promise" id="community">
+  <div class="in"><div class="split2">
+    <div class="panel disc"><span class="kick">The community</span><div class="stat">5,000+</div><p>People in the Discord. A question every day, honest advice, and a warm welcome on your first day. It's also where to ask for help with the app.</p><a class="btn w sm" href="https://discord.gg/collared" rel="noopener">Join the Discord</a></div>
+    <div class="panel pod"><span class="kick">The podcast · soon</span><h3>Real conversations about life in the lifestyle.</h3><p>Listener questions from the Discord, and guests from the community.</p></div>
+  </div></div>
+</section>
+
+<section class="endcard">
+  <svg class="ring" aria-hidden="true"><use href="#mark"/></svg>
+  <div class="in">
+    <span class="kick">The beta is open</span>
+    <h2 class="h2">Be one of the first inside.</h2>
+    <div class="cta"><a class="btn p" href="/beta">Join the beta</a><a class="btn s" href="/account">Sign in</a></div>
+    <p class="fine">Free while in beta. Questions first? <a href="https://discord.gg/collared" rel="noopener">Ask in the Discord.</a></p>
+  </div>
+</section>
+</main>
+
+<!--FOOT-->
+<footer class="foot">
+  <div class="in">
+    <div class="brand"><img class="wm" src="/assets/collared-logo-white.png" alt="Collared" width="106" height="30" loading="lazy"><div>Structure for your dynamic.</div><div><a href="mailto:hello@collared.app">hello@collared.app</a></div></div>
+    <div><h2>The app</h2><a href="/#tasks">Features</a><a href="/beta">Join the beta</a><a href="/account">Your account</a></div>
+    <div><h2>Switching</h2><a href="/#switch">Switching to Collared</a><a href="/compare/obedience">From Obedience</a><a href="/compare/life360">From Life360</a></div>
+    <div><h2>Collared</h2><a href="/team">Team</a><a href="https://discord.gg/collared" rel="noopener">Discord</a><a href="https://discord.gg/collared" rel="noopener">Help and support</a></div>
+    <div><h2>Legal</h2><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+    <div class="legal"><p>Collared is for adults 18 and over. Everything here is about consensual adult dynamics. Obedience and Life360 are trademarks of their owners and are named only to compare. © 2026 Collared.</p></div>
+  </div>
+</footer>
+<!--/FOOT-->
+
+<div class="progress" aria-hidden="true"><svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="18" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="6"/><circle id="pr" cx="27" cy="27" r="18" fill="none" stroke="#9C7DFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="113.1" stroke-dashoffset="113.1"/></svg></div>
+<div class="stick"><a class="btn p" href="/beta">Join the beta</a></div>
+
+<script src="/site.js" defer></script>
 </body>
 </html>

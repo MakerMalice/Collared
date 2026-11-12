@@ -1,0 +1,55 @@
+/* Collared · Stage, the compare pages: facts about them, dated; what lives where in Collared; what we don't do. */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px 22px}
+.fact b{display:block;font:800 11.5px/1 Nunito;letter-spacing:.12em;text-transform:uppercase;color:var(--tint);margin-bottom:10px}
+.fact span{font-size:15px;line-height:1.45}
+.asof{font-size:13px;color:var(--sub);margin-top:14px}
+
+.block{padding:90px 0;background:var(--ground)}
+.block.alt{background:var(--ink)}
+.block .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.block .head .lede{margin:0;max-width:440px}
+
+.ctab{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden;font-size:15.5px}
+.ctab caption{text-align:left}
+.ctab th,.ctab td{text-align:left;vertical-align:top;padding:18px 22px;border-top:1px solid var(--line)}
+.ctab thead th{border-top:0;font:800 12px/1 Nunito;letter-spacing:.12em;text-transform:uppercase;color:var(--sub);padding-top:22px;padding-bottom:16px}
+.ctab tbody th{font-weight:600;color:var(--sub);width:30%}
+.ctab td:nth-child(2){font-weight:700}
+.ctab td:last-child{width:150px}
+.ctab td small{display:block;font-weight:600;color:var(--sub);font-size:13.5px;margin-top:4px}
+.v-in,.v-more,.v-no,.v-never{display:inline-flex;align-items:center;gap:6px;font:800 12px/1 Nunito;padding:7px 10px;border-radius:999px;white-space:nowrap}
+.v-in{background:rgba(156,125,255,.16);color:#CBBBFF}
+.v-more{background:rgba(76,195,128,.16);color:#7FDCA5}
+.v-no{background:rgba(255,255,255,.07);color:var(--sub)}
+.v-never{background:rgba(255,122,107,.14);color:#FFA79C}
+
+.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.notes .tile h3{margin-top:16px}
+
+.sources{font-size:13.5px;color:var(--sub);max-width:900px}
+.sources h2{font:800 12px/1 Nunito;letter-spacing:.12em;text-transform:uppercase;color:var(--text);margin:0 0 12px}
+.sources p{margin:0 0 8px}
+.endband{padding:100px 0;text-align:center;background:radial-gradient(50% 70% at 50% 100%,rgba(116,68,255,.45),transparent 70%),var(--ink)}
+.endband .cta{justify-content:center}
+.endband .fine a{color:var(--tint)}
+.other{display:inline-block;margin-top:22px;font:800 15px/1 Nunito;color:var(--tint);text-decoration:none}
+.other:hover{text-decoration:underline}
+
+@media (max-width:900px){
+  .facts{grid-template-columns:1fr 1fr}
+  .notes{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .block{padding:64px 0}
+  .facts{grid-template-columns:1fr;margin-top:32px}
+  .ctab,.ctab thead,.ctab tbody,.ctab tr,.ctab th,.ctab td{display:block;width:auto!important}
+  .ctab{border-radius:24px}
+  .ctab thead{display:none}
+  .ctab tr{padding:16px 18px;border-top:1px solid var(--line)}
+  .ctab tr:first-child{border-top:0}
+  .ctab th,.ctab td{border:0;padding:0}
+  .ctab tbody th{font-size:14px;margin-bottom:6px}
+  .ctab td:last-child{margin-top:10px}
+  .endband{padding:72px 0}
+}

@@ -178,3 +178,28 @@ stays hidden until the server switch is turned on after the lawyer gate.
 - Fill store/podcast URL constants in `app.js` when those exist.
 - Refresh the §2 demo panels after the rebuilt app's visual language settles
   (owner's call: site stays as-is until the new app is visually further along).
+
+## 2026-11-11: Stage (the redo), branch `stage-redo`
+
+The whole site moved to direction A, *Stage*, from the app repo's `design/website-redo/` (D2147, the owner's
+order and claims). Built on the local branch `stage-redo`; not live until the owner says so.
+
+- **Home** in the owner's order: smart tasks, points and punishments, location, the *Coming from Obedience or
+  Life360?* block, Held, journals, workouts, water and meds, Read Together, Glimpses, Sub Studio (no Soon tag),
+  Social. Hero *Everything your dynamic runs on.* The only pricing line is *Free while in beta*. Every call to
+  action is *Join the beta*; the Discord is offered for help. Nothing tells anyone to search a store.
+- **Compare pages** `/compare/obedience` and `/compare/life360` from the strategy's feature map: their facts dated
+  11 November 2026, honest *Not yet* and *Not offered* rows, sources in words.
+- **Clips** are real app captures with the fictional cast. The location map is a new take for this site: the
+  recap screen on an iPhone 17 Pro simulator, Theo watching Luna's afternoon in Manhattan (Washington Square
+  Park, the High Line, Bryant Park, Times Square, Central Park), landmarks only, no Home, Apple's own tiles, not
+  blurred because there is nothing to hide. The old Brooklyn recap is not used. Sub Studio is a cut of the launch
+  film (v4, the real 3D iPhone), 6.55 to 12.0, 18.6 to 22.2 and 23.9 to 25.2 s, no titles.
+- **Fonts** are the app's own (Nunito, Lora, Caveat), subset to Latin WOFF2 and served from `assets/fonts/`.
+  Google Fonts are gone; `/account`'s policy gained `font-src 'self'`.
+- **/account**: account.js untouched; only its shell (nav, page head, footer) and colours changed. It is always
+  dark now, like the rest of the site.
+- **Unpublished:** `.nojekyll` replaced by `_config.yml` so `README.md`, `CLAUDE.md`, `docs/` and `tools/` stop being
+  served; the three unreviewed drafts moved to `docs/drafts/`. After the first push, check that
+  `/.well-known/apple-app-site-association` and `/.well-known/assetlinks.json` still answer, and that `/README`,
+  `/docs/DEVLOG` and `/CLAUDE.md` don't.

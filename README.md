@@ -12,60 +12,37 @@ and convert visitors into Discord members and app-waitlist signups.
 
 ## Stack
 
-Vanilla HTML/CSS/JS — no framework, no build step. Three files plus assets:
+Vanilla HTML/CSS/JS, no framework, no build step. **Stage** look since November 2026 (app decision D2147):
+a dark studio ground, the app's real screens on real devices, one colour field per feature.
 
 | File | Purpose |
 |---|---|
-| `index.html` | The entire page: nav, hero, pillars, app features, community, podcast, merch, events, join, footer |
-| `styles.css` | All styling. Two deliberate palettes (see below) |
-| `app.js` | Site-wide behavior: nav, scroll reveals, link wiring, plus the homepage demo panels (every homepage-only block is guarded by an element check, so it runs clean on every page) |
-| `team.html` / `team.css` / `team.js` | The **Join the Team** application page, served at `/team` |
-| `beta.html` / `beta.css` / `beta.js` | The **beta tester signup**, served at `/beta` — **unlisted** (noindex, not linked anywhere); reuses `team.css` components |
-| `account.html` / `account.css` / `account.js` / `account-config.js` | **Your account**, served at `/account` (noindex; linked from the footer and the privacy page). Signs in to the same Collared account as the app and talks only to Supabase and its `account-web` function. Loads no `app.js`, no fonts or scripts from anyone else, and a Content-Security-Policy says so. `account-config.js` holds the project URL and the **publishable** key only: never a secret key |
+| `index.html` + `home.css` | Home: hero, the feature ribbon, eleven feature sections in the owner's order, the *Coming from Obedience or Life360?* block, the privacy band, every screen, community, end card |
+| `compare/obedience.html`, `compare/life360.html` + `compare.css` | `/compare/obedience` and `/compare/life360`: dated facts about them, a side-by-side table with honest *Not yet* rows, sources |
+| `site.css` / `site.js` | The shared shell on every page but `/account`: self-hosted fonts, tokens, nav and mobile menu, buttons, devices, page heads, footer; the clips and the closing ring on Home |
+| `forms.css` | `/beta` and `/team` form styles (dark) |
+| `legal.css` | `/privacy` and `/terms` (styles only; the wording is the policy) |
+| `team.html` / `team.js` | The **Join the Team** application page, served at `/team` |
+| `beta.html` / `beta.js` | The **beta tester signup**, served at `/beta`. Every call to action on the site points here |
+| `account.html` / `account.css` / `account.js` / `account-config.js` | **Your account**, served at `/account` (noindex). Signs in to the same Collared account as the app and talks only to Supabase and its `account-web` function. Loads no `site.js` and nothing from anyone else; a Content-Security-Policy says so (`font-src 'self'` for the site's own fonts). `account-config.js` holds the project URL and the **publishable** key only: never a secret key |
 | `vendor/` | Pinned copies used by `/account`: `supabase-js-2.116.0.js` (the UMD build, unmodified) and `qrcode-1.5.4.js` (node-qrcode's core with dijkstrajs, MIT, unmodified sources in one wrapper). Update by replacing the file and its version in the name |
-| `assets/` | Brand marks only (transparent logo PNGs, broken-circle icon, OG tile) |
+| `assets/fonts/` | Nunito, Lora and Caveat (the app's own faces, OFL), subset to Latin as WOFF2. No Google Fonts |
+| `assets/v2/` | The Home clips (`.mp4` + `.webm` + `.jpg` poster) and stills: real app captures, fictional cast only |
+| `assets/` | Brand marks (wordmark PNGs, broken-circle icon, OG tile) and the Discord post images |
+| `tools/stage_shell.py` | Copies the defs, nav and footer from `index.html` into every page with the `<!--DEFS-->`, `<!--NAV-->`, `<!--FOOT-->` markers. Run it after changing the shell (`/account` keeps its own nav: account.js reads it) |
+| `_config.yml` | Keeps `README.md`, `CLAUDE.md`, `docs/` and `tools/` out of the published site (GitHub Pages' Jekyll; no page has front matter, so nothing is templated) |
+| `docs/drafts/` | Unreviewed policy drafts, kept here and not published |
 | `CNAME` | Custom-domain binding for GitHub Pages (`collared.app`) |
 
-## The two palettes (intentional)
+The old lavender site (`styles.css`, `app.js`, `team.css`, `beta.css`) is no longer loaded by any page.
 
-1. **Site chrome** — soft brand lavender from the logo tiles:
-   `--lavender #A9A4C9`, `--lavender-deep #8B85B0`, `--lavender-mist #E6E3F2`,
-   `--porcelain #FAFAFC`, `--ink #1E1E24`, `--stone #8A8A93`
-2. **App demo panels** (`.app-ui`) — the *real app's* palette so the recreated UI reads as
-   authentic product: bg `#F6F0FF`, accent violet `#7444FF`, with a full dark-mode variable set
-   under `body.demos-dark`.
+## Clips
 
-Typography: **Jost** (display) + **Inter** (body) via Google Fonts, system fallbacks.
-The broken-circle icon (a collar in two strokes) is the only motif — used as an inline SVG
-symbol (`#collar-mark`) for section glyphs, hero geometry, podcast cover, and empty states.
-
-## Interactive demo panels
-
-All demo state is plain in-memory JS (nothing persisted). The recreated app UI is hand-built
-HTML/CSS/JS based on a screen recording of the original app — **no screenshots or video are
-shipped**, and all data shown is fictional (see `docs/DEVLOG.md` for provenance and privacy rules).
-
-- **Hero phone** — working Tasks screen: auto-loop completes tasks (strikethrough → green badge →
-  points tick) and pauses on first user interaction; filters and Complete buttons are real.
-- **Feature panels** — tasks (same engine), journal cards (static), rewards shop (working redeem
-  with balance), profile (toggleable Role / Relationship Status pills).
-- **"Make it yours"** — Light/Dark/System selector that flips every demo panel (not the site)
-  between the app's light and dark themes.
-
-## Editing the site
-
-**All external links** live in one constants block at the top of `app.js`:
-`DISCORD_INVITE_URL`, `STAFF_FORM_URL`, store URLs, podcast URLs.
-
-**Events** are one `events` array at the top of `app.js` — add an object with
-`title / date (ISO) / location / description / link` and the page automatically sorts it into
-Upcoming or Past (collapsed accordion). A commented worked example sits above the array.
-
-**Waitlist** is wired to Kit (ConvertKit), form ID `9553709` (`KIT_WAITLIST_FORM_ID` in `app.js`).
-Submission happens via background fetch (visitor stays on-page, styled confirmation), with a
-native-POST fallback to Kit's hosted thank-you page. The "tell me about merch too" checkbox is
-sent as the Kit custom field `merch_interest`; an optional `KIT_MERCH_FORM_ID` slot exists for a
-dedicated merch form.
+Every `.v[data-v]` holds its poster `<img>` (lazy). Near the screen, `site.js` swaps in a muted, looping, inline
+`<video>` (WebM first, MP4 second) and pauses it when it leaves. Reduce Motion keeps the posters and stops the
+CSS loops. Sources: the app repo's `design/website-redo/` (the teaser v4 takes), the NYC map recap recorded on a
+simulator for this site (landmarks only, fictional cast), and a cut of the Sub Studio launch film (v4) for its real
+3D iPhone.
 
 ## The team application page (`/team`)
 
@@ -88,13 +65,11 @@ it retries once with `mode: "no-cors"` and treats completion as success; if
 Both payload shapes (`type: "application"` and `type: "interest"`) carry a hidden `website`
 honeypot field.
 
-`STAFF_FORM_URL` in `app.js` points at `/team`, so every `[data-link="staff"]` button —
-including the homepage join band — links there in the same tab.
 
 ## The beta signup page (`/beta`)
 
-`beta.html` is the sibling of `/team` for the invite-only beta round. It is deliberately
-**unlisted** — `noindex`, no nav/footer/homepage link — and is shared by direct link. Two
+`beta.html` is the sibling of `/team` for the invite-only beta round. Since the Stage redo it is in the nav
+and behind every *Join the beta* button on the site (it still carries `noindex`). Two
 platform cards (iPhone / Android, a keyboard-operable radiogroup) open one questionnaire whose
 device and store-email fields swap per platform; Android gets a "invites start a few weeks
 after iPhone" callout and its own success copy. Eight questions, same progress bar and
@@ -113,9 +88,8 @@ repo's visibility is ever toggled, re-check Settings → Pages (visibility chang
 
 ## Accessibility & performance
 
-Semantic HTML, visible `:focus-visible` styles, keyboard-reachable demo controls,
-`prefers-reduced-motion` honored (reveals and auto-loop disabled), WCAG AA contrast pass
-(text on lavender uses ink/deep tones). No video files, no stock photography, ~356 KB of assets.
+Semantic HTML, a skip link, visible `:focus-visible` styles, `prefers-reduced-motion` honored (posters instead of
+clips, no CSS loops), AA contrast. Images are lazy with sizes set; clips load only near the screen.
 
 ---
 

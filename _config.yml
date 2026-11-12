@@ -1,0 +1,17 @@
+# GitHub Pages runs Jekyll on this repo only so the internal files below stay out of the published site.
+# Nothing is templated: no page has front matter, so every page and asset is copied as it is.
+# (This replaced .nojekyll on 2026-11-11. If you ever add .nojekyll back, the excludes below stop working.)
+
+# Dot folders are skipped by default; the app's universal links need this one served.
+include:
+  - .well-known
+
+# Kept in the repo, never served at collared.app.
+exclude:
+  - README.md
+  - CLAUDE.md
+  - docs/
+  - tools/
+  - .claude/
+  - .gitignore
+  - _config.yml

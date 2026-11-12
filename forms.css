@@ -1,0 +1,190 @@
+/* Collared · Stage. The two sign-up pages (/beta and /team): section layout, the team listbox, platform cards,
+   the progress bar, fields, pills, errors and success. Loads after site.css; Nunito comes from there.
+   Class names are the ones beta.js and team.js read, so do not rename them. */
+
+:root{
+  --field:#17141F; --field-line:rgba(255,255,255,.14); --err:#FF8A8A; --err-bg:rgba(255,138,138,.08); --good:#5CD08F;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* head extras */
+.phead .fine{font-size:15px;max-width:640px;margin-top:22px}
+.phead .fine a{color:var(--tint);text-underline-offset:3px}
+.phead .fine a:hover{color:#fff}
+.phead .fine strong{color:var(--text)}
+
+/* the form section */
+.team-choose{padding:80px 0 120px}
+.team-choose .lede{margin-bottom:34px}
+.team-choose .h2{margin-top:12px}
+
+/* ── the team listbox (button + list) ── */
+.tsel{position:relative;max-width:620px}
+.tsel-label{display:block;font:800 13px/1 Nunito;letter-spacing:.14em;text-transform:uppercase;color:var(--tint);margin-bottom:12px}
+.tsel-button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 17px/1.3 Nunito;text-align:left;color:var(--text);background:var(--card);border:1px solid var(--field-line);border-radius:20px;padding:18px 22px;cursor:pointer;transition:border-color .18s,background-color .18s}
+.tsel-button:hover{border-color:rgba(183,162,255,.5)}
+.tsel-button[aria-expanded="true"]{border-color:var(--violet-d)}
+.tsel-value.is-placeholder{color:var(--sub);font-weight:600}
+.tsel-button .tsel-value{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tsel-chevron{width:20px;height:20px;flex:none;fill:none;stroke:var(--tint);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .28s var(--ease)}
+.tsel-button[aria-expanded="true"] .tsel-chevron{transform:rotate(180deg)}
+.tsel-list{position:absolute;z-index:30;top:calc(100% + 8px);left:0;right:0;margin:0;padding:8px;list-style:none;background:#25212F;border:1px solid var(--field-line);border-radius:22px;box-shadow:0 24px 60px -12px rgba(0,0,0,.7);max-height:360px;overflow-y:auto;transform-origin:top center;animation:tsel-open .2s var(--ease)}
+.tsel-list[hidden]{display:none}
+@keyframes tsel-open{from{opacity:0;transform:translateY(-6px) scale(.985)}to{opacity:1;transform:none}}
+.tsel-list:focus-visible{outline-offset:2px}
+.tsel-option{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:15px;cursor:pointer;transition:background-color .14s}
+.tsel-option+.tsel-option{margin-top:2px}
+.tsel-option-text{display:flex;flex-direction:column;gap:3px;min-width:0;margin-right:auto}
+.tsel-option-name{font-weight:800;font-size:16.5px;color:var(--text);line-height:1.3}
+.tsel-option-desc{font-size:14.5px;color:var(--sub);line-height:1.4}
+.tsel-option.is-soon .tsel-option-name{font-weight:700}
+.tsel-tag{flex:none;font:800 11.5px/1 Nunito;letter-spacing:.08em;text-transform:uppercase;color:var(--tint);background:var(--soft);border-radius:999px;padding:6px 11px}
+.tsel-option:hover,.tsel-option.is-active{background:rgba(255,255,255,.07)}
+.tsel-option.is-active{box-shadow:inset 0 0 0 2px var(--violet-d)}
+.tsel-check{width:19px;height:19px;flex:none;fill:none;stroke:var(--tint);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .16s}
+.tsel-option[aria-selected="true"] .tsel-check{opacity:1}
+
+/* ── expanding panels (beta.js and team.js drive the height) ── */
+.team-panel{overflow:hidden;height:0;opacity:0;transition:height .45s var(--ease),opacity .35s var(--ease)}
+.team-panel[hidden]{display:none}
+.team-panel.is-open{opacity:1}
+.team-panel-inner{padding-top:36px}
+/* a focus ring inside the clipped panel must not be cut off */
+.team-panel{padding:0 4px;margin:0 -4px}
+
+/* ── the form card ── */
+.tq-form,.interest-form,.tq-success{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:36px 38px 40px;max-width:760px}
+.tq-eyebrow{font:800 12.5px/1.2 Nunito;letter-spacing:.16em;text-transform:uppercase;color:var(--tint);margin:0 0 20px;padding:0}
+.tq-section>legend.tq-eyebrow{display:flex;align-items:center;gap:14px;width:100%;float:none}
+.tq-section>legend.tq-eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+.tq-section{border:0;margin:0;padding:0;min-width:0}
+.tq-section+.tq-section{margin-top:44px}
+.tq-field+.tq-field{margin-top:28px}
+.tq-label{display:block;margin:0 0 11px;font:700 17px/1.45 Nunito;color:var(--text)}
+.tq-req{color:var(--tint);margin-left:2px}
+.tq-optional{font:700 12.5px/1 Nunito;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);margin-left:8px}
+.tq-help{font-size:14.5px;color:var(--sub);margin:10px 0 0}
+.tq-count{font-size:13.5px;color:var(--sub);margin:8px 0 0}
+.tq-count.is-ok{color:var(--good)}
+
+/* ── fields ── */
+.tq-input{width:100%;font:500 16px/1.5 Nunito;color:var(--text);padding:14px 16px;background:var(--field);border:1px solid var(--field-line);border-radius:14px;transition:border-color .18s,box-shadow .18s,background-color .18s;-webkit-appearance:none;appearance:none}
+.tq-input::placeholder{color:var(--sub);opacity:1}
+.tq-input:hover{border-color:rgba(183,162,255,.45)}
+.tq-input:focus{border-color:var(--violet-d);box-shadow:0 0 0 4px rgba(116,68,255,.32);outline:none}
+.tq-input:focus-visible{outline:3px solid var(--violet-d);outline-offset:2px}
+.tq-input:-webkit-autofill{-webkit-text-fill-color:var(--text);box-shadow:0 0 0 100px var(--field) inset}
+.tq-textarea{resize:none;overflow:hidden;min-height:120px;line-height:1.6}
+.tq-input-row{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}
+.tq-input-row .tq-input{flex:1 1 240px}
+.tq-inline-btn{flex:none;font:700 14.5px/1.2 Nunito;color:var(--tint);background:var(--soft);border:1px solid transparent;border-radius:14px;padding:12px 18px;cursor:pointer;transition:background-color .18s,color .18s}
+.tq-inline-btn:hover{background:#3A3158}
+.tq-inline-btn.is-done{color:var(--good)}
+
+/* ── pills ── */
+.tq-pills{display:flex;flex-wrap:wrap;gap:10px}
+.tq-pill{font:700 15.5px/1.2 Nunito;color:var(--text);background:var(--field);border:1px solid var(--field-line);border-radius:999px;padding:12px 22px;cursor:pointer;transition:background-color .18s,border-color .18s,color .18s,transform .12s}
+.tq-pill:hover{border-color:rgba(183,162,255,.55);background:#201B2C}
+.tq-pill:active{transform:scale(.97)}
+.tq-pill[aria-pressed="true"]{background:var(--violet);border-color:var(--violet);color:#fff;font-weight:800}
+.tq-pill-num{min-width:54px;padding-left:0;padding-right:0;text-align:center}
+.tq-scale{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.tq-scale-end{font-size:13.5px;color:var(--sub);flex:none}
+.tq-pills-scale{flex:0 1 auto}
+
+/* ── platform cards ── */
+.beta-platform-field{max-width:760px}
+.beta-visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.bp-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.bp-card{position:relative;display:flex;align-items:flex-start;gap:16px;width:100%;text-align:left;font-family:Nunito,system-ui,sans-serif;color:var(--text);background:var(--card);border:1px solid var(--field-line);border-radius:26px;padding:22px 24px 24px;cursor:pointer;transition:border-color .18s,background-color .18s,box-shadow .18s,transform .18s var(--ease)}
+.bp-card:hover{border-color:rgba(183,162,255,.55);transform:translateY(-2px)}
+.bp-card:active{transform:none}
+.bp-card[aria-checked="true"]{border-color:var(--violet-d);background:#251F3D;box-shadow:0 0 0 1px var(--violet-d),0 16px 44px -14px rgba(116,68,255,.55)}
+.bp-card-glyph{flex:none;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:16px;background:var(--soft);color:var(--tint);transition:background-color .18s,color .18s}
+.bp-card-glyph svg{width:26px;height:26px;display:block}
+.bp-card[aria-checked="true"] .bp-card-glyph{background:var(--violet);color:#fff}
+.bp-card-text{display:flex;flex-direction:column;gap:4px;min-width:0}
+.bp-card-name{font:800 22px/1.2 Nunito;color:var(--text)}
+.bp-card-sub{font-size:14.5px;line-height:1.45;color:var(--sub)}
+.bp-card-check{position:absolute;top:18px;right:18px;width:20px;height:20px;fill:none;stroke:var(--tint);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:0;transform:scale(.8);transition:opacity .18s,transform .18s var(--ease)}
+.bp-card[aria-checked="true"] .bp-card-check{opacity:1;transform:none}
+.tq-field.is-invalid .bp-card{border-color:var(--err)}
+.beta-platform-fields[hidden]{display:none}
+.beta-other{margin-top:14px;max-width:320px}
+.beta-other[hidden]{display:none}
+.beta-other-label{font-size:15px;font-weight:700;margin-bottom:8px}
+.beta-other-input{font-size:15.5px;padding:12px 14px}
+
+/* ── errors ── */
+.tq-error{font-size:14.5px;font-weight:700;color:var(--err);margin:10px 0 0}
+.tq-error[hidden]{display:none}
+.tq-field.is-invalid .tq-input{border-color:var(--err);background:var(--err-bg)}
+.tq-field.is-invalid .tq-pill{border-color:rgba(255,138,138,.55)}
+.tq-formerror{margin:20px 0 0;padding:14px 18px;background:var(--err-bg);border:1px solid rgba(255,138,138,.4);border-radius:16px;color:var(--err);font-size:15px;font-weight:700}
+.tq-formerror[hidden]{display:none}
+
+/* ── honeypot ── */
+.tq-hp{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ── actions ── */
+.tq-actions{margin-top:36px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.tq-actions .btn{font-size:17px;padding:17px 34px}
+.tq-actions-note{font-size:14.5px;color:var(--sub);margin:0}
+.btn[aria-busy="true"],.btn:disabled{opacity:.6;cursor:default;transform:none!important;box-shadow:none}
+
+/* ── progress ── */
+.tq-progress[hidden]{display:none}
+.tq-progress{max-width:760px;background:rgba(31,28,39,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:999px;padding:14px 22px;margin-bottom:18px;display:flex;align-items:center;gap:18px}
+@media (min-width:761px){.tq-progress{position:sticky;top:82px;z-index:15}}
+.tq-progress-bar{display:flex;gap:5px;flex:1;min-width:0}
+.tq-seg{flex:1;height:6px;border-radius:999px;background:rgba(255,255,255,.12);transition:background-color .4s var(--ease)}
+.tq-seg.is-filled{background:var(--violet-d)}
+.tq-progress-text{margin:0;flex:none;font:800 14px/1 Nunito;color:var(--tint);font-variant-numeric:tabular-nums}
+
+/* ── success ── */
+.tq-success{text-align:center;padding:60px 36px 64px}
+.tq-success[hidden]{display:none}
+.tq-success-mark{width:76px;height:76px;color:var(--violet-d);margin:0 auto 22px}
+.tq-success-mark circle{stroke-dasharray:111.6 14.1;stroke-dashoffset:-7;animation:mark-draw 1.05s var(--ease) forwards}
+@keyframes mark-draw{from{stroke-dasharray:0 251.3;stroke-dashoffset:-7}to{stroke-dasharray:111.6 14.1;stroke-dashoffset:-7}}
+.tq-success h3{font:800 clamp(28px,3.4vw,36px)/1.1 Nunito;letter-spacing:-.015em;margin:0 0 12px;color:var(--text)}
+.tq-success p{color:var(--sub);font-size:17px;margin:0 auto;max-width:420px}
+
+/* ── the not-open-yet panel ── */
+.interest-lede{font-size:17px;color:var(--sub);margin:0 0 26px;max-width:520px}
+
+@media (max-width:760px){
+  .team-choose{padding:56px 0 88px}
+  .tq-form,.interest-form,.tq-success{padding:28px 20px 30px;border-radius:24px}
+  .tq-progress{padding:12px 16px;gap:12px;border-radius:18px}
+  .tq-progress-text{font-size:13px}
+  .tq-actions{flex-direction:column;align-items:stretch;gap:14px}
+  .tq-actions .btn{width:100%;justify-content:center}
+  .tq-actions-note{text-align:center}
+  .tq-inline-btn{width:100%}
+  .tq-scale-end-right{margin-left:auto}
+  .bp-cards{grid-template-columns:minmax(0,1fr);gap:12px}
+  .bp-card{padding:18px;gap:14px;border-radius:22px}
+  .bp-card:hover{transform:none}
+  .tq-success{padding:46px 20px 48px}
+}
+@media (max-width:420px){
+  .tq-pill{padding:11px 17px;font-size:15px}
+  .tq-pill-num{min-width:46px}
+  .tq-scale{gap:8px}
+  .tq-scale-end{font-size:12.5px}
+  .tsel-option{padding:12px 11px;gap:9px}
+  .tsel-option-name{font-size:15.5px}
+  .tsel-option-desc{font-size:13.5px}
+  .tsel-button{padding:16px 18px}
+  .bp-card-glyph{width:42px;height:42px;border-radius:14px}
+  .bp-card-glyph svg{width:23px;height:23px}
+  .bp-card-check{top:14px;right:14px;width:18px;height:18px}
+  .beta-other{max-width:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .team-panel,.tsel-chevron,.tq-seg,.bp-card,.bp-card-glyph,.bp-card-check,.tq-pill{transition:none}
+  .bp-card:hover{transform:none}
+  .tsel-list{animation:none}
+  .tq-success-mark circle{animation:none}
+}

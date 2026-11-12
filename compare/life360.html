@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coming from Life360 · Collared</title>
+  <meta name="description" content="Switching from Life360 to Collared: where the live map, place alerts, history and SOS live in Collared, what is made for two people who chose this, and what Collared doesn't offer.">
+  <meta name="theme-color" content="#0E0A1A">
+  <meta property="og:title" content="Coming from Life360 · Collared">
+  <meta property="og:description" content="The live map, place alerts and history, made for two people who chose this. And what we don't do.">
+  <meta property="og:image" content="https://collared.app/assets/collared-tile.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://collared.app/compare/life360">
+  <link rel="canonical" href="https://collared.app/compare/life360">
+  <link rel="icon" type="image/png" href="/assets/collodis.png">
+  <link rel="apple-touch-icon" href="/assets/collodis.png">
+  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/compare.css">
+</head>
+<body>
+<!--DEFS-->
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs><mask id="band"><rect width="1024" height="1024" fill="#fff"/><rect y="464" width="1024" height="96" fill="#000"/></mask></defs>
+  <symbol id="mark" viewBox="0 0 1024 1024"><circle cx="512" cy="512" r="300" fill="none" stroke="currentColor" stroke-width="92" mask="url(#band)"/></symbol>
+  <symbol id="g-tick" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="g-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="15.5" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="g-seal" viewBox="0 0 24 24"><path d="M3.5 7.5h17v11h-17z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M3.5 7.5l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="14" r="3" fill="currentColor"/></symbol>
+  <symbol id="g-eye" viewBox="0 0 24 24"><path d="M3 12c2.5-4 5.5-6 9-6s6.5 2 9 6c-2.5 4-5.5 6-9 6s-6.5-2-9-6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="g-swap" viewBox="0 0 24 24"><path d="M5 8h13l-3.5-3.5M19 16H6l3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="g-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></symbol>
+  <symbol id="g-home" viewBox="0 0 24 24"><path d="M4 11l8-6.5 8 6.5V20H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="14" width="4" height="6" rx="1" fill="currentColor"/></symbol>
+  <symbol id="g-heart" viewBox="0 0 24 24"><circle cx="9" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="15" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="g-book" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="g-drop" viewBox="0 0 24 24"><path d="M12 3.5s6 6.4 6 10.7a6 6 0 0 1-12 0C6 9.9 12 3.5 12 3.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="g-pace" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 17l4-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="g-star" viewBox="0 0 24 24"><path d="M12 3.8l2.4 5 5.4.6-4 3.7 1.1 5.4L12 15.8l-4.9 2.7 1.1-5.4-4-3.7 5.4-.6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="g-people" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16.5" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 19c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5M14.5 15c2.6-.4 4.8.8 5.8 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+<!--/DEFS-->
+
+<a class="skip" href="#main">Skip to content</a>
+<!--NAV-->
+<header class="nav">
+  <div class="in">
+    <a class="home" href="/" aria-label="Collared home"><img class="wm" src="/assets/collared-logo-white.png" alt="Collared" width="92" height="26"></a>
+    <nav class="links" aria-label="Primary"><a href="/#tasks">Features</a><a href="/#switch">Switching</a><a href="/beta">Beta</a><a href="/team">Team</a><a href="/#community">Community</a></nav>
+    <span class="sp"></span>
+    <a class="sign" href="/account">Sign in</a>
+    <a class="btn p sm" href="/beta">Join the beta</a>
+    <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Menu" hidden><a href="/#tasks">Features</a><a href="/#switch">Switching</a><a href="/beta">Beta</a><a href="/team">Team</a><a href="/#community">Community</a><a href="/account">Sign in</a></nav>
+</header>
+<!--/NAV-->
+
+<main id="main">
+<section class="phead">
+  <svg class="ring" aria-hidden="true"><use href="#mark"/></svg>
+  <div class="in">
+    <span class="kick">Switching · From Life360</span>
+    <h1 class="h1">Coming from<br><span class="l">Life360?</span></h1>
+    <p class="lede">A family locator is built for a whole household. Collared is built for two people who chose to be known to each other, agreed out loud, once. Here's where each thing you use lives, and what we don't offer.</p>
+    <div class="cta"><a class="btn p" href="/beta">Join the beta</a><a class="btn s" href="#map">See it side by side</a></div>
+
+    <div class="facts" aria-label="Life360 at a glance">
+      <div class="fact"><b>What it is</b><span>A location app for families, with driving and safety plans</span></div>
+      <div class="fact"><b>Free</b><span>The live map, 2 places, 2 days of history, crash detection and SOS</span></div>
+      <div class="fact"><b>Paid plans</b><span>Silver, Gold and Platinum in the US, from $9.99 to $24.99 a month</span></div>
+      <div class="fact"><b>Gold adds</b><span>30 days of history, unlimited places, driver reports, crash dispatch and roadside help</span></div>
+    </div>
+    <p class="asof">Their details as listed on the App Store and their site, read on 11 November 2026. Collared is free while in beta.</p>
+  </div>
+</section>
+
+<section class="block" id="map">
+  <div class="in">
+    <div class="head">
+      <div><span class="kick">Side by side</span><h2 class="h2">What you use now,<br><span class="l">and where it lives.</span></h2></div>
+      <p class="lede">The last rows are the ones we don't do. Collared isn't a family safety plan, and it doesn't pretend to be.</p>
+    </div>
+    <table class="ctab">
+      <thead><tr><th scope="col">In Life360</th><th scope="col">In Collared</th><th scope="col"><span class="vh">How it compares</span></th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Live map</th><td>Live location, agreed once when your dynamic starts, with her face on his map and a Where are you? when he asks</td><td><span class="v-in">In Collared</span></td></tr>
+        <tr><th scope="row">Place alerts</th><td>Named places with arriving and leaving notices that say who, where and when</td><td><span class="v-in">In Collared</span></td></tr>
+        <tr><th scope="row">Location history</th><td>Trips and places on smooth lines coloured by speed, and her day told back as a story</td><td><span class="v-more">More in Collared</span></td></tr>
+        <tr><th scope="row">Driving summary</th><td>Her drive live on his Lock Screen, and the road home that ends when the porch light comes on. On the road, his timers wait while she drives.</td><td><span class="v-more">More in Collared</span></td></tr>
+        <tr><th scope="row">SOS</th><td>Held: press and hold, he's told at once, and you breathe together while it keeps sharing where you are. A safe call to a friend you both trust, and the emergency contact you set up.</td><td><span class="v-more">More in Collared</span></td></tr>
+        <tr><th scope="row">Arriving by a time</th><td>Expect her by a time, at a place</td><td><span class="v-in">In Collared</span></td></tr>
+        <tr><th scope="row">Low battery and check-ins</th><td>A heads-up when her battery runs low, and quick check-ins from the Lock Screen, a widget and the watch</td><td><span class="v-in">In Collared</span></td></tr>
+        <tr><th scope="row">On the watch</th><td>Where she is, on his watch</td><td><span class="v-in">In Collared</span></td></tr>
+        <tr><th scope="row">Driver reports and scores</th><td>Never a score. Her drive is something he watches over, not something she's graded on.</td><td><span class="v-never">Not on purpose</span></td></tr>
+        <tr><th scope="row">Crash dispatch, roadside help, ID theft and stolen phone cover, item and pet trackers</th><td>Not offered. If you need those for your family, keep the plan that has them.</td><td><span class="v-no">Not offered</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="in">
+    <div class="head">
+      <div><span class="kick">Your location, your terms</span><h2 class="h2">Who sees it,<br><span class="l">and who never will.</span></h2></div>
+      <p class="lede">Being known is the point in a dynamic. It should only ever be known by the person you chose.</p>
+    </div>
+    <div class="notes">
+      <div class="tile"><span class="glyph"><svg width="22" height="22" aria-hidden="true"><use href="#g-people"/></svg></span><h3>Agreed by both of you</h3><p>Sharing is set once, when your dynamic starts, and both of you agree to it.</p></div>
+      <div class="tile"><span class="glyph"><svg width="22" height="22" aria-hidden="true"><use href="#g-eye"/></svg></span><h3>Never sold</h3><p>Your location goes to the person you chose. Never to an advertiser, a data broker or an insurer.</p></div>
+      <div class="tile"><span class="glyph"><svg width="22" height="22" aria-hidden="true"><use href="#g-lock"/></svg></span><h3>Plainly said</h3><p>Messages, Glimpses and Story time books are end-to-end encrypted. Location isn't, so it can arrive fast; it's still only for the person you chose.</p></div>
+    </div>
+    <p class="asof">For comparison: Life360 says it shares location, device and driving data with Arity, an Allstate company, for ads and insurance offers in the US, and that turning this off also turns off its driving features.</p>
+    <a class="other" href="/compare/obedience">Also coming from Obedience? See that comparison ›</a>
+  </div>
+</section>
+
+<section class="block">
+  <div class="in">
+    <div class="head">
+      <div><span class="kick">Only in Collared</span><h2 class="h2">Then the rest<br><span class="l">of your dynamic.</span></h2></div>
+      <p class="lede">The map is one part. The rest is what a family app was never for.</p>
+    </div>
+    <div class="notes">
+      <div class="tile"><span class="glyph"><svg width="22" height="22" aria-hidden="true"><use href="#g-tick"/></svg></span><h3>Tasks that check themselves</h3><p>Home by six, 8,000 steps, a run: her phone confirms it and the task closes on its own.</p></div>
+      <div class="tile"><span class="glyph"><svg width="22" height="22" aria-hidden="true"><use href="#g-star"/></svg></span><h3>Points and a shop</h3><p>Every kept task earns points to spend in a shop the Dominant stocks.</p></div>
+      <div class="tile"><span class="glyph"><svg width="22" height="22" aria-hidden="true"><use href="#g-book"/></svg></span><h3>Journals and reading</h3><p>A journal that's yours until you share it, and books you read together.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="endband">
+  <div class="in">
+    <span class="kick">The beta is open</span>
+    <h2 class="h2">Made for the two of you.</h2>
+    <div class="cta"><a class="btn p" href="/beta">Join the beta</a><a class="btn s" href="/#location">See location on Home</a></div>
+    <p class="fine">Free while in beta. Questions about switching? <a href="https://discord.gg/collared" rel="noopener">Ask in the Discord.</a></p>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="in sources">
+    <h2>Sources</h2>
+    <p>Read on 11 November 2026: the Life360 App Store listing (plans and privacy label); life360.com on how it uses data, including its Arity partnership; its responsible advertising page; and published coverage of its 2026 price change. Prices are in US dollars and can change. If something here is out of date, tell us at hello@collared.app and we'll fix it.</p>
+    <p>Life360 is a trademark of its owner and is named only to compare. Collared isn't affiliated with Life360.</p>
+  </div>
+</section>
+</main>
+
+<!--FOOT-->
+<footer class="foot">
+  <div class="in">
+    <div class="brand"><img class="wm" src="/assets/collared-logo-white.png" alt="Collared" width="106" height="30" loading="lazy"><div>Structure for your dynamic.</div><div><a href="mailto:hello@collared.app">hello@collared.app</a></div></div>
+    <div><h2>The app</h2><a href="/#tasks">Features</a><a href="/beta">Join the beta</a><a href="/account">Your account</a></div>
+    <div><h2>Switching</h2><a href="/#switch">Switching to Collared</a><a href="/compare/obedience">From Obedience</a><a href="/compare/life360">From Life360</a></div>
+    <div><h2>Collared</h2><a href="/team">Team</a><a href="https://discord.gg/collared" rel="noopener">Discord</a><a href="https://discord.gg/collared" rel="noopener">Help and support</a></div>
+    <div><h2>Legal</h2><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div>
+    <div class="legal"><p>Collared is for adults 18 and over. Everything here is about consensual adult dynamics. Obedience and Life360 are trademarks of their owners and are named only to compare. © 2026 Collared.</p></div>
+  </div>
+</footer>
+<!--/FOOT-->
+<script src="/site.js" defer></script>
+</body>
+</html>

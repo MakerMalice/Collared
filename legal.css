@@ -1,0 +1,44 @@
+/* Collared · Stage. Long-form reading for Privacy and Terms: one centred column on the dark ground.
+   Loads after site.css. Only the wrapper and the type are styled here; the words live in the pages. */
+main.legal{
+  max-width:calc(720px + 2 * var(--gutter));margin:0 auto;
+  padding:88px var(--gutter) 128px;
+  font:400 17px/1.7 Nunito,system-ui,sans-serif;color:#DDD9E6;
+  position:relative;
+}
+main.legal::before{
+  content:"";position:absolute;left:50%;top:0;width:min(1100px,100vw);height:420px;transform:translateX(-50%);
+  background:radial-gradient(50% 100% at 50% 0%,rgba(116,68,255,.28),transparent 70%);pointer-events:none;z-index:-1;
+}
+main.legal h1{font:800 clamp(40px,6vw,64px)/1.02 Nunito;letter-spacing:-.025em;margin:0;color:var(--text)}
+main.legal .legal-meta{
+  display:inline-block;margin:22px 0 0;padding:7px 14px;border-radius:999px;
+  background:rgba(255,255,255,.06);border:1px solid var(--line);
+  font:700 13.5px/1.3 Nunito;letter-spacing:.02em;color:var(--tint);
+}
+main.legal .section-lede{font-size:clamp(19px,2vw,22px);line-height:1.55;color:var(--text);margin:32px 0 0;padding-bottom:40px;border-bottom:1px solid var(--line)}
+main.legal h2{font:800 clamp(26px,3vw,32px)/1.15 Nunito;letter-spacing:-.015em;color:var(--tint);margin:64px 0 18px;scroll-margin-top:96px}
+main.legal h3{font:800 20px/1.3 Nunito;color:var(--text);margin:36px 0 10px}
+main.legal p{margin:0 0 18px}
+main.legal strong{color:var(--text);font-weight:800}
+main.legal em{color:var(--text)}
+main.legal ul,main.legal ol{margin:0 0 20px;padding:0}
+main.legal ul{list-style:none}
+main.legal ul li{position:relative;padding:0 0 0 26px;margin:0 0 14px}
+main.legal ul li::before{content:"";position:absolute;left:4px;top:.72em;width:7px;height:7px;border-radius:50%;background:var(--violet-d)}
+main.legal ol{padding-left:26px}
+main.legal ol li{margin:0 0 14px;padding-left:4px}
+main.legal ol li::marker{color:var(--tint);font-weight:800}
+main.legal li ul,main.legal li ol{margin-top:12px}
+main.legal a{color:var(--tint);text-decoration:underline;text-decoration-color:rgba(183,162,255,.5);text-underline-offset:3px;text-decoration-thickness:1.5px;transition:text-decoration-color .15s,color .15s}
+main.legal a:hover{color:#fff;text-decoration-color:currentColor}
+main.legal table{width:100%;border-collapse:collapse;margin:0 0 24px;font-size:15.5px;line-height:1.5}
+main.legal th,main.legal td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)}
+main.legal th{font-weight:800;color:var(--text)}
+main.legal hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+main.legal blockquote{margin:0 0 20px;padding:4px 0 4px 20px;border-left:3px solid var(--violet)}
+main.legal code{font:600 .9em ui-monospace,Menlo,monospace;background:rgba(255,255,255,.08);padding:2px 6px;border-radius:6px}
+@media (max-width:760px){
+  main.legal{padding:56px var(--gutter) 88px;font-size:16.5px}
+  main.legal h2{margin-top:48px}
+}
