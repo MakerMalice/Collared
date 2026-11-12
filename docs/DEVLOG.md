@@ -278,3 +278,5 @@ Before-state: tag `stage-before-polish-2026-11-12` and branch `stage-redo-backup
 - **Sharing and finish.** `assets/share-card.jpg` (1200 x 630) with large-card tags on every page, a 64 px favicon and
   a 180 px touch icon, `404.html`, and every title in the "Page · Collared" form. Beta, team and the two compare pages
   each have their own head (`.phead[data-head]`); beta's headline no longer repeats Home's close.
+
+- **Sharper captures (same night).** Seven clips re-exported from their full-size takes at 800 x 1740 (the Glimpse pair, the journal shelf, the Sub Studio pair, the Manhattan map) and the water pour at 604 x 1314 (its source size); five stills at 1012 x 2200 (shop, punishment, meds, cycle, Social). Same names, lengths and loops. Still 400 px, waiting on a fresh capture: hero-home, tasks-proof, held, loc-horizon, fit-cheer, duo-stage, and the fit, read, Duo cover and watch stills. `assets/v2` went from 7.0 MB to 11.8 MB.
