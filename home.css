@@ -409,3 +409,33 @@ ul.mini li::before{content:"";position:absolute;left:0;top:.42em;width:10px;heig
   .cmpc .more{padding:12px 0;margin-top:6px}
   .endcard .fine a{display:inline-block;padding:9px 0}
 }
+
+/* the day told back: drawn here in the app's look (not a recording), so it is sharp at any size and can be scrubbed */
+.dayplay{background:#17131F}
+.dayplay svg{display:block;width:100%;height:100%;font-family:Nunito,system-ui,sans-serif}
+.dayplay text{fill:#fff}
+.dayplay .clock{font:800 17px Nunito}
+.dayplay .who{font:800 15px Nunito}
+.dayplay .pname{font:800 17px Nunito}
+.dayplay .psub{font:600 12.5px Nunito;fill:#A7A2B3}
+.dayplay .chip{font:800 12.5px Nunito}
+.dayplay .time{font:800 32px Nunito;letter-spacing:-.02em}
+.dayplay .stat{font:700 15px Nunito;fill:#B9B3C6}
+.dayplay .ends{font:600 11.5px Nunito;fill:#8F899E}
+.dayplay .hoods text{font:800 9.5px Nunito;letter-spacing:.16em;fill:#D9CEFF;opacity:.5}
+.dayplay .me text{font:900 13px Nunito;fill:#5A2440}
+.dayplay .route{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.dayplay .route.ghost{stroke:#FF8FBC;stroke-opacity:.26;stroke-width:3;stroke-dasharray:1 7}
+.dayplay .route.glow{stroke:#FF4F9A;stroke-width:16;stroke-opacity:.85}
+.dayplay .route.line{stroke:#FF5FA2;stroke-width:6.5}
+.dayplay .route.core{stroke:#FFE1EE;stroke-width:2.2}
+.dayplay .stops circle{fill:#17131F;stroke:#fff;stroke-width:2.5;transition:fill .3s}
+.dayplay .stops circle.seen{fill:#FF5FA2}
+.dayplay .scrub{position:absolute;left:6%;width:88%;top:84.200%;height:9.600%;margin:0;opacity:0;cursor:grab;touch-action:pan-y}
+.dayplay .scrub:active{cursor:grabbing}
+.dayplay .pp{position:absolute;left:80.800%;top:73.800%;width:13.500%;aspect-ratio:1;border:0;border-radius:50%;background:none;padding:0;cursor:pointer}
+.dayplay:has(.scrub:focus-visible) .knob{stroke:#9C7DFF;stroke-width:4}
+.c-loc .shots .phone:not(.sm){width:320px}
+.c-loc .shots .phone.sm{width:220px}
+@media (max-width:1100px){.c-loc .shots .phone:not(.sm){width:280px}.c-loc .shots .phone.sm{width:190px}}
+@media (max-width:760px){.c-loc .shots .phone:not(.sm){width:226px}.c-loc .shots .phone.sm{width:140px}}

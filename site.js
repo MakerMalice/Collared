@@ -205,6 +205,79 @@
     });
   }
 
+  // ── the day told back: Luna's afternoon, drawn. It plays on its own while it's on screen; the scrubber and the
+  // pause button are real. Travelling takes longer on screen than waiting, so the line is what you watch. ──
+  const day = document.querySelector('[data-day]');
+  if (day) {
+    const q = (k) => day.querySelector('[data-k="' + k + '"]');
+    const paths = [...day.querySelectorAll('.route:not(.ghost)')];
+    const total = paths[0].getTotalLength();
+    const me = day.querySelector('.me');
+    const stops = [...day.querySelectorAll('.stops circle')];
+    const scrub = day.querySelector('.scrub');
+    const pp = day.querySelector('.pp');
+    const done = day.querySelector('.done');
+    const knob = day.querySelector('.knob');
+    const END = 215; // minutes from 3:16 pm to 6:51 pm
+    // [from, to, route length at from, at to, place index or -1 while on the way]
+    const legs = [[0, 22, 0, 220, -1], [22, 77, 220, 220, 1], [77, 91, 220, 480, -1], [91, 136, 480, 480, 2], [136, 146, 480, 555, -1], [146, 181, 555, 555, 3], [181, 185, 555, 710, -1], [185, 215, 710, 710, 4]];
+    const places = [['Washington Square Park', 'Until 3:16 pm · Greenwich Village', ''], ['The High Line', '3:38 pm to 4:33 pm · Chelsea', '55 min'], ['Bryant Park', '4:47 pm to 5:32 pm · Midtown', '45 min'], ['Times Square', '5:42 pm to 6:17 pm · Midtown', '35 min'], ['Central Park', '6:21 pm to now · Manhattan', '30 min']];
+    const clock = (m) => { const t = 196 + Math.round(m); const h = Math.floor(t / 60); return ((h + 11) % 12 + 1) + ':' + String(t % 60).padStart(2, '0') + ' pm'; };
+    const scale = total / 710;
+    let shown = -1;
+    const draw = (m) => {
+      const leg = legs.find((l) => m <= l[1]) || legs[legs.length - 1];
+      const k = leg[1] === leg[0] ? 1 : (m - leg[0]) / (leg[1] - leg[0]);
+      const len = (leg[2] + (leg[3] - leg[2]) * k) * scale;
+      paths.forEach((p) => { p.style.strokeDasharray = len + ' ' + (total + 40); });
+      const pt = paths[0].getPointAtLength(len);
+      me.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ')');
+      const last = legs.filter((l) => l[4] > 0 && l[0] <= m).pop();
+      const at = last ? last[4] : 0;
+      stops.forEach((c, i) => c.classList.toggle('seen', i <= at));
+      q('time').textContent = clock(m);
+      q('stat').textContent = leg[4] < 0 ? 'On the way · ' + Math.max(1, Math.round(m - leg[0])) + ' min' : 'At ' + places[leg[4]][0];
+      if (at !== shown) {
+        shown = at;
+        q('name').textContent = places[at][0]; q('sub').textContent = places[at][1]; q('chip').textContent = places[at][2];
+        q('chipg').style.display = places[at][2] ? '' : 'none';
+      }
+      const x = 40 + 322 * (m / END);
+      knob.setAttribute('cx', x.toFixed(1));
+      done.style.strokeDasharray = (100 * m / END).toFixed(2) + ' 100';
+      scrub.value = String(Math.round(m));
+      scrub.setAttribute('aria-valuetext', clock(m) + ', ' + q('stat').textContent);
+    };
+    // screen time: 2.2 s for each stretch on the way, 0.9 s for each stay, then a rest on the last frame
+    const dur = legs.map((l) => (l[4] < 0 ? 2200 : 900));
+    const span = dur.reduce((a, b) => a + b, 0);
+    const REST = 1800;
+    const toMin = (ms) => { let t = ms; for (let i = 0; i < legs.length; i++) { if (t <= dur[i]) return legs[i][0] + (legs[i][1] - legs[i][0]) * (t / dur[i]); t -= dur[i]; } return END; };
+    const toMs = (m) => { let ms = 0; for (let i = 0; i < legs.length; i++) { if (m <= legs[i][1]) return ms + dur[i] * ((m - legs[i][0]) / (legs[i][1] - legs[i][0])); ms += dur[i]; } return span; };
+    let playing = !still, onScreen = false, at = toMs(139), prev = 0, raf = 0;
+    const setPlaying = (on) => {
+      playing = on;
+      q('pause').setAttribute('display', on ? '' : 'none'); q('play').setAttribute('display', on ? 'none' : '');
+      pp.setAttribute('aria-label', on ? 'Pause the playback' : 'Play the afternoon back'); pp.setAttribute('aria-pressed', String(!on));
+      loop();
+    };
+    const frame = (now) => {
+      raf = 0;
+      if (!playing || !onScreen) return;
+      at += Math.min(80, now - prev); prev = now;
+      if (at > span + REST) at = 0;
+      draw(toMin(Math.min(at, span)));
+      raf = requestAnimationFrame(frame);
+    };
+    const loop = () => { if (playing && onScreen && !raf) { prev = performance.now(); raf = requestAnimationFrame(frame); } };
+    scrub.addEventListener('input', () => { if (playing) setPlaying(false); const m = Number(scrub.value); at = toMs(m); draw(m); });
+    pp.addEventListener('click', () => { if (!playing && at >= span) at = 0; setPlaying(!playing); });
+    if (IO) new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; loop(); }, { threshold: 0.2 }).observe(day);
+    else onScreen = true;
+    draw(139);
+    setPlaying(playing);
+  }
+
   // ── arriving: each chapter's words rise once, a beat apart, and its devices settle in after them ──
   const groups = [...document.querySelectorAll('.act .in, .ch .copy, .ch.show .facts, .switch .head, .switch .cmp, .private .in, .more2 .in, .split2, .endcard .in')];
   const devs = [...document.querySelectorAll('.ch .shots > *, .c-duo .phone.open, .watches > *')];
