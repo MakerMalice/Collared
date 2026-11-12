@@ -239,3 +239,8 @@ From the app repo's `design/website-redo/CHANGES-2026-11-12.md`; proof frames in
   normal speed): shutter 0.4 s, the picture flies about 2.0 s, lands blurred on Theo's thread about 2.4 to 2.8 s, a
   finger at 3.8 s, open at 4.0 s. No clip on Home cross-dissolves any more: the new clips cut clean at their loop and
   between takes, and a still sequence (`.seq`) pushes the next screen in whole from the right and cuts back to the first.
+- **The shop still, last:** Luna's shop draws no reward photos (the featured card's ring is the balance's progress toward
+  that reward, `CollarRing` in ShopRoom.tsx; a reward's photo shows only in the Dominant's editor). So the still is the
+  shop scrolled so the list rows lead and no ring is on screen. The pair is now Theo and Luna like the rest of the page
+  (the teaser scratch couple: rewards Theo stocks, a punishment from Sir). The footer under the list is the app's own
+  line, with Theo's pronoun.
