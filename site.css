@@ -105,9 +105,26 @@ a{color:inherit}
 .phone.open{padding:0;aspect-ratio:164.6/117.8;border-radius:6.379%/8.913%}
 .phone.open>*{position:absolute;left:2.096%;right:2.096%;top:2.929%;bottom:2.929%;border-radius:4.122%/5.861%;overflow:hidden}
 .phone.open img,.phone.open video{width:100%;height:100%;object-fit:cover;border-radius:0}
-.watch{position:relative;border-radius:46px;padding:12px;background:linear-gradient(150deg,#45404f,#16141a 45%,#2b2733);box-shadow:0 0 0 1.5px #555060 inset,0 30px 60px -20px rgba(0,0,0,.7)}
-.watch img{border-radius:34px;width:100%}
-.watch:after{content:"";position:absolute;right:-7px;top:26%;width:7px;height:52px;border-radius:0 6px 6px 0;background:#3a3542}
+/* Apple Watch Series 11, 46 mm, true to the device (Apple's published specs): case 39 x 46 mm; display 416 x 496 px over
+   1,220 sq mm, so the lit area is 32.0 x 38.1 mm (82.0% x 82.9% of the case), centred, with 3.5 mm of black glass a side
+   and 3.9 mm top and bottom. Case corners about 11 mm (28.2% / 23.9%); the screen's are concentric (7.5 mm: 23.4% / 19.7%
+   of the screen). A 0.9 mm metal rim shows from the front (2.3% of the width). The Digital Crown and the side button sit
+   on the right. Every watch on the site is this one frame, and every size is a percentage of the case (or cqw of it),
+   so the bezels match at any width. A watch screen is 416 x 496, the same shape as the lit area: nothing is cropped. */
+.watch{position:relative;container-type:inline-size;isolation:isolate;aspect-ratio:39/46;border-radius:28.2%/23.9%;box-shadow:0 30px 60px -20px rgba(0,0,0,.7),0 20px 50px -30px rgba(116,68,255,.45)}
+.watch::before{content:"";position:absolute;inset:0;z-index:-1;box-sizing:border-box;border:2.3cqw solid transparent;border-radius:inherit;
+  background:linear-gradient(#050507,#050507) padding-box,linear-gradient(140deg,#a3a0ad,#5b5864 18%,#2c2a33 46%,#3b3843 64%,#76737f 86%,#aeabb7) border-box;
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.28),0 0 0 .5px rgba(0,0,0,.5)}
+/* the crown (ridged, 6.4 mm tall, 2.4 mm proud) and the side button below it (10 mm long, flush but for 0.8 mm) */
+.watch::after{content:"";position:absolute;z-index:-2;top:0;bottom:0;left:96%;width:9.5cqw;
+  background:
+    repeating-linear-gradient(180deg,rgba(255,255,255,.16) 0 .45cqw,rgba(0,0,0,.18) .45cqw .9cqw) 0 25.5%/100% 13.9% no-repeat,
+    linear-gradient(90deg,#3c3944,#8e8b97 55%,#55525e) 0 25.5%/100% 13.9% no-repeat,
+    linear-gradient(90deg,#34313b,#6f6c78) 0 59%/63% 21.7% no-repeat;
+  border-radius:0 2cqw 2cqw 0}
+.watch>img,.watch>.v{position:absolute;left:8.99%;top:8.55%;width:82.03%;height:82.91%;border-radius:23.4%/19.7%;overflow:hidden;background:#000}
+.watch>img{object-fit:cover}
+.watch>.v :is(img,video){width:100%;height:100%;object-fit:cover;border-radius:0}
 
 /* cards and tiles shared by inner pages */
 .tile{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:28px}
