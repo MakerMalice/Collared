@@ -54,7 +54,6 @@
 .v{position:relative;border-radius:42px;overflow:hidden;background:#000}
 .v img,.v video{display:block;width:100%;height:auto;border-radius:0}
 .phone.duo .v,.phone.duo .seq{border-radius:31px}
-.phone.open .v,.phone.open .seq{border-radius:25px}
 .watch .v{border-radius:34px}
 .seq{position:relative;overflow:hidden;border-radius:42px;background:#000}
 .seq img{border-radius:0!important;width:100%;animation:seq var(--dur,9s) infinite both}
