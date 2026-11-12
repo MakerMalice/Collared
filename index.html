@@ -8,13 +8,21 @@
   <meta name="theme-color" content="#0E0A1A">
   <meta property="og:title" content="Collared · Everything your dynamic runs on">
   <meta property="og:description" content="Your routines, your rules and the small moments in between, in one app for the two of you. Across the room or across the country.">
-  <meta property="og:image" content="https://collared.app/assets/collared-tile.png">
+  <meta property="og:image" content="https://collared.app/assets/share-card.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Collared">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Collared · Everything your dynamic runs on">
+  <meta name="twitter:description" content="Your routines, your rules and the small moments in between, in one app for the two of you.">
+  <meta name="twitter:image" content="https://collared.app/assets/share-card.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://collared.app/">
   <link rel="canonical" href="https://collared.app/">
-  <link rel="icon" type="image/png" href="/assets/collodis.png">
-  <link rel="apple-touch-icon" href="/assets/collodis.png">
+  <link rel="icon" type="image/png" href="/assets/favicon-64.png">
+  <link rel="apple-touch-icon" href="/assets/touch-icon-180.png">
   <link rel="preload" href="/assets/fonts/Nunito_800ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+  <script>document.documentElement.classList.add("js")</script>
   <link rel="stylesheet" href="/site.css">
   <link rel="stylesheet" href="/home.css">
 </head>
@@ -43,14 +51,15 @@
 <!--NAV-->
 <header class="nav">
   <div class="in">
-    <a class="home" href="/" aria-label="Collared home"><img class="wm" src="/assets/collared-logo-white.png" alt="Collared" width="92" height="26"></a>
+    <a class="home" href="/" aria-label="Collared home"><img class="wm" src="/assets/collared-logo-white.png" alt="Collared" width="92" height="26"><img class="wm wm-l" src="/assets/collared-logo-purple.png" alt="" width="92" height="26" aria-hidden="true"></a>
     <nav class="links" aria-label="Primary"><a href="/#tasks">Features</a><a href="/#switch">Switching</a><a href="/beta">Beta</a><a href="/team">Team</a><a href="/#community">Community</a></nav>
     <span class="sp"></span>
+    <span class="nav-ring" aria-hidden="true"><svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="18" fill="none" stroke="currentColor" stroke-opacity=".16" stroke-width="6"/><circle id="pr" cx="27" cy="27" r="18" fill="none" stroke="#9C7DFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="113.1" stroke-dashoffset="113.1"/></svg></span>
     <a class="sign" href="/account">Sign in</a>
     <a class="btn p sm" href="/beta">Join the beta</a>
     <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
   </div>
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Menu" hidden><a href="/#tasks">Features</a><a href="/#switch">Switching</a><a href="/beta">Beta</a><a href="/team">Team</a><a href="/#community">Community</a><a href="/account">Sign in</a></nav>
+  <nav class="mobile-menu anim" id="mobile-menu" aria-label="Menu" hidden><div class="mm"><a href="/#tasks">Features</a><a href="/#switch">Switching</a><a href="/beta">Beta</a><a href="/team">Team</a><a href="/#community">Community</a><a href="/account">Sign in</a></div></nav>
 </header>
 <!--/NAV-->
 
@@ -68,54 +77,59 @@
     </div>
     <div class="stage">
       <svg class="ring" aria-hidden="true"><use href="#mark"/></svg>
-      <div class="phone duo p2"><img src="/assets/v2/duo-home-theo.jpg" width="440" height="640" alt="Theo's iPhone Duo cover: Luna's day at a glance"></div>
-      <div class="phone"><div class="v" data-v="/assets/v2/hero-home"><img src="/assets/v2/hero-home.jpg" width="400" height="870" fetchpriority="high" alt="Luna's Home: Morning walk is marked done and the day moves on"></div></div>
-      <div class="watch"><img src="/assets/v2/watch-closed.jpg" width="416" height="496" alt="Luna's watch: 6 of 6, your collar is closed for the day"></div>
+      <div class="phone duo p2" data-depth="-.05"><img src="/assets/v2/duo-home-theo.jpg" width="440" height="640" alt="Theo's iPhone Duo cover: Luna's day at a glance"></div>
+      <div class="phone" data-depth=".03"><div class="v" data-v="/assets/v2/hero-home"><img src="/assets/v2/hero-home.jpg" width="400" height="870" fetchpriority="high" alt="Luna's Home: Morning walk is marked done and the day moves on"></div></div>
+      <div class="watch" data-depth=".09"><img src="/assets/v2/watch-closed.jpg" width="416" height="496" alt="Luna's watch: 6 of 6, your collar is closed for the day"></div>
     </div>
   </div>
 </section>
 
-<nav class="ribbon" aria-label="Features"><div class="track"><a href="#tasks"><b>Smart tasks</b></a><i class="o"></i><a href="#points">Points and punishments</a><i class="o"></i><a href="#location"><b>Location</b></a><i class="o"></i><a href="#held">Held</a><i class="o"></i><a href="#journal"><b>Journals</b></a><i class="o"></i><a href="#workouts">Workouts</a><i class="o"></i><a href="#care"><b>Water, meds and cycle</b></a><i class="o"></i><a href="#read">Read Together</a><i class="o"></i><a href="#glimpses"><b>Glimpses</b></a><i class="o"></i><a href="#studio">Sub Studio</a><i class="o"></i><a href="#social"><b>Social</b></a></div></nav>
+<nav class="ribbon" aria-label="Features"><div class="belt"><div class="track"><a href="#tasks"><b>Smart tasks</b></a><i class="o"></i><a href="#points">Points and punishments</a><i class="o"></i><a href="#location"><b>Location</b></a><i class="o"></i><a href="#held">Held</a><i class="o"></i><a href="#glimpses"><b>Glimpses</b></a><i class="o"></i><a href="#workouts">Workouts</a><i class="o"></i><a href="#care"><b>Water, meds and cycle</b></a><i class="o"></i><a href="#journal">Journals</a><i class="o"></i><a href="#studio"><b>Sub Studio</b></a><i class="o"></i><a href="#read">Read Together</a><i class="o"></i><a href="#social"><b>Social</b></a><i class="o"></i></div><div class="track" aria-hidden="true"><a href="#tasks" tabindex="-1"><b>Smart tasks</b></a><i class="o"></i><a href="#points" tabindex="-1">Points and punishments</a><i class="o"></i><a href="#location" tabindex="-1"><b>Location</b></a><i class="o"></i><a href="#held" tabindex="-1">Held</a><i class="o"></i><a href="#glimpses" tabindex="-1"><b>Glimpses</b></a><i class="o"></i><a href="#workouts" tabindex="-1">Workouts</a><i class="o"></i><a href="#care" tabindex="-1"><b>Water, meds and cycle</b></a><i class="o"></i><a href="#journal" tabindex="-1">Journals</a><i class="o"></i><a href="#studio" tabindex="-1"><b>Sub Studio</b></a><i class="o"></i><a href="#read" tabindex="-1">Read Together</a><i class="o"></i><a href="#social" tabindex="-1"><b>Social</b></a><i class="o"></i></div></div></nav>
 
-<!-- 1 SMART TASKS -->
+<!-- PART ONE -->
+<div class="act" data-step><div class="in"><span class="kick">Part one · Structure</span><p class="actline">What's asked, what's earned, and what's owed.</p></div></div>
+
+<!-- SMART TASKS -->
 <section class="ch c-tasks" id="tasks" data-step>
   <div class="in">
     <div class="copy">
-      <span class="num">01 · SMART TASKS</span>
+      <span class="num">Smart tasks</span>
       <h2 class="h2">Tasks that<br><span class="l">check themselves.</span></h2>
-      <p class="lede">Set it once and their phone does the checking: the run, the steps, the walk home, the photo taken right now. The task closes on its own, so you know it's done even from the other side of the country. Morning rituals run step by step, and a tap on the wrist says when it's time.</p>
+      <p class="lede">Set a task once and their phone confirms it: the run, the steps, getting home, a photo taken right now. It closes on its own, so you know it's done.</p>
       <ul class="points">
         <li><svg width="22" height="22" style="color:#4CC380" aria-hidden="true"><use href="#g-tick"/></svg>A check can finish a task. It can never fail one.</li>
-        <li><svg width="22" height="22" style="color:#4CC380" aria-hidden="true"><use href="#g-tick"/></svg>A photo taken in Collared counts straight away</li>
+        <li><svg width="22" height="22" style="color:#4CC380" aria-hidden="true"><use href="#g-tick"/></svg>Morning rituals, one step at a time</li>
         <li><svg width="22" height="22" style="color:#4CC380" aria-hidden="true"><use href="#g-tick"/></svg>Once, every Tuesday, or every morning at nine</li>
+        <li><svg width="22" height="22" style="color:#4CC380" aria-hidden="true"><use href="#g-tick"/></svg>A tap on the wrist when it's time</li>
       </ul>
-      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-swap"/></svg></span><div><b>Coming from a habit tracker</b>Everything you tick by hand today, plus the part where the phone does the checking.</div></div>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-swap"/></svg></span><div><b>Coming from a habit tracker</b>Everything you tick by hand today, with the phone doing the checking.</div></div>
     </div>
     <div class="shots wrap">
-      <div class="phone"><div class="v" data-v="/assets/v2/tasks-proof"><img src="/assets/v2/tasks-proof.jpg" width="400" height="870" loading="lazy" alt="Make the bed: Luna takes the photo, sends it to Sir, and it's counted"></div></div>
+      <div class="phone" data-depth=".04"><div class="v" data-v="/assets/v2/tasks-proof"><img src="/assets/v2/tasks-proof.jpg" width="400" height="870" loading="lazy" alt="Make the bed: Luna takes the photo, sends it to Sir, and it's counted"></div></div>
       <div class="float donewhen" data-cycle>
         <div class="lab" id="dw-lab">Done when</div>
         <p class="rot" aria-live="off"><span class="on">Luna runs 5 km</span><span>Luna's home by 6:00 pm</span><span>Luna taps the tag by the door</span><span>8,000 steps by 9:00 pm</span><span>A photo, taken right now</span><span>Luna says it's done</span></p>
         <div class="chips" role="group" aria-labelledby="dw-lab"><button type="button" aria-pressed="true">A run</button><button type="button" aria-pressed="false">Arriving</button><button type="button" aria-pressed="false">A tag</button><button type="button" aria-pressed="false">Steps</button><button type="button" aria-pressed="false">A photo</button><button type="button" aria-pressed="false">Their word</button></div>
-        <div class="ok"><svg width="16" height="16" aria-hidden="true"><use href="#g-tick"/></svg>Their phone counts. You see that it checked.</div>
+        <div class="ok"><svg width="16" height="16" aria-hidden="true"><use href="#g-tick"/></svg>Their phone does the counting. You see it's done.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 2 POINTS, THE SHOP AND PUNISHMENTS -->
-<section class="ch c-shop light flip" id="points" data-step>
+<!-- POINTS, THE SHOP AND PUNISHMENTS -->
+<section class="ch c-shop light flip" id="points" data-step data-tone="light">
   <div class="in">
     <div class="copy">
-      <span class="num">02 · POINTS, THE SHOP AND PUNISHMENTS</span>
+      <span class="num">Points, the shop and punishments</span>
       <h2 class="h2">Earn it, spend it,<br><span class="l">answer for it.</span></h2>
-      <p class="lede">Every kept task earns points. Spend them in a shop your Dominant stocks, on things like a lie-in, movie night or a day off. When something slips, the punishment is picked from the list you agreed together, with points taken or a restriction that ends on its own.</p>
+      <p class="lede">Every kept task earns points to spend in a shop your Dominant stocks: a slow morning, movie night, a day off. When something slips, the punishment comes from the list you agreed together.</p>
       <ul class="points">
         <li><svg width="22" height="22" style="color:#7444FF" aria-hidden="true"><use href="#g-tick"/></svg>Featured rewards, and ones that leave on a date</li>
-        <li><svg width="22" height="22" style="color:#7444FF" aria-hidden="true"><use href="#g-tick"/></svg>Never takes the balance below zero</li>
+        <li><svg width="22" height="22" style="color:#7444FF" aria-hidden="true"><use href="#g-tick"/></svg>Points taken, or a restriction that ends on its own</li>
+        <li><svg width="22" height="22" style="color:#7444FF" aria-hidden="true"><use href="#g-tick"/></svg>The balance never drops below zero</li>
         <li><svg width="22" height="22" style="color:#7444FF" aria-hidden="true"><use href="#g-tick"/></svg>Rules, limits and asks, kept in one place</li>
       </ul>
-      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-star"/></svg></span><div><b>One ledger, two phones</b>Every point, reward and punishment reads the same on both phones, wherever each of you is.</div></div>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-star"/></svg></span><div><b>One ledger, two phones</b>Every point, reward and punishment reads the same for both of you.</div></div>
     </div>
     <div class="shots duet">
       <div class="phone"><div class="v"><img src="/assets/v2/shop-phone.jpg" width="506" height="1100" loading="lazy" alt="Luna's view of Sir's shop: Coffee run, Lie-in, Pick the film and more, each with its price to redeem"></div><div class="float pts" aria-hidden="true">+30</div></div>
@@ -124,24 +138,74 @@
   </div>
 </section>
 
-<!-- 3 LOCATION -->
+<!-- PART TWO -->
+<div class="act" data-step><div class="in"><span class="kick">Part two · Closeness</span><p class="actline">Near each other, wherever you each are.</p></div></div>
+
+<!-- LOCATION -->
 <section class="ch c-loc" id="location" data-step>
   <div class="in">
     <div class="copy">
-      <span class="num">03 · WHERE THEY ARE</span>
+      <span class="num">Where they are</span>
       <h2 class="h2">Know they<br><span class="l">got home.</span></h2>
-      <p class="lede">Live location, agreed once when your dynamic starts. Places tell you when they get there and when they leave. Their day is told back as a little story, and the drive home is a road that ends when the porch light comes on.</p>
+      <p class="lede">Live location, agreed once when your dynamic starts. Places tell you when they arrive and when they leave, and the drive home is a road that ends when the porch light comes on.</p>
       <ul class="points">
         <li><svg width="22" height="22" style="color:#FF7A6B" aria-hidden="true"><use href="#g-home"/></svg>Expect them by a time, at a place</li>
-        <li><svg width="22" height="22" style="color:#FF7A6B" aria-hidden="true"><use href="#g-pace"/></svg>On the road, timers wait while they drive</li>
+        <li><svg width="22" height="22" style="color:#FF7A6B" aria-hidden="true"><use href="#g-book"/></svg>Their day, told back as a little story</li>
+        <li><svg width="22" height="22" style="color:#FF7A6B" aria-hidden="true"><use href="#g-pace"/></svg>Timers wait while they drive</li>
         <li><svg width="22" height="22" style="color:#FF7A6B" aria-hidden="true"><use href="#g-pin"/></svg>A heads-up when their battery runs low</li>
       </ul>
       <p class="fine small">Shared with the person you chose. Never with an advertiser, a data broker or an insurer.</p>
       <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-home"/></svg></span><div><b>For the miles in between</b>When you live apart, you'll know the moment they're home. No texting to check, no asking twice.</div></div>
     </div>
     <div class="shots">
-      <div class="phone sm"><div class="v" data-v="/assets/v2/loc-nyc"><img src="/assets/v2/loc-nyc.jpg" width="400" height="870" loading="lazy" alt="Luna's afternoon in Manhattan told back on the map: Washington Square Park, the High Line, Bryant Park, Times Square, then Central Park"></div></div>
-      <div class="phone"><div class="v" data-v="/assets/v2/loc-horizon"><img src="/assets/v2/loc-horizon.jpg" width="400" height="870" loading="lazy" alt="The Horizon: the road home, 2 minutes to go, then the porch light"></div></div>
+      <div class="phone sm" data-depth=".07"><div class="v" data-v="/assets/v2/loc-nyc"><img src="/assets/v2/loc-nyc.jpg" width="400" height="870" loading="lazy" alt="Luna's afternoon in Manhattan told back on the map: Washington Square Park, the High Line, Bryant Park, Times Square, then Central Park"></div></div>
+      <div class="phone" data-depth=".02"><div class="v" data-v="/assets/v2/loc-horizon"><img src="/assets/v2/loc-horizon.jpg" width="400" height="870" loading="lazy" alt="The Horizon: the road home, 2 minutes to go, then the porch light"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HELD: a showpiece, and one you can try -->
+<section class="ch show c-held" id="held" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">Held</span>
+      <h2 class="h2">Ask to be Held.<br><span class="l">They're there in a breath.</span></h2>
+      <p class="lede">Press and hold in the app, on the Lock Screen or with the Action button. Your person is told at once, and you breathe with their voice and their steady beat until they're with you.</p>
+    </div>
+    <div class="shots wrap">
+      <div class="float holdtry" data-hold>
+        <div class="lab">Try it</div>
+        <button type="button" class="holdbtn" aria-describedby="hold-say" aria-label="Press and hold to ask to be Held">
+          <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="5"/><circle class="fill" cx="60" cy="60" r="54" fill="none" stroke="#F2AFC4" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg>
+          <span class="orbs" aria-hidden="true"><i></i><i></i></span>
+        </button>
+        <p class="say" id="hold-say" aria-live="polite">Press and hold</p>
+      </div>
+      <div class="phone" data-depth=".03"><div class="v" data-v="/assets/v2/held"><img src="/assets/v2/held.jpg" width="400" height="870" loading="lazy" alt="Held with Theo: the two orbs breathing"></div></div>
+    </div>
+    <p class="fine center">Held keeps sharing where you are until you say you're okay.</p>
+  </div>
+</section>
+
+<!-- GLIMPSES -->
+<section class="ch c-glimpse" id="glimpses" data-step>
+  <div class="in">
+    <div class="copy">
+      <span class="num">Glimpses</span>
+      <h2 class="h2">A glimpse of your day,<br><span class="l">for one person.</span></h2>
+      <p class="lede">A photo of right now, sent to the one person it's for. Private ones stay blurred until they're tapped, and every Glimpse is end-to-end encrypted.</p>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-seal"/></svg></span><div><b>Taken live</b>Glimpses are taken with the camera in Collared, never picked from the camera roll, so what arrives really is this moment.</div></div>
+      <div class="gtry">
+        <button type="button" class="gtile" data-glimpse aria-pressed="false" aria-label="A Private Glimpse from Luna. Tap to see it.">
+          <img src="/assets/v2/glimpse-tile.jpg" width="520" height="520" loading="lazy" alt="">
+          <span class="veil" aria-hidden="true"><svg width="20" height="20"><use href="#g-lock"/></svg><b>Private</b>Tap to see</span>
+        </button>
+        <p class="gsay"><b>Try it</b><span data-gsay>From Luna, blurred until you tap.</span></p>
+      </div>
+    </div>
+    <div class="shots duet" data-sync>
+      <div class="phone"><div class="v" data-v="/assets/v2/glimpse-send" data-awake="0-3.8"><img src="/assets/v2/glimpse-send.jpg" width="400" height="870" loading="lazy" alt="Luna's Glimpse camera: a Private picture of the sunset, sent to Sir"></div></div>
+      <div class="phone"><div class="v" data-v="/assets/v2/glimpse-land" data-awake="1.6-6.6"><img src="/assets/v2/glimpse-land.jpg" width="400" height="870" loading="lazy" alt="Theo's thread with Luna: the Private Glimpse lands live, blurred, then opens on a tap: Almost home"><span class="touch" data-at="3.8" style="left:33.5%;top:70.6%" aria-hidden="true"></span></div></div>
     </div>
   </div>
 </section>
@@ -151,7 +215,7 @@
   <div class="in">
     <div class="head">
       <div><span class="kick">Switching</span><h2 class="h2">Coming from Obedience<br><span class="l">or Life360?</span></h2></div>
-      <p class="lede">Bring your routine. Here's where each thing you use today lives in Collared, and the two we don't do.</p>
+      <p class="lede">Bring your routine. Here's where each thing you use today lives in Collared, and two things we don't offer.</p>
     </div>
     <div class="cmp">
       <div class="cmpc">
@@ -162,7 +226,7 @@
         <div class="row"><span class="them">Chat</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Messages and Glimpses, end-to-end encrypted</span></div>
         <div class="row"><span class="them">Embrace, a second app</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">The journal, built in</span></div>
         <div class="row gap"><span class="them">A web app, nine languages</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-eye"/></svg><span class="us">Not yet. Phone, Duo and watch first, in English</span></div>
-        <a class="more" href="/compare/obedience">See the full comparison ›</a>
+        <a class="more" href="/compare/obedience">See the full comparison <span aria-hidden="true">›</span></a>
       </div>
       <div class="cmpc">
         <h3>From Life360</h3><p class="sub">The family locator</p>
@@ -172,106 +236,86 @@
         <div class="row"><span class="them">SOS</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Held, a safe call to a friend, the emergency contact</span></div>
         <div class="row"><span class="them">Driving summary</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-swap"/></svg><span class="us">Their drive live, and the road home</span></div>
         <div class="row gap"><span class="them">Crash dispatch, roadside help</span><svg class="ar" width="18" height="18" aria-label="in Collared"><use href="#g-eye"/></svg><span class="us">Not offered. Collared isn't a family safety plan</span></div>
-        <a class="more" href="/compare/life360">See the full comparison ›</a>
+        <a class="more" href="/compare/life360">See the full comparison <span aria-hidden="true">›</span></a>
       </div>
     </div>
-    <div class="cta"><a class="btn p" href="/beta">Join the beta</a><a class="btn s" href="#held">Then see what's new</a></div>
+    <div class="cta"><a class="btn p" href="/beta">Join the beta</a><a class="btn s" href="#workouts">Keep looking</a></div>
   </div>
 </section>
 
-<!-- 4 HELD -->
-<section class="ch c-held flip" id="held" data-step>
-  <div class="in">
-    <div class="copy">
-      <div class="orbs" aria-hidden="true"><i></i><i></i></div>
-      <span class="num">04 · HELD</span>
-      <h2 class="h2">Ask to be Held.<br><span class="l">They're there in a breath.</span></h2>
-      <p class="lede">Press and hold in the app, on the Lock Screen or with the Action button. Your person is told at once, and you're already breathing with their voice and their steady beat while they join you from wherever they are.</p>
-      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-heart"/></svg></span><div><b>However far apart</b>Held reaches them wherever they are, and keeps sharing where you are until you say you're okay.</div></div>
-    </div>
-    <div class="shots"><div class="phone"><div class="v" data-v="/assets/v2/held"><img src="/assets/v2/held.jpg" width="400" height="870" loading="lazy" alt="Held with Theo: the two orbs breathing"></div></div></div>
-  </div>
-</section>
+<!-- PART THREE -->
+<div class="act" data-step><div class="in"><span class="kick">Part three · Care</span><p class="actline">Body, mind and the little things, looked after.</p></div></div>
 
-<!-- 5 JOURNALS -->
-<section class="ch c-journal light" id="journal" data-step>
-  <div class="in">
-    <div class="copy">
-      <span class="num">05 · JOURNALS</span>
-      <h2 class="h2">Yours,<br><span class="l">until you share it.</span></h2>
-      <p class="lede">Pick a book from your shelf and write in your own hand. Tape in a photo, or keep a page closed until a date. Share an entry for a day, a week or for good, and take it back any time. On iPhone Duo it opens like a real book.</p>
-      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-book"/></svg></span><div><b>All in one app</b>Your journal sits next to your tasks, your messages and your day together. One app holds the lot, so there's nothing else to keep up with.</div></div>
-    </div>
-    <div class="shots"><div class="phone"><div class="v" data-v="/assets/v2/journal-shelf"><img src="/assets/v2/journal-shelf.jpg" width="400" height="870" loading="lazy" alt="Luna's journal: from a page with a taped-in photo, the shelf of books opens, Journal is picked, and the notebook turns to Things I want to keep"></div></div></div>
-  </div>
-</section>
-
-<!-- 6 WORKOUTS -->
+<!-- WORKOUTS -->
 <section class="ch c-fit flip" id="workouts" data-step>
   <div class="in">
     <div class="copy">
-      <span class="num">06 · WORKOUTS</span>
+      <span class="num">Workouts</span>
       <h2 class="h2">Move together,<br><span class="l">even apart.</span></h2>
-      <p class="lede">Start anything from a run to the rower, and lift to the targets your Dominant set. Run in two different cities and they follow along live, and their cheer lands on your wrist mid-stride. A long-distance morning run can still be one you do together.</p>
+      <p class="lede">Start anything from a run to the rower, and lift to the targets your Dominant set. They follow your run live, and their cheer lands on your wrist mid-stride.</p>
       <ul class="points">
-        <li><svg width="22" height="22" style="color:#FF4F8B" aria-hidden="true"><use href="#g-pace"/></svg>Apart or side by side</li>
+        <li><svg width="22" height="22" style="color:#FF4F8B" aria-hidden="true"><use href="#g-pace"/></svg>Side by side, or in two different cities</li>
         <li><svg width="22" height="22" style="color:#FF4F8B" aria-hidden="true"><use href="#g-pace"/></svg>Steps and goals they set, saved to Health</li>
       </ul>
-      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-pin"/></svg></span><div><b>Together, miles apart</b>You see their pace as it happens, and one tap sends a cheer to their wrist.</div></div>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-heart"/></svg></span><div><b>A cheer, mid-run</b>You see their pace as it happens, and one tap sends a cheer to their wrist.</div></div>
     </div>
     <div class="shots">
-      <div class="phone sm"><div class="seq n2"><img src="/assets/v2/fit-hers.jpg" width="368" height="800" loading="lazy" alt="Lower A, together with Sir"><img src="/assets/v2/fit-his.jpg" width="368" height="800" loading="lazy" alt="Theo's Fitness: Move together, with Luna's steps"></div></div>
-      <div class="watch cw"><div class="v" data-v="/assets/v2/fit-cheer"><img src="/assets/v2/fit-cheer.jpg" width="416" height="496" loading="lazy" alt="Luna's watch on a live run: Cheered you on"></div></div>
+      <div class="phone sm" data-depth=".02"><div class="seq n2"><img src="/assets/v2/fit-hers.jpg" width="368" height="800" loading="lazy" alt="Lower A, together with Sir"><img src="/assets/v2/fit-his.jpg" width="368" height="800" loading="lazy" alt="Theo's Fitness: Move together, with Luna's steps"></div></div>
+      <div class="watch cw" data-depth=".08"><div class="v" data-v="/assets/v2/fit-cheer"><img src="/assets/v2/fit-cheer.jpg" width="416" height="496" loading="lazy" alt="Luna's watch on a live run: Cheered you on"></div></div>
     </div>
   </div>
 </section>
 
-<!-- 7 WATER AND MEDS -->
-<section class="ch c-care light" id="care" data-step>
+<!-- WATER, MEDS AND CYCLE: a showpiece -->
+<section class="ch show c-care light" id="care" data-step data-tone="light">
   <div class="in">
     <div class="copy">
-      <span class="num">07 · WATER, MEDS AND CYCLE</span>
+      <span class="num">Water, meds and cycle</span>
       <h2 class="h2">Looked after,<br><span class="l">every day.</span></h2>
-      <p class="lede">The whole page is the water. Each drink you log sinks to its own band, and the day ends up in layers. Meds sit in a weekly pill case, with Taken right on the reminder and the last dose always in view. Cycle tracking keeps the day of the cycle, how you feel and when the next period is likely, and you choose who sees it.</p>
-      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-drop"/></svg></span><div><b>Looking after each other</b>From a different town, one look says they've had their water and taken their meds. A skipped dose never ends a streak.</div></div>
+      <p class="lede">The whole page is the water. Each drink sinks to its own band, and by evening the day sits in layers.</p>
     </div>
     <div class="shots">
-      <div class="phone"><div class="v" data-v="/assets/v2/water-pour"><img src="/assets/v2/water-pour.jpg" width="400" height="870" loading="lazy" alt="Water: a mug of coffee is poured in, sinks through the water and settles as its own band"></div></div>
-      <div class="phone sm"><div class="seq n2"><img src="/assets/v2/meds-week.jpg" width="506" height="1100" loading="lazy" alt="Meds today: the week's pill case, morning meds taken, evening meds tonight"><img src="/assets/v2/cycle.jpg" width="506" height="1100" loading="lazy" alt="Cycle: day 12, Blooming, a bright day with a little breeze, the next period likely in about 16 days"></div></div>
+      <div class="phone" data-depth=".03"><div class="v" data-v="/assets/v2/water-pour"><img src="/assets/v2/water-pour.jpg" width="400" height="870" loading="lazy" alt="Water: a mug of coffee is poured in, sinks through the water and settles as its own band"></div></div>
+      <div class="phone sm" data-depth=".08"><div class="seq n2"><img src="/assets/v2/meds-week.jpg" width="506" height="1100" loading="lazy" alt="Meds today: the week's pill case, morning meds taken, evening meds tonight"><img src="/assets/v2/cycle.jpg" width="506" height="1100" loading="lazy" alt="Cycle: day 12, Blooming, a bright day with a little breeze, the next period likely in about 16 days"></div></div>
     </div>
+    <ul class="facts">
+      <li><b>Meds</b>A weekly pill case, with Taken right on the reminder</li>
+      <li><b>Cycle</b>The day, how you feel, and when the next period is likely</li>
+      <li><b>Yours to share</b>You choose who sees your cycle</li>
+      <li><b>Kind streaks</b>A skipped dose never ends one</li>
+    </ul>
   </div>
 </section>
 
-<!-- 8 READ TOGETHER -->
-<section class="ch c-read flip" id="read" data-step>
+<!-- JOURNALS -->
+<section class="ch c-journal light" id="journal" data-step data-tone="light">
   <div class="in">
     <div class="copy">
-      <span class="num">08 · READ TOGETHER</span>
-      <h2 class="h2">The same page,<br><span class="l">miles apart.</span></h2>
-      <p class="lede">Bring your own books or open a classic. See who's ahead, pass a page with a note, and read the bedtime stories written for two.</p>
+      <span class="num">Journals</span>
+      <h2 class="h2">Yours,<br><span class="l">until you share it.</span></h2>
+      <p class="lede">Pick a book from your shelf and write in your own hand. Tape in a photo, keep a page closed until a date, and share an entry for a day, a week or for good.</p>
       <ul class="points">
-        <li><svg width="22" height="22" style="color:#FFD25E" aria-hidden="true"><use href="#g-book"/></svg>Your EPUBs and PDFs, shared with the people you choose</li>
-        <li><svg width="22" height="22" style="color:#FFD25E" aria-hidden="true"><use href="#g-book"/></svg>Story time books are end-to-end encrypted</li>
+        <li><svg width="22" height="22" style="color:#9A6A3A" aria-hidden="true"><use href="#g-tick"/></svg>Take a shared entry back any time</li>
+        <li><svg width="22" height="22" style="color:#9A6A3A" aria-hidden="true"><use href="#g-tick"/></svg>On iPhone Duo it opens like a real book</li>
       </ul>
+      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-book"/></svg></span><div><b>All in one app</b>Your journal sits next to your tasks, your messages and your day together, so there's nothing else to keep up with.</div></div>
     </div>
-    <div class="shots">
-      <div class="phone"><div class="seq n3"><img src="/assets/v2/read-now.jpg" width="506" height="1100" loading="lazy" alt="Reading now: Mara is two pages ahead"><img src="/assets/v2/read-pass.jpg" width="506" height="1100" loading="lazy" alt="Luna passed you a page: read this one to me tonight"><img src="/assets/v2/read-page.jpg" width="506" height="1100" loading="lazy" alt="The Secret Garden, page 10"></div><span class="tap" style="left:56%;top:57%;--dur:13.5s;--at:3.7s"></span></div>
-    </div>
+    <div class="shots"><div class="phone" data-depth=".04"><div class="v" data-v="/assets/v2/journal-shelf"><img src="/assets/v2/journal-shelf.jpg" width="400" height="870" loading="lazy" alt="Luna's journal: from a page with a taped-in photo, the shelf of books opens, Journal is picked, and the notebook turns to Things I want to keep"></div></div></div>
   </div>
 </section>
 
-<!-- 9 GLIMPSES -->
-<section class="ch c-glimpse" id="glimpses" data-step>
+<!-- SUB STUDIO -->
+<section class="ch c-studio light flip" id="studio" data-step data-tone="light">
+  <span class="blob b1" aria-hidden="true"></span><span class="blob b2" aria-hidden="true"></span>
   <div class="in">
     <div class="copy">
-      <span class="num">09 · GLIMPSES</span>
-      <h2 class="h2">A glimpse of your day,<br><span class="l">for one person.</span></h2>
-      <p class="lede">A photo of right now, sent to the one person it's for. When you're apart it's the next best thing to being there. Private ones stay blurred until they're tapped, and every Glimpse is end-to-end encrypted.</p>
-      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-seal"/></svg></span><div><b>Taken live</b>Glimpses are taken with the camera in Collared, never picked from the camera roll, so what arrives really is this moment.</div></div>
+      <span class="num">Sub Studio</span>
+      <h2 class="h2">Dressed<br><span class="l">by you.</span></h2>
+      <p class="lede">They snap their clothes and each piece becomes a sticker in a wardrobe. You dress them for the day, pick their nail colours, and can send the look as a surprise to open the night before.</p>
     </div>
     <div class="shots duet" data-sync>
-      <div class="phone"><div class="v" data-v="/assets/v2/glimpse-send" data-awake="0-3.8"><img src="/assets/v2/glimpse-send.jpg" width="400" height="870" loading="lazy" alt="Luna's Glimpse camera: a Private picture of the sunset, sent to Sir"></div></div>
-      <div class="phone"><div class="v" data-v="/assets/v2/glimpse-land" data-awake="1.6-6.6"><img src="/assets/v2/glimpse-land.jpg" width="400" height="870" loading="lazy" alt="Theo's thread with Luna: the Private Glimpse lands live, blurred, then opens on a tap: Almost home"><span class="touch" data-at="3.8" style="left:33.5%;top:70.6%" aria-hidden="true"></span></div></div>
+      <div class="phone"><div class="v" data-v="/assets/v2/studio-wardrobe" data-awake="0-5.6,26.6-33.8"><img src="/assets/v2/studio-wardrobe.jpg" width="400" height="870" loading="lazy" alt="Luna's phone: a striped shirt becomes a sticker in the wardrobe, and later a Surprise look opens from its envelope"></div></div>
+      <div class="phone"><div class="v" data-v="/assets/v2/studio-dress" data-awake="5.4-33.8"><img src="/assets/v2/studio-dress.jpg" width="400" height="870" loading="lazy" alt="Theo's Studio: Luna's figure dressed in the striped shirt, a camel skirt and boots, then sent to Luna as a surprise"></div></div>
     </div>
   </div>
 </section>
@@ -281,38 +325,32 @@
   <div class="in">
     <span class="kick">Private on purpose</span>
     <h2 class="h2">What's yours<br><span class="l">stays yours.</span></h2>
-    <p class="lede">Your messages, Glimpses and Story time books are end-to-end encrypted. They're locked on your phone before they leave it, and only the people you share them with can open them. We can't read them either. No ads, no tracking, and nothing about you is ever sold.</p>
+    <p class="lede">Your messages, Glimpses and Story time books are end-to-end encrypted. They're locked on your phone before they leave it, and only the people you share them with can open them. We can't read them. No ads, no tracking, and nothing about you is ever sold.</p>
     <div class="glyphs"><span><svg width="18" height="18" aria-hidden="true"><use href="#g-seal"/></svg>Encrypted on your phone</span><span><svg width="18" height="18" aria-hidden="true"><use href="#g-lock"/></svg>App lock and a discreet icon</span><span><svg width="18" height="18" aria-hidden="true"><use href="#g-eye"/></svg>No ads, nothing sold</span></div>
   </div>
 </section>
 
-<!-- 10 SUB STUDIO -->
-<section class="ch c-studio light" id="studio" data-step>
-  <span class="blob b1" aria-hidden="true"></span><span class="blob b2" aria-hidden="true"></span>
+<!-- TWO MORE, side by side: Read Together and Social -->
+<section class="more2" data-step>
   <div class="in">
-    <div class="copy">
-      <span class="num">10 · SUB STUDIO</span>
-      <h2 class="h2">Dressed<br><span class="l">by you.</span></h2>
-      <p class="lede">Snap your own clothes and each piece becomes a sticker in your wardrobe. Your Dominant dresses you for the day from it, picks your nail colours, and can send the look as a surprise you open the night before.</p>
-      <p class="note">Coffee first, then the gallery.</p>
-    </div>
-    <div class="shots duet" data-sync>
-      <div class="phone"><div class="v" data-v="/assets/v2/studio-wardrobe" data-awake="0-5.6,26.6-33.8"><img src="/assets/v2/studio-wardrobe.jpg" width="400" height="870" loading="lazy" alt="Luna's phone: a striped shirt becomes a sticker in the wardrobe, and later a Surprise look opens from its envelope"></div></div>
-      <div class="phone"><div class="v" data-v="/assets/v2/studio-dress" data-awake="5.4-33.8"><img src="/assets/v2/studio-dress.jpg" width="400" height="870" loading="lazy" alt="Theo's Studio: Luna's figure dressed in the striped shirt, a camel skirt and boots, then sent to Luna as a surprise"></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- 11 SOCIAL -->
-<section class="ch c-social flip" id="social" data-step>
-  <div class="in">
-    <div class="copy">
-      <span class="num">11 · SOCIAL</span>
-      <h2 class="h2">Your people,<br><span class="l">at your distance.</span></h2>
-      <p class="lede">Friends see counts, never content. Join a challenge where everyone else is a number, and the community is a tap away.</p>
-      <div class="hook"><span class="hg"><svg width="18" height="18" aria-hidden="true"><use href="#g-people"/></svg></span><div><b>Already here</b>More than 5,000 people in the Collared Discord.</div></div>
-    </div>
-    <div class="shots"><div class="phone"><div class="v"><img src="/assets/v2/social.jpg" width="506" height="1100" loading="lazy" alt="Luna's Social: Theo, Nova and Wren in the circle, From your people, the community"></div></div></div>
+    <article class="mcard c-read" id="read">
+      <div class="copy">
+        <span class="num">Read Together</span>
+        <h2 class="h3">The same page,<br><span class="l">miles apart.</span></h2>
+        <p>Bring your own books or open a classic. See who's ahead, pass a page with a note, and read bedtime stories written for two.</p>
+        <ul class="mini"><li>Your EPUBs and PDFs, shared with the people you choose</li><li>Story time books are end-to-end encrypted</li></ul>
+      </div>
+      <div class="phone"><div class="seq n3"><img src="/assets/v2/read-now.jpg" width="506" height="1100" loading="lazy" alt="Reading now: Mara is two pages ahead"><img src="/assets/v2/read-pass.jpg" width="506" height="1100" loading="lazy" alt="Luna passed you a page: read this one to me tonight"><img src="/assets/v2/read-page.jpg" width="506" height="1100" loading="lazy" alt="The Secret Garden, page 10"></div><span class="tap" style="left:56%;top:57%;--dur:13.5s;--at:3.7s"></span></div>
+    </article>
+    <article class="mcard c-social" id="social">
+      <div class="copy">
+        <span class="num">Social</span>
+        <h2 class="h3">Your people,<br><span class="l">at your distance.</span></h2>
+        <p>Friends see counts, never content. Challenges show everyone as a number, so you can join in quietly, and the community is a tap away.</p>
+        <ul class="mini"><li>More than 5,000 people in the Collared Discord</li></ul>
+      </div>
+      <div class="phone"><div class="v"><img src="/assets/v2/social.jpg" width="506" height="1100" loading="lazy" alt="Luna's Social: Theo, Nova and Wren in the circle, From your people, the community"></div></div>
+    </article>
   </div>
 </section>
 
@@ -320,9 +358,9 @@
 <section class="ch c-duo" data-step>
   <div class="in">
     <div class="copy">
-      <span class="num">ON EVERY SCREEN YOU OWN</span>
+      <span class="num">On every screen you own</span>
       <h2 class="h2">Open it, and see<br><span class="l">the whole day.</span></h2>
-      <p class="lede">iPhone, iPhone Duo in every pose, Apple Watch and Android. When Luna keeps the last thing, Theo's stage says so.</p>
+      <p class="lede">iPhone, iPhone Duo in every pose, Apple Watch and Android. When Luna finishes the last thing on her list, Theo's screen shows the day complete.</p>
     </div>
     <div class="phone open wide"><div class="v" data-v="/assets/v2/duo-stage"><img src="/assets/v2/duo-stage.jpg" width="760" height="534" loading="lazy" alt="Theo's iPhone Duo open: the stage ticks to 6 of 6, Luna has kept everything"></div></div>
     <div class="watches">
@@ -337,13 +375,13 @@
 <section class="promise" id="community">
   <div class="in"><div class="split2">
     <div class="panel disc"><span class="kick">The community</span><div class="stat">5,000+</div><p>People in the Discord. A question every day, honest advice, and a warm welcome on your first day. It's also where to ask for help with the app.</p><a class="btn w sm" href="https://discord.gg/collared" rel="noopener">Join the Discord</a></div>
-    <div class="panel pod"><span class="kick">The podcast · soon</span><h3>Real conversations about life in the lifestyle.</h3><p>Listener questions from the Discord, and guests from the community.</p></div>
+    <div class="panel fresh"><span class="kick">New in build 64</span><h3>The biggest build yet.</h3><ul class="mini"><li>Sub Studio, with a wardrobe and nail colours</li><li>All new water: the whole page fills</li><li>Story time, rebuilt</li><li>Press and hold, everywhere</li><li>Sign in on collared.app with your phone</li></ul></div>
   </div></div>
 </section>
 
 <section class="endcard">
-  <svg class="ring" aria-hidden="true"><use href="#mark"/></svg>
   <div class="in">
+    <svg class="closing" viewBox="0 0 120 120" aria-hidden="true"><path d="M14 60a46 46 0 0 1 92 0" pathLength="100"/><path d="M106 60a46 46 0 0 1-92 0" pathLength="100"/></svg>
     <span class="kick">The beta is open</span>
     <h2 class="h2">Be one of the first inside.</h2>
     <div class="cta"><a class="btn p" href="/beta">Join the beta</a><a class="btn s" href="/account">Sign in</a></div>
@@ -365,8 +403,6 @@
 </footer>
 <!--/FOOT-->
 
-<div class="progress" aria-hidden="true"><svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="18" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="6"/><circle id="pr" cx="27" cy="27" r="18" fill="none" stroke="#9C7DFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="113.1" stroke-dashoffset="113.1"/></svg></div>
-<div class="stick"><a class="btn p" href="/beta">Join the beta</a></div>
 
 <script src="/site.js" defer></script>
 </body>

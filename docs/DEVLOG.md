@@ -244,3 +244,37 @@ From the app repo's `design/website-redo/CHANGES-2026-11-12.md`; proof frames in
   shop scrolled so the list rows lead and no ring is on screen. The pair is now Theo and Luna like the rest of the page
   (the teaser scratch couple: rewards Theo stocks, a punishment from Sir). The footer under the list is the app's own
   line, with Theo's pronoun.
+
+## 12 November 2026, night: the polish pass (twenty changes, `stage-redo`, not pushed)
+
+Before-state: tag `stage-before-polish-2026-11-12` and branch `stage-redo-backup-2026-11-12` (both at `ed25eb6`).
+
+- **Shape.** Home reads in three parts (Structure: tasks, points. Closeness: location, Held, Glimpses. Care: workouts,
+  water, journals, Sub Studio), each opened by a short `.act` band. Held and Water are showpieces (`.ch.show`: words
+  centred, devices given the room). Read Together and Social sit side by side as two cards (`.more2`). Chapters stack
+  like cards: each has a rounded top that rides over the one before (`--lap`). The chapter numbers are gone.
+- **Arriving and depth.** The hero settles in on load (CSS only). Each chapter's words rise once and its devices settle
+  after them (`.rv`, `.rvd`, set by site.js, so with no script everything is simply there). Devices with `data-depth`
+  drift a little against the scroll (not on phones). Reduce Motion: none of it.
+- **The nav.** The reading ring lives in the nav (`.nav-ring`, Home only, `body.has-steps`); the floating ring and the
+  sticky Join bar are gone, so a phone shows one Join button. Over a light chapter (`data-tone="light"`) the nav turns
+  light and swaps to the purple wordmark. The mobile menu eases open (`.mobile-menu.anim`, a `.mm` wrapper) and the
+  burger becomes a close mark. /account keeps its own older menu script and the plain `.mobile-menu` rules.
+- **The belt.** The feature names drift as a marquee (two tracks, the second `aria-hidden`), rest under a pointer, and
+  stand still and scroll by hand with Reduce Motion.
+- **To try.** Held: press and hold the button, the ring fills in 1.4 s, then "Theo has been told. Breathe in, gently."
+  (pointer, touch and keyboard). Glimpses: a Private tile that clears on a tap (`assets/v2/glimpse-tile.jpg`, cut from
+  the same take as the landing clip). Both are drawn by the site in the app's look, like the Done when card.
+- **Pairs on a phone.** `.shots.duet` is a swipe with each phone at 236 px, and a synced pair scrolls itself to the
+  phone whose part has just begun (hands off for 6 s after a touch).
+- **Smart tasks clip** now starts on the task (the first 3.6 s, Home again, are cut); re-encoded from the published
+  400 px clip, so it wants a fresh capture with the others.
+- **Words.** Every paragraph is about 30 words, details moved into the tick lists; the distance line is kept in the
+  hero, Location, Workouts and Read Together and dropped from the rest; Sub Studio's paragraph now speaks to the
+  Dominant, matching "Dressed by you."; the handwritten note is gone; every second headline line has its chapter's
+  colour; headlines balance (`text-wrap`) and none runs to an orphan at 1440.
+- **Close.** The end card's ring sits above the headline and closes as it comes into view. The podcast panel is
+  replaced by "New in build 64". No tester quotes: none are on file and none are invented.
+- **Sharing and finish.** `assets/share-card.jpg` (1200 x 630) with large-card tags on every page, a 64 px favicon and
+  a 180 px touch icon, `404.html`, and every title in the "Page · Collared" form. Beta, team and the two compare pages
+  each have their own head (`.phead[data-head]`); beta's headline no longer repeats Home's close.
