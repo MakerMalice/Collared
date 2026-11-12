@@ -233,3 +233,9 @@ From the app repo's `design/website-redo/CHANGES-2026-11-12.md`; proof frames in
   of the app). The Glimpse lands live: Theo's thread is open and quiet, Luna's Private Glimpse is sent during the take
   and arrives through the thread's own refresh, then opens on a tap. The first watch is Luna's meds (Log), not a task from
   Mara. Every new clip carries the island on every frame (the simulator recorder drops it on a few).
+- **Owner's round, same evening:** the shop and punishment pair is upright, the same frame and spacing as the Glimpse
+  pair: Luna's shop with her balance (a +30 rises by it: earned), and her punishment card (fifty points taken). Two
+  stills, nothing dissolving. The Glimpse beat is cut to 6.6 s from the same takes (dead time removed, playback at
+  normal speed): shutter 0.4 s, the picture flies about 2.0 s, lands blurred on Theo's thread about 2.4 to 2.8 s, a
+  finger at 3.8 s, open at 4.0 s. No clip on Home cross-dissolves any more: the new clips cut clean at their loop and
+  between takes, and a still sequence (`.seq`) pushes the next screen in whole from the right and cuts back to the first.
