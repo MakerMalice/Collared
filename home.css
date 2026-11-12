@@ -55,17 +55,20 @@
 .v img,.v video{display:block;width:100%;height:auto;border-radius:0}
 .phone.duo .v,.phone.duo .seq{border-radius:31px}
 .seq{position:relative;overflow:hidden;border-radius:42px;background:#000}
-.seq img{border-radius:0!important;width:100%;animation:seq var(--dur,9s) infinite both}
+.seq img{border-radius:0!important;width:100%;animation:seq var(--dur,10s) infinite both}
+/* the next screen slides in whole and opaque over the last, the way a screen pushes in the app; the loop cuts clean back
+   to the first. Two different layouts are never on screen at once, half see-through. */
 .seq img+img{position:absolute;inset:0;height:100%;object-fit:cover}
-.seq.n2 img{--dur:7s}
+.seq.n2 img{--dur:10s}
+.seq.n3 img{--dur:13.5s}
 .seq img:nth-child(1){animation-name:seq1}
 .seq.n3 img:nth-child(2){animation-name:seq3b}
 .seq.n3 img:nth-child(3){animation-name:seq3c}
 .seq.n2 img:nth-child(2){animation-name:seq2b}
-@keyframes seq1{0%,100%{opacity:1}}
-@keyframes seq2b{0%,44%{opacity:0;transform:translateX(18%)}52%,92%{opacity:1;transform:none}100%{opacity:0;transform:none}}
-@keyframes seq3b{0%,28%{opacity:0;transform:translateX(18%)}34%,62%{opacity:1;transform:none}68%,100%{opacity:0}}
-@keyframes seq3c{0%,62%{opacity:0;transform:translateX(18%)}68%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes seq1{0%,100%{transform:none}}
+@keyframes seq2b{0%,46%{transform:translateX(102%)}50%,99.9%{transform:none}100%{transform:translateX(102%)}}
+@keyframes seq3b{0%,30%{transform:translateX(102%)}33.5%,99.9%{transform:none}100%{transform:translateX(102%)}}
+@keyframes seq3c{0%,63.5%{transform:translateX(102%)}67%,99.9%{transform:none}100%{transform:translateX(102%)}}
 
 /* the tap: a soft ring where a finger lands */
 .tap{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:2px solid rgba(255,255,255,.9);background:rgba(255,255,255,.25);opacity:0;pointer-events:none;animation:tap var(--dur,9s) infinite;animation-delay:var(--at,0s)}
@@ -86,7 +89,7 @@
 .donewhen .ok svg{flex:none;color:#4CC380}
 
 /* points pill */
-.pts{left:41%;top:40px;font:900 22px/1 Nunito;color:#fff;background:#2E9D5E;padding:10px 16px;border-radius:999px;box-shadow:0 14px 30px -8px rgba(76,195,128,.6);animation:pts 7s infinite}
+.pts{left:auto;right:-22px;top:15%;font:900 22px/1 Nunito;color:#fff;background:#2E9D5E;padding:10px 16px;border-radius:999px;box-shadow:0 14px 30px -8px rgba(76,195,128,.6);animation:pts 7s infinite}
 @keyframes pts{0%,8%{opacity:0;transform:translateY(20px) scale(.8)}14%,40%{opacity:1;transform:none}52%,100%{opacity:0;transform:translateY(-24px)}}
 
 /* colour fields */
@@ -127,15 +130,17 @@
 .watches{display:flex;gap:28px;justify-content:center;margin-top:64px}
 .watches .watch{width:190px}
 
-/* two phones that belong together. .pair: tilted toward each other (the shop and the punishment). .duet: one story across
+/* two phones that belong together, upright, side by side, one frame and one spacing: .duet. With [data-sync] it is one
    two phones, kept in step by site.js; the phone not in the story yet rests dimmed (Glimpses, Sub Studio). */
-.shots.pair,.shots.duet{align-items:center;gap:0}
-.shots.pair .phone,.shots.duet .phone{width:270px}
-.shots.pair .phone:first-child{transform:rotate(4deg) translate(10px,12px);z-index:1}
-.shots.pair .phone:last-child{transform:rotate(-4deg) translate(-10px,-12px)}
+.shots.duet{align-items:center;gap:0}
+.shots.duet .phone{width:270px}
 .shots.duet .phone+.phone{margin-left:26px}
 .duet .v :is(img,video){transition:filter .8s ease}
 .duet .v.rest :is(img,video){filter:brightness(.42) saturate(.7)}
+/* a finger on the screen inside a duet, timed by site.js from the clip's own clock (data-at, seconds) */
+.v .touch{position:absolute;z-index:2;width:13%;aspect-ratio:1;margin:-6.5% 0 0 -6.5%;border-radius:50%;border:2px solid rgba(255,255,255,.95);background:rgba(255,255,255,.3);box-shadow:0 0 0 1px rgba(0,0,0,.12);opacity:0;pointer-events:none}
+.v .touch.go{animation:touch .55s ease-out both}
+@keyframes touch{0%{opacity:0;transform:scale(.5)}25%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.5)}}
 
 /* switch block */
 .switch{padding:110px 0;background:var(--ground)}
@@ -187,7 +192,7 @@
 
 @media (prefers-reduced-motion:reduce){
   .seq img,.tap,.pts,.orbs i{animation:none!important}
-  .seq img+img{opacity:0}
+  .seq img+img{transform:translateX(102%)}
   .donewhen .rot span,.donewhen .chips button{transition:none}
   .pts{opacity:1}
   .progress circle+circle{transition:none}
@@ -197,7 +202,7 @@
   .hero .stage{transform:scale(.88);transform-origin:center}
   .shots .phone{width:260px}
   .shots .phone.sm,.shots .phone.duo.sm{width:200px}
-  .shots.pair .phone,.shots.duet .phone{width:236px}
+  .shots.duet .phone{width:236px}
 }
 @media (max-width:900px){
   .hero .in,.ch .in,.c-journal .in,.c-studio .in{grid-template-columns:minmax(0,1fr)}
@@ -221,11 +226,11 @@
   .shots .phone.duo{width:210px}
   .shots .phone.duo.sm{width:150px;margin-bottom:-24px}
   .shots .watch.cw{width:118px;margin-bottom:26px}
-  .shots.pair .phone,.shots.duet .phone{width:min(164px,43vw)}
+  .shots.duet .phone{width:min(164px,43vw)}
   .shots.duet .phone+.phone{margin-left:14px}
   .donewhen{position:relative;left:auto;bottom:auto;width:100%;max-width:330px;margin:22px auto 0}
   .shots.wrap{flex-direction:column;align-items:center}
-  .pts{left:auto;right:0;top:40px;font-size:18px}
+  .pts{right:-12px;font-size:16px;padding:8px 12px}
   .watches{gap:12px;margin-top:40px}
   .watches .watch{width:min(100px,26vw)}
   .cmp{grid-template-columns:1fr}

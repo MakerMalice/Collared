@@ -55,9 +55,17 @@
       const vs = [...d.querySelectorAll('.v[data-v]')];
       let clips = null;
       let raf = 0;
+      const touches = [...d.querySelectorAll('.touch[data-at]')];
+      let was = 0;
       const step = () => {
         const lead = clips[0];
         const t = lead.currentTime;
+        // a finger lands when the clip's own clock passes its moment (and not again until the next play)
+        touches.forEach((el) => {
+          const at = Number(el.dataset.at);
+          if (was < at && t >= at && t - at < 0.5) { el.classList.remove('go'); void el.offsetWidth; el.classList.add('go'); }
+        });
+        was = t;
         clips.forEach((c, i) => {
           if (i && !c.paused && Math.abs(c.currentTime - t) > 0.12) c.currentTime = t;
           const r = ranges(vs[i]);
