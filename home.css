@@ -89,7 +89,7 @@
 .donewhen .ok svg{flex:none;color:#4CC380}
 
 /* points pill */
-.pts{left:auto;right:-22px;top:15%;font:900 22px/1 Nunito;color:#fff;background:#2E9D5E;padding:10px 16px;border-radius:999px;box-shadow:0 14px 30px -8px rgba(76,195,128,.6);animation:pts 7s infinite}
+.pts{left:auto;right:8%;top:auto;bottom:100%;margin-bottom:22px;font:900 22px/1 Nunito;color:#fff;background:#2E9D5E;padding:10px 16px;border-radius:999px;box-shadow:0 14px 30px -8px rgba(76,195,128,.6);animation:pts 7s infinite}
 @keyframes pts{0%,8%{opacity:0;transform:translateY(20px) scale(.8)}14%,40%{opacity:1;transform:none}52%,100%{opacity:0;transform:translateY(-24px)}}
 
 /* colour fields */
@@ -230,7 +230,8 @@
   .shots.duet .phone+.phone{margin-left:14px}
   .donewhen{position:relative;left:auto;bottom:auto;width:100%;max-width:330px;margin:22px auto 0}
   .shots.wrap{flex-direction:column;align-items:center}
-  .pts{right:-12px;font-size:16px;padding:8px 12px}
+  .pts{right:8%;margin-bottom:16px;font-size:16px;padding:8px 12px}
+  .shots.duet:has(.pts){padding-top:44px}
   .watches{gap:12px;margin-top:40px}
   .watches .watch{width:min(100px,26vw)}
   .cmp{grid-template-columns:1fr}
