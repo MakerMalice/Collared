@@ -54,7 +54,6 @@
 .v{position:relative;border-radius:42px;overflow:hidden;background:#000}
 .v img,.v video{display:block;width:100%;height:auto;border-radius:0}
 .phone.duo .v,.phone.duo .seq{border-radius:31px}
-.watch .v{border-radius:34px}
 .seq{position:relative;overflow:hidden;border-radius:42px;background:#000}
 .seq img{border-radius:0!important;width:100%;animation:seq var(--dur,9s) infinite both}
 .seq img+img{position:absolute;inset:0;height:100%;object-fit:cover}
@@ -67,22 +66,22 @@
 @keyframes seq2b{0%,44%{opacity:0;transform:translateX(18%)}52%,92%{opacity:1;transform:none}100%{opacity:0;transform:none}}
 @keyframes seq3b{0%,28%{opacity:0;transform:translateX(18%)}34%,62%{opacity:1;transform:none}68%,100%{opacity:0}}
 @keyframes seq3c{0%,62%{opacity:0;transform:translateX(18%)}68%,94%{opacity:1;transform:none}100%{opacity:0}}
-.paused .seq img,.paused .tap,.paused .pts,.paused .donewhen .rot span,.paused .orbs i{animation-play-state:paused}
 
 /* the tap: a soft ring where a finger lands */
 .tap{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:2px solid rgba(255,255,255,.9);background:rgba(255,255,255,.25);opacity:0;pointer-events:none;animation:tap var(--dur,9s) infinite;animation-delay:var(--at,0s)}
 @keyframes tap{0%{opacity:0;transform:scale(.4)}3%{opacity:1;transform:scale(1)}8%{opacity:0;transform:scale(1.6)}100%{opacity:0}}
 
-/* Done when card (drawn in the app's look) */
-.donewhen{left:-10px;bottom:70px;width:262px;background:#221E2C;border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:16px 18px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
+/* Done when card (drawn in the app's look): the words and the pill cycle together, a click shows that one */
+.donewhen{left:-10px;bottom:70px;width:292px;background:#221E2C;border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:16px 18px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
 .donewhen .lab{font:800 11px/1 Nunito;letter-spacing:.12em;color:#B7A2FF;text-transform:uppercase}
 .donewhen .rot{position:relative;height:26px;margin:10px 0 12px;overflow:hidden}
-.donewhen .rot span{position:absolute;left:0;top:0;font:800 19px/26px Nunito;color:#fff;opacity:0;animation:rot 15s infinite;white-space:nowrap}
-.donewhen .rot span:nth-child(2){animation-delay:3s}.donewhen .rot span:nth-child(3){animation-delay:6s}.donewhen .rot span:nth-child(4){animation-delay:9s}.donewhen .rot span:nth-child(5){animation-delay:12s}
-@keyframes rot{0%{opacity:0;transform:translateY(100%)}4%,17%{opacity:1;transform:none}21%,100%{opacity:0;transform:translateY(-100%)}}
+.donewhen .rot span{position:absolute;left:0;top:0;font:800 19px/26px Nunito;color:#fff;white-space:nowrap;opacity:0;transform:translateY(70%);transition:opacity .3s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.donewhen .rot span.on{opacity:1;transform:none}
+.donewhen .rot span.out{opacity:0;transform:translateY(-70%)}
 .donewhen .chips{display:flex;gap:6px;flex-wrap:wrap}
-.donewhen .chips i{font:700 11.5px/1 Nunito;font-style:normal;padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.07);color:#D9D3E8}
-.donewhen .chips i.on{background:#7444FF;color:#fff}
+.donewhen .chips button{font:700 12px/1 Nunito;padding:8px 10px;border-radius:999px;border:0;background:rgba(255,255,255,.07);color:#D9D3E8;cursor:pointer;transition:background-color .25s ease,color .25s ease}
+.donewhen .chips button:hover{background:rgba(255,255,255,.13)}
+.donewhen .chips button[aria-pressed="true"]{background:#7444FF;color:#fff}
 .donewhen .ok{display:flex;gap:8px;align-items:center;margin-top:12px;font:700 12.5px/1.3 Nunito;color:#A7A2B3}
 .donewhen .ok svg{flex:none;color:#4CC380}
 
@@ -106,8 +105,6 @@
 .c-journal{background:var(--paper);color:#3A2E22}
 .c-journal .h2{font-family:Lora,serif;font-weight:400;letter-spacing:-.01em}
 .c-journal .h2 .l{font-style:italic;opacity:.6}
-.c-journal .in{grid-template-columns:.8fr 1.2fr}
-.c-journal .phone.open{width:100%;max-width:640px}
 .c-fit{background:radial-gradient(60% 70% at 75% 60%,rgba(255,79,139,.28),transparent 70%),radial-gradient(50% 60% at 60% 30%,rgba(116,68,255,.35),transparent 70%),#16131F}
 .c-fit .h2 .l{background:linear-gradient(90deg,#9C7DFF,#FF4F8B);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:1}
 .c-care{background:linear-gradient(180deg,#EAF3FF,#F6F0FF);color:#20283A}
@@ -120,7 +117,6 @@
 .c-studio .blob{position:absolute;border-radius:50%;pointer-events:none}
 .c-studio .b1{width:520px;height:520px;right:-120px;top:-80px;background:#FFAA8E;opacity:.55}
 .c-studio .b2{width:300px;height:300px;right:380px;bottom:-140px;background:#F2AFC4;opacity:.6}
-.c-studio .in{grid-template-columns:.8fr 1.2fr}
 .c-studio .note{margin-top:22px}
 .c-social{background:linear-gradient(180deg,#2A2560,#1B1240)}
 .c-duo{background:linear-gradient(180deg,#0E0A1A,#1B1240)}
@@ -131,10 +127,15 @@
 .watches{display:flex;gap:28px;justify-content:center;margin-top:64px}
 .watches .watch{width:190px}
 
-/* Sub Studio: the launch film's real 3D iPhone, on its own little screen */
-.film{position:relative;width:100%;border-radius:28px;overflow:hidden;background:#140c2e;box-shadow:0 0 0 1px rgba(43,33,64,.12),0 50px 90px -30px rgba(90,60,0,.55),0 30px 60px -30px rgba(43,33,64,.5)}
-.film img,.film video{display:block;width:100%;height:auto}
-.shots.wide{min-height:0;align-items:center}
+/* two phones that belong together. .pair: tilted toward each other (the shop and the punishment). .duet: one story across
+   two phones, kept in step by site.js; the phone not in the story yet rests dimmed (Glimpses, Sub Studio). */
+.shots.pair,.shots.duet{align-items:center;gap:0}
+.shots.pair .phone,.shots.duet .phone{width:270px}
+.shots.pair .phone:first-child{transform:rotate(4deg) translate(10px,12px);z-index:1}
+.shots.pair .phone:last-child{transform:rotate(-4deg) translate(-10px,-12px)}
+.shots.duet .phone+.phone{margin-left:26px}
+.duet .v :is(img,video){transition:filter .8s ease}
+.duet .v.rest :is(img,video){filter:brightness(.42) saturate(.7)}
 
 /* switch block */
 .switch{padding:110px 0;background:var(--ground)}
@@ -185,9 +186,9 @@
 .stick{display:none}
 
 @media (prefers-reduced-motion:reduce){
-  .seq img,.tap,.donewhen .rot span,.pts,.orbs i{animation:none!important}
+  .seq img,.tap,.pts,.orbs i{animation:none!important}
   .seq img+img{opacity:0}
-  .donewhen .rot span:first-child{opacity:1}
+  .donewhen .rot span,.donewhen .chips button{transition:none}
   .pts{opacity:1}
   .progress circle+circle{transition:none}
 }
@@ -196,6 +197,7 @@
   .hero .stage{transform:scale(.88);transform-origin:center}
   .shots .phone{width:260px}
   .shots .phone.sm,.shots .phone.duo.sm{width:200px}
+  .shots.pair .phone,.shots.duet .phone{width:236px}
 }
 @media (max-width:900px){
   .hero .in,.ch .in,.c-journal .in,.c-studio .in{grid-template-columns:minmax(0,1fr)}
@@ -208,8 +210,7 @@
   .hero .stage{height:560px;margin:10px -20px 0}
   .hero .ring{width:440px;height:440px}
   .hero .phone{width:250px}
-  .hero .watch{width:96px;right:6px;bottom:30px;padding:8px;border-radius:30px}
-  .hero .watch img{border-radius:22px}
+  .hero .watch{width:96px;right:10px;bottom:30px}
   .hero .p2{width:120px;left:8px;bottom:20px}
   .ribbon{font-size:22px;padding:16px 0}
   .ch{padding:80px 0}
@@ -219,16 +220,14 @@
   .shots .phone.sm{width:160px;margin-bottom:-24px}
   .shots .phone.duo{width:210px}
   .shots .phone.duo.sm{width:150px;margin-bottom:-24px}
-  .shots .watch{width:112px;padding:8px;border-radius:30px}
   .shots .watch.cw{width:118px;margin-bottom:26px}
-  .shots .watch .v{border-radius:22px}
+  .shots.pair .phone,.shots.duet .phone{width:min(164px,43vw)}
+  .shots.duet .phone+.phone{margin-left:14px}
   .donewhen{position:relative;left:auto;bottom:auto;width:100%;max-width:330px;margin:22px auto 0}
   .shots.wrap{flex-direction:column;align-items:center}
   .pts{left:auto;right:0;top:40px;font-size:18px}
-  .film{border-radius:20px}
   .watches{gap:12px;margin-top:40px}
-  .watches .watch{width:104px;padding:7px;border-radius:28px}
-  .watches .watch img{border-radius:21px}
+  .watches .watch{width:min(100px,26vw)}
   .cmp{grid-template-columns:1fr}
   .cmpc{padding:24px 20px 18px;border-radius:24px}
   .row{grid-template-columns:1fr 14px 1.2fr;gap:8px;font-size:14px}

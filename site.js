@@ -17,8 +17,9 @@
 
   // ── clips: every .v[data-v] holds its poster <img>; near the screen it becomes a muted, looping, inline clip ──
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const boxes = [...document.querySelectorAll('.v[data-v]')];
-  if (boxes.length && !still && 'IntersectionObserver' in window) {
+  const boxes = [...document.querySelectorAll('.v[data-v]')].filter((b) => !b.closest('[data-sync]'));
+  const duets = [...document.querySelectorAll('[data-sync]')];
+  if ((boxes.length || duets.length) && !still && 'IntersectionObserver' in window) {
     const make = (el) => {
       const img = el.querySelector('img');
       const base = el.dataset.v;
@@ -46,6 +47,78 @@
       }
     }), { rootMargin: '200px 0px', threshold: 0.01 });
     boxes.forEach((b) => play.observe(b));
+
+    // ── duets: one story told across two phones. Both clips are the same length; the first keeps time and the other
+    // follows it. A phone whose part hasn't started yet rests dimmed (its .v carries data-awake="from-to,...", seconds).
+    const ranges = (el) => (el.dataset.awake || '').split(',').filter(Boolean).map((r) => r.split('-').map(Number));
+    duets.forEach((d) => {
+      const vs = [...d.querySelectorAll('.v[data-v]')];
+      let clips = null;
+      let raf = 0;
+      const step = () => {
+        const lead = clips[0];
+        const t = lead.currentTime;
+        clips.forEach((c, i) => {
+          if (i && !c.paused && Math.abs(c.currentTime - t) > 0.12) c.currentTime = t;
+          const r = ranges(vs[i]);
+          vs[i].classList.toggle('rest', r.length > 0 && !r.some(([a, b]) => t >= a && t < b));
+        });
+        raf = requestAnimationFrame(step);
+      };
+      const start = () => {
+        clips.forEach((c) => { c.currentTime = 0; });
+        Promise.all(clips.map((c) => c.play().catch(() => {}))).then(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(step); });
+      };
+      new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) {
+          if (!clips) {
+            clips = vs.map((el) => (el._v = make(el)));
+            let ready = 0;
+            clips.forEach((c) => c.addEventListener('canplay', () => { if (++ready === clips.length) start(); }, { once: true }));
+          } else {
+            clips.forEach((c) => c.play().catch(() => {}));
+            cancelAnimationFrame(raf); raf = requestAnimationFrame(step);
+          }
+        } else if (clips) {
+          clips.forEach((c) => c.pause());
+          cancelAnimationFrame(raf);
+        }
+      }), { rootMargin: '200px 0px', threshold: 0.01 }).observe(d);
+    });
+  }
+
+  // ── Done when: the words and their pill move together on a calm timer. Hover, focus or a tap holds it; a pill
+  // shows its own example. With Reduce Motion nothing moves by itself, and the pills still work. ──
+  const dw = document.querySelector('[data-cycle]');
+  if (dw) {
+    const words = [...dw.querySelectorAll('.rot span')];
+    const pills = [...dw.querySelectorAll('.chips button')];
+    const live = dw.querySelector('.rot');
+    let at = 0, hover = false, focus = false, heldUntil = 0, seen = false;
+    const show = (n) => {
+      if (n === at) return;
+      words[at].classList.remove('on'); words[at].classList.add('out');
+      const was = words[at];
+      setTimeout(() => was.classList.remove('out'), 450);
+      at = n;
+      words[at].classList.add('on');
+      pills.forEach((p, k) => p.setAttribute('aria-pressed', String(k === at)));
+    };
+    pills.forEach((p, k) => p.addEventListener('click', () => {
+      live.setAttribute('aria-live', 'polite');
+      heldUntil = Date.now() + 9000;
+      show(k);
+    }));
+    dw.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
+    dw.addEventListener('pointerleave', () => { hover = false; });
+    dw.addEventListener('focusin', () => { focus = true; });
+    dw.addEventListener('focusout', () => { focus = dw.contains(document.activeElement); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { seen = e.isIntersecting; }).observe(dw);
+    else seen = true;
+    if (!still) setInterval(() => {
+      if (hover || focus || !seen || document.hidden || Date.now() < heldUntil) return;
+      show((at + 1) % words.length);
+    }, 3200);
   }
 
   // ── the broken ring closes as you read down Home: one step per section ──
