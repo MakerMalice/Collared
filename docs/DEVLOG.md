@@ -368,3 +368,5 @@ Before-state: tag `stage-before-round6-2026-11-12` (at `18e7816`).
   words. Fixed from it: *end-to-end* no longer breaks across lines (non-breaking hyphens in prose), the map's pause
   target is finger-sized, Sub Studio's peach circle no longer sits behind the words, and phones scale up a little on
   the wider screen (`min(…px, …vw)` widths).
+
+- **13 November, before go-live:** an invite (`/i/…`) or tag (`/t/…`) link opened where the app is not installed lands on `404.html`; site.js now says what it is ("This opens in the app.") and points to the beta, where before it was a bare not-found page. Go-live audit: no broken links or missing files on any page; `stage-redo` is 39 commits ahead of `main` and 0 behind (a clean fast-forward); `account.js`, `account-config.js`, `vendor/`, `CNAME` and `.well-known/` are unchanged from `main`. The preview server was rebuilt after a restart wiped the old scratchpad.

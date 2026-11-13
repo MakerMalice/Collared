@@ -9,6 +9,23 @@
   // ── drawn screens share one small helper: is it on screen, and a list of timers to clear ──
   const watch = (el, cb) => { if (IO) new IntersectionObserver(([e]) => cb(e.isIntersecting), { threshold: 0.35 }).observe(el); else cb(true); };
 
+  // ── an invite or tag link opened where the app isn't installed lands on the 404 page: say what it is ──
+  const lost = document.querySelector('[data-lost="title"]');
+  if (lost) {
+    const kind = /^\/i\//.test(location.pathname) ? 'invite' : /^\/t\//.test(location.pathname) ? 'tag' : '';
+    if (kind) {
+      const q = (k) => document.querySelector('[data-lost="' + k + '"]');
+      q('kick').textContent = kind === 'invite' ? 'An invite to Collared' : 'A Collared tag';
+      lost.innerHTML = 'This opens<br><span class="l">in the app.</span>';
+      q('lede').textContent = kind === 'invite'
+        ? 'Someone invited you to Collared. Get the app through the beta, then tap their link again and it will open there.'
+        : 'This link belongs to a tag someone set up in Collared. It opens in the app on their phone.';
+      q('first').textContent = 'Join the beta'; q('first').setAttribute('href', '/beta');
+      q('second').textContent = 'See what Collared is'; q('second').setAttribute('href', '/');
+      document.title = (kind === 'invite' ? 'An invite' : 'A tag') + ' · Collared';
+    }
+  }
+
   // ── the mobile menu: it opens and closes with a short ease, and the burger becomes a close mark ──
   const burger = document.querySelector('.nav-burger');
   const menu = document.getElementById('mobile-menu');
