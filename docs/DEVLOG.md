@@ -370,3 +370,5 @@ Before-state: tag `stage-before-round6-2026-11-12` (at `18e7816`).
   the wider screen (`min(…px, …vw)` widths).
 
 - **13 November, before go-live:** an invite (`/i/…`) or tag (`/t/…`) link opened where the app is not installed lands on `404.html`; site.js now says what it is ("This opens in the app.") and points to the beta, where before it was a bare not-found page. Go-live audit: no broken links or missing files on any page; `stage-redo` is 39 commits ahead of `main` and 0 behind (a clean fast-forward); `account.js`, `account-config.js`, `vendor/`, `CNAME` and `.well-known/` are unchanged from `main`. The preview server was rebuilt after a restart wiped the old scratchpad.
+
+- **13 November: the three tester quotes are real** (Jeff S., Kaylee E., Matt M., sent by the owner). The "Placeholder quotes" tag and its rule are gone. That go-live blocker is closed.
