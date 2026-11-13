@@ -1,1 +1,6 @@
 .DS_Store
+# kept on this Mac only: build notes, drafts and local tool settings stay out of the public repo
+.claude/
+docs/DEVLOG.md
+docs/PRIVACY-STAGED.md
+docs/drafts/

@@ -31,7 +31,7 @@ a dark studio ground, the app's real screens on real devices, one colour field p
 | `assets/` | Brand marks (wordmark PNGs, broken-circle icon, OG tile) and the Discord post images |
 | `tools/stage_shell.py` | Copies the defs, nav and footer from `index.html` into every page with the `<!--DEFS-->`, `<!--NAV-->`, `<!--FOOT-->` markers. Run it after changing the shell (`/account` keeps its own nav: account.js reads it) |
 | `_config.yml` | Keeps `README.md`, `CLAUDE.md`, `docs/` and `tools/` out of the published site (GitHub Pages' Jekyll; no page has front matter, so nothing is templated) |
-| `docs/drafts/` | Unreviewed policy drafts, kept here and not published |
+| `docs/drafts/` | Unreviewed policy drafts, kept on the owner's Mac only (not in this repo, not published) |
 | `CNAME` | Custom-domain binding for GitHub Pages (`collared.app`) |
 
 The old lavender site (`styles.css`, `app.js`, `team.css`, `beta.css`) is no longer loaded by any page.
