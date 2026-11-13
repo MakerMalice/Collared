@@ -66,8 +66,9 @@
     // On a small screen the pair is a swipe, and it follows the story to whichever phone has just woken.
     const ranges = (el) => (el.dataset.awake || '').split(',').filter(Boolean).map((r) => r.split('-').map(Number));
     duets.forEach((d) => {
-      const vs = [...d.querySelectorAll('.v[data-v]')];
-      const rs = vs.map(ranges);
+      const parts = [...d.querySelectorAll('.v')];
+      const vs = parts.filter((p) => p.dataset.v);
+      const rs = parts.map(ranges);
       let clips = null;
       let raf = 0;
       const touches = [...d.querySelectorAll('.touch[data-at]')];
@@ -85,16 +86,17 @@
         });
         was = t;
         let latest = -1, since = -1;
-        clips.forEach((c, i) => {
-          if (i && !c.paused && Math.abs(c.currentTime - t) > 0.12) c.currentTime = t;
+        clips.forEach((c, i) => { if (i && !c.paused && Math.abs(c.currentTime - t) > 0.12) c.currentTime = t; });
+        parts.forEach((p, i) => {
           const on = rs[i].find(([a, b]) => t >= a && t < b);
-          vs[i].classList.toggle('rest', rs[i].length > 0 && !on);
+          p.classList.toggle('rest', rs[i].length > 0 && !on);
           if (on && on[0] >= since) { since = on[0]; latest = i; }
+          if (p._tick) p._tick(t);
         });
         if (latest !== showing && latest >= 0) {
           showing = latest;
           if (small.matches && Date.now() > handsOff && d.scrollWidth > d.clientWidth + 4) {
-            const ph = vs[latest].closest('.phone');
+            const ph = parts[latest].closest('.phone');
             d.scrollTo({ left: ph.offsetLeft - (d.clientWidth - ph.offsetWidth) / 2, behavior: 'smooth' });
           }
         }
@@ -156,53 +158,81 @@
     }, 3200);
   }
 
-  // ── Held, to try: press and hold until the ring fills. Letting go early lets it empty; a full ring tells them. ──
-  const hold = document.querySelector('[data-hold]');
-  if (hold) {
-    const btn = hold.querySelector('.holdbtn');
-    const say = hold.querySelector('.say');
-    const idle = say.textContent;
-    let t = 0, back = 0, down = false;
-    const reset = () => { hold.classList.remove('holding', 'held'); say.textContent = idle; };
-    const press = () => {
-      if (down || hold.classList.contains('held')) return;
-      down = true;
-      clearTimeout(back);
-      hold.classList.add('holding');
-      say.textContent = 'Keep holding';
-      t = setTimeout(() => {
-        down = false;
-        hold.classList.remove('holding'); hold.classList.add('held');
-        say.textContent = 'Theo has been told. Breathe in, gently.';
-        back = setTimeout(reset, 9000);
-      }, still ? 600 : 1400);
+  // ── drawn screens share one small helper: is it on screen, and a list of timers to clear ──
+  const watch = (el, cb) => { if (IO) new IntersectionObserver(([e]) => cb(e.isIntersecting), { threshold: 0.35 }).observe(el); else cb(true); };
+
+  // ── Home, drawn: Mark it done really marks it. Left alone it plays itself, the way the day would go. ──
+  const home = document.querySelector('[data-home]');
+  if (home) {
+    const mark = home.querySelector('.mark');
+    const tap = home.querySelector('.touch');
+    let ts = [], on = false;
+    const clear = () => { ts.forEach(clearTimeout); ts = []; };
+    const later = (f, ms) => ts.push(setTimeout(f, ms));
+    const set = (n) => { home.dataset.s = String(n); };
+    const finish = () => { clear(); set(1); later(() => set(2), 1900); later(() => { set(0); idle(); }, 1900 + 3600); };
+    const idle = () => { clear(); if (!on || still) return; later(() => { tap.classList.remove('go'); void tap.offsetWidth; tap.classList.add('go'); }, 2300); later(finish, 2600); };
+    mark.addEventListener('click', () => { if (home.dataset.s === '0') finish(); });
+    watch(home, (v) => { on = v; if (v && home.dataset.s === '0') idle(); else if (!v) { clear(); set(0); } });
+  }
+
+  // ── Held, drawn: press and hold the circle on the screen until the ring closes. Letting go early lets it empty.
+  // Sir is told, then Theo arrives and the two breathe together; "I'm okay" ends it. Left alone it shows itself. ──
+  const held = document.querySelector('[data-held]');
+  if (held) {
+    const hold = held.querySelector('.hold');
+    const okay = held.querySelector('.okay.hit');
+    const breath = held.querySelector('[data-k="breath"]');
+    const say = held.querySelector('[data-k="say"]');
+    let ts = [], on = false, down = false, fillT = 0, br = 0;
+    const clear = () => { ts.forEach(clearTimeout); ts = []; };
+    const later = (f, ms) => ts.push(setTimeout(f, ms));
+    const set = (n) => {
+      held.dataset.s = String(n);
+      okay.tabIndex = n === 2 ? 0 : -1; hold.tabIndex = n === 0 ? 0 : -1;
+      clearInterval(br);
+      breath.textContent = 'Breathe in, gently';
+      if (n === 2 && !still) { let out = false; br = setInterval(() => { out = !out; breath.textContent = out ? 'And out, like a candle' : 'Breathe in, gently'; }, 3000); }
+      say.textContent = n === 1 ? 'Sir has been told. Breathe here while you wait for Sir.' : n === 2 ? 'Sir is here.' : '';
     };
+    const rest = () => { clear(); set(0); idle(); };
+    const told = () => { held.classList.remove('holding'); clear(); set(1); later(() => set(2), 3000); later(rest, 3000 + 14000); };
+    const fill = () => { clear(); held.classList.add('holding'); fillT = setTimeout(told, still ? 500 : 1400); };
+    const idle = () => { if (!on || still) return; later(fill, 3200); };
+    const press = () => { if (down || held.dataset.s !== '0') return; down = true; clearTimeout(fillT); fill(); };
     const release = () => {
       if (!down) return;
       down = false;
-      clearTimeout(t);
-      hold.classList.remove('holding');
-      say.textContent = 'A little longer. Press and hold.';
-      back = setTimeout(reset, 2600);
+      if (held.dataset.s === '0') { clearTimeout(fillT); held.classList.remove('holding'); idle(); }
     };
-    btn.addEventListener('pointerdown', (e) => { if (e.button === 0) { try { btn.setPointerCapture(e.pointerId); } catch (_) {} press(); } });
-    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((ev) => btn.addEventListener(ev, release));
-    btn.addEventListener('contextmenu', (e) => e.preventDefault());
-    btn.addEventListener('keydown', (e) => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); press(); } else if (e.key === ' ' || e.key === 'Enter') e.preventDefault(); });
-    btn.addEventListener('keyup', (e) => { if (e.key === ' ' || e.key === 'Enter') release(); });
-    btn.addEventListener('blur', release);
+    hold.addEventListener('pointerdown', (e) => { if (e.button === 0) { try { hold.setPointerCapture(e.pointerId); } catch (_) {} press(); } });
+    ['pointerup', 'pointercancel', 'lostpointercapture', 'blur'].forEach((ev) => hold.addEventListener(ev, release));
+    hold.addEventListener('contextmenu', (e) => e.preventDefault());
+    hold.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); if (!e.repeat) press(); } });
+    hold.addEventListener('keyup', (e) => { if (e.key === ' ' || e.key === 'Enter') release(); });
+    okay.addEventListener('click', rest);
+    watch(held, (v) => { on = v; if (v && held.dataset.s === '0') { clear(); idle(); } else if (!v) { clear(); clearTimeout(fillT); held.classList.remove('holding'); down = false; set(0); } });
+    set(0);
   }
 
-  // ── a Private Glimpse, to try: blurred until it's tapped; a second tap blurs it again ──
-  const gl = document.querySelector('[data-glimpse]');
-  if (gl) {
-    const gsay = document.querySelector('[data-gsay]');
-    gl.addEventListener('click', () => {
-      const open = gl.getAttribute('aria-pressed') !== 'true';
-      gl.setAttribute('aria-pressed', String(open));
-      gl.setAttribute('aria-label', open ? 'A Glimpse from Luna: a sunset through a window, Almost home. Tap to blur it again.' : 'A Private Glimpse from Luna. Tap to see it.');
-      if (gsay) gsay.textContent = open ? 'Only you see it. Tap to blur it again.' : 'From Luna, blurred until you tap.';
-    });
+  // ── the Glimpse thread, drawn: it follows the camera clip beside it (the Glimpse lands at 2.4 s) and opens by
+  // itself at 4 s unless you tapped it first; a tap blurs or clears it at any time. ──
+  const thread = document.querySelector('[data-thread]');
+  if (thread) {
+    const tile = thread.querySelector('[data-glimpse]');
+    let mine = false, last = 0;
+    const open = (o) => {
+      tile.setAttribute('aria-pressed', String(o));
+      tile.setAttribute('aria-label', o ? 'A Glimpse from Luna: a sunset through a window, Almost home. Tap to blur it again.' : 'A Private Glimpse from Luna. Tap to see it.');
+    };
+    tile.addEventListener('click', () => { mine = true; open(tile.getAttribute('aria-pressed') !== 'true'); });
+    thread._tick = (t) => {
+      if (t < last - 1) { mine = false; open(false); }
+      last = t;
+      const s = t < 2.4 ? 0 : 1;
+      if (thread.dataset.s !== String(s)) thread.dataset.s = String(s);
+      if (!mine && s === 1) { const want = t >= 4; if ((tile.getAttribute('aria-pressed') === 'true') !== want) open(want); }
+    };
   }
 
   // ── the day told back: Luna's afternoon, drawn. It plays on its own while it's on screen; the scrubber and the

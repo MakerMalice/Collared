@@ -282,3 +282,27 @@ Before-state: tag `stage-before-polish-2026-11-12` and branch `stage-redo-backup
 - **Sharper captures (same night).** Seven clips re-exported from their full-size takes at 800 x 1740 (the Glimpse pair, the journal shelf, the Sub Studio pair, the Manhattan map) and the water pour at 604 x 1314 (its source size); five stills at 1012 x 2200 (shop, punishment, meds, cycle, Social). Same names, lengths and loops. Still 400 px, waiting on a fresh capture: hero-home, tasks-proof, held, loc-horizon, fit-cheer, duo-stage, and the fit, read, Duo cover and watch stills. `assets/v2` went from 7.0 MB to 11.8 MB.
 
 - **The day told back is drawn, not recorded (owner, same night: "resolution MUCH higher, the pink lines better and obvious, this should be the bigger view").** `.dayplay` in the big phone is an SVG of the playback screen in the app's look: a Manhattan grid, the route as a glowing pink line that draws as the afternoon plays, Luna's marker, the place card, the clock and a real scrubber (an invisible range input) and pause button. It plays by itself on screen (2.2 s per stretch on the way, 0.9 s per stay); Reduce Motion: it rests at 5:35 pm and still scrubs. The stay line ("At Times Square") is the site's wording, not copied from the app. The road home is now the small phone. `loc-nyc.*` is no longer used on Home.
+
+## 12 November 2026, late: round two (drawn, touchable screens; `stage-redo`, not pushed)
+
+Before-state: tag `stage-before-round2-2026-11-12` and branch `stage-redo-backup2-2026-11-12` (both at `41bcdfd`).
+Owner: renders are fine where they are sharper than captures, and the feature on the screen should be the thing you
+touch, with no side card saying "Try it".
+
+- **Home (hero), Held and Theo's Glimpse thread are drawn** as SVG in the app's look (`.play`, with `.homeplay`,
+  `.heldplay`, `.threadplay`), modelled on the captures they replace. site.js sets `data-s` (the state) and invisible
+  `.hit` buttons sit over the drawn controls.
+  - **Home:** *Mark it done* marks Morning walk done, the collar ring moves on, and Make the bed becomes Now. Left
+    alone it plays itself and loops. `hero-home.*` is no longer used.
+  - **Held:** press and hold the circle on the screen (pointer, touch or keyboard) until the ring closes: *Sir has been
+    told*, then *Sir is here* and the two orbs breathe together; *I'm okay* ends it. Left alone it shows itself. The
+    opening screen ("Press and hold", "Sir is told at once.", "Ask to be Held") is the site's own; the rest are the
+    app's words from the capture. `held.*` is no longer used, and the side card is gone.
+  - **Glimpses:** the thread follows the camera clip beside it (lands at 2.4 s, opens by itself at 4 s unless you
+    tapped first); the blurred picture in the thread is the button. `glimpse-land.*` is no longer used, and the tile
+    under the words is gone.
+- **Three questions** replace the build 64 panel (free, private, does my partner need it too). The third answer says
+  you can start alone and invite them later.
+- **What testers say** (`.voices`): three lines WRITTEN BY US as stand-ins, tagged "Placeholder quotes" on the page.
+  The owner is collecting three real lines with consent. **Do not go live with the stand-ins**: swap all three, then
+  remove the `.ph` tag and the comment above the section.
