@@ -6,6 +6,9 @@
   const small = matchMedia('(max-width: 760px)');
   const IO = 'IntersectionObserver' in window;
 
+  // ── drawn screens share one small helper: is it on screen, and a list of timers to clear ──
+  const watch = (el, cb) => { if (IO) new IntersectionObserver(([e]) => cb(e.isIntersecting), { threshold: 0.35 }).observe(el); else cb(true); };
+
   // ── the mobile menu: it opens and closes with a short ease, and the burger becomes a close mark ──
   const burger = document.querySelector('.nav-burger');
   const menu = document.getElementById('mobile-menu');
@@ -50,6 +53,9 @@
       v.addEventListener('playing', () => { v.style.cssText = ''; }, { once: true });
       return v;
     };
+    // load from two screens away (so nothing is still fetching when you arrive); play only when near the screen
+    const FAR = { rootMargin: '1800px 0px', threshold: 0 };
+    const warm = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { const el = e.target; if (!el._v) el._v = make(el); warm.unobserve(el); } }), FAR);
     const play = new IntersectionObserver((es) => es.forEach((e) => {
       const el = e.target;
       if (e.isIntersecting) {
@@ -59,7 +65,7 @@
         el._v.pause();
       }
     }), { rootMargin: '200px 0px', threshold: 0.01 });
-    boxes.forEach((b) => play.observe(b));
+    boxes.forEach((b) => { warm.observe(b); play.observe(b); });
 
     // ── duets: one story told across two phones. Both clips are the same length; the first keeps time and the other
     // follows it. A phone whose part hasn't started yet rests dimmed (its .v carries data-awake="from-to,...", seconds).
@@ -106,16 +112,21 @@
         clips.forEach((c) => { c.currentTime = 0; });
         Promise.all(clips.map((c) => c.play().catch(() => {}))).then(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(step); });
       };
+      let ready = false, begun = false, near = false;
+      const load = () => {
+        if (clips) return;
+        clips = vs.map((el) => (el._v = make(el)));
+        let n = 0;
+        const ok = () => { if (++n === clips.length) { ready = true; if (near) { begun = true; start(); } } };
+        clips.forEach((c) => { if (c.readyState >= 3) ok(); else c.addEventListener('canplay', ok, { once: true }); });
+      };
+      new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { load(); o.disconnect(); } }), FAR).observe(d);
       new IntersectionObserver((es) => es.forEach((e) => {
-        if (e.isIntersecting) {
-          if (!clips) {
-            clips = vs.map((el) => (el._v = make(el)));
-            let ready = 0;
-            clips.forEach((c) => c.addEventListener('canplay', () => { if (++ready === clips.length) start(); }, { once: true }));
-          } else {
-            clips.forEach((c) => c.play().catch(() => {}));
-            cancelAnimationFrame(raf); raf = requestAnimationFrame(step);
-          }
+        near = e.isIntersecting;
+        if (near) {
+          load();
+          if (ready && !begun) { begun = true; start(); }
+          else if (begun) { clips.forEach((c) => c.play().catch(() => {})); cancelAnimationFrame(raf); raf = requestAnimationFrame(step); }
         } else if (clips) {
           clips.forEach((c) => c.pause());
           cancelAnimationFrame(raf);
@@ -123,43 +134,6 @@
       }), { rootMargin: '200px 0px', threshold: 0.01 }).observe(d);
     });
   }
-
-  // ── Done when: the words and their pill move together on a calm timer. Hover, focus or a tap holds it; a pill
-  // shows its own example. With Reduce Motion nothing moves by itself, and the pills still work. ──
-  const dw = document.querySelector('[data-cycle]');
-  if (dw) {
-    const words = [...dw.querySelectorAll('.rot span')];
-    const pills = [...dw.querySelectorAll('.chips button')];
-    const live = dw.querySelector('.rot');
-    let at = 0, hover = false, focus = false, heldUntil = 0, seen = false;
-    const show = (n) => {
-      if (n === at) return;
-      words[at].classList.remove('on'); words[at].classList.add('out');
-      const was = words[at];
-      setTimeout(() => was.classList.remove('out'), 450);
-      at = n;
-      words[at].classList.add('on');
-      pills.forEach((p, k) => p.setAttribute('aria-pressed', String(k === at)));
-    };
-    pills.forEach((p, k) => p.addEventListener('click', () => {
-      live.setAttribute('aria-live', 'polite');
-      heldUntil = Date.now() + 9000;
-      show(k);
-    }));
-    dw.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
-    dw.addEventListener('pointerleave', () => { hover = false; });
-    dw.addEventListener('focusin', () => { focus = true; });
-    dw.addEventListener('focusout', () => { focus = dw.contains(document.activeElement); });
-    if (IO) new IntersectionObserver(([e]) => { seen = e.isIntersecting; }).observe(dw);
-    else seen = true;
-    if (!still) setInterval(() => {
-      if (hover || focus || !seen || document.hidden || Date.now() < heldUntil) return;
-      show((at + 1) % words.length);
-    }, 3200);
-  }
-
-  // ── drawn screens share one small helper: is it on screen, and a list of timers to clear ──
-  const watch = (el, cb) => { if (IO) new IntersectionObserver(([e]) => cb(e.isIntersecting), { threshold: 0.35 }).observe(el); else cb(true); };
 
   // ── Home, drawn: Mark it done really marks it. Left alone it plays itself, the way the day would go. ──
   const home = document.querySelector('[data-home]');
@@ -233,6 +207,225 @@
       if (thread.dataset.s !== String(s)) thread.dataset.s = String(s);
       if (!mine && s === 1) { const want = t >= 4; if ((tile.getAttribute('aria-pressed') === 'true') !== want) open(want); }
     };
+  }
+
+  // ── a task, drawn: the Done when pills are on the task itself. Each shows its own check filling, then "Counted."
+  // It moves through them by itself; a tap shows that one and holds it. ──
+  const task = document.querySelector('[data-task]');
+  if (task) {
+    const q = (k) => task.querySelector('[data-k="' + k + '"]');
+    const pills = [...task.querySelectorAll('.pill')];
+    const marks = [...task.querySelectorAll('[data-pill]')];
+    const kinds = [
+      ['Run 5 km before dinner.', (k) => (3.2 + 1.8 * k).toFixed(1) + ' km', 'of 5 km'],
+      ['Be home by 6:00 pm.', (k) => (k < 1 ? Math.ceil(9 * (1 - k)) + ' min' : 'Home'), 'from the door'],
+      ['Tap the tag by the door.', (k) => (k < 1 ? 'Hold near' : 'Tapped'), 'the tag by the door'],
+      ['8,000 steps by 9:00 pm.', (k) => Math.round(6400 + 1600 * k).toLocaleString('en-US'), 'of 8,000 steps'],
+      ['Make the bed. A photo when it is done.', (k) => (k < 1 ? 'Photo' : 'Sent'), 'taken right now'],
+      ['Stretch for ten minutes.', (k) => (k < 1 ? 'Waiting' : 'Done'), "on Luna's word"],
+    ];
+    let at = -1, t0 = 0, raf = 0, on = false, holdUntil = 0, next = 0;
+    const frame = (now) => {
+      raf = 0;
+      const k = Math.min(1, (now - t0) / 2400);
+      q('prog').style.strokeDasharray = (100 * (0.18 + 0.82 * k)).toFixed(1) + ' 100';
+      q('val').textContent = kinds[at][1](k);
+      if (k < 1) { if (on) raf = requestAnimationFrame(frame); return; }
+      task.classList.add('done');
+      q('say').textContent = 'Counted. He sees it now.';
+      clearTimeout(next);
+      next = setTimeout(() => { if (on && !still) show((at + 1) % kinds.length); }, Math.max(2600, holdUntil - Date.now()));
+    };
+    const show = (n) => {
+      at = n; clearTimeout(next); cancelAnimationFrame(raf); raf = 0;
+      task.classList.remove('done');
+      q('line').textContent = kinds[n][0]; q('sub').textContent = kinds[n][2]; q('say').textContent = '';
+      pills.forEach((p, i) => p.setAttribute('aria-pressed', String(i === n)));
+      marks.forEach((m, i) => m.classList.toggle('on', i === n));
+      t0 = performance.now() + 500;
+      if (still) { q('prog').style.strokeDasharray = '100 100'; q('val').textContent = kinds[n][1](1); task.classList.add('done'); return; }
+      q('prog').style.strokeDasharray = '18 100'; q('val').textContent = kinds[n][1](0);
+      if (on) raf = requestAnimationFrame(frame);
+    };
+    pills.forEach((p, i) => p.addEventListener('click', () => { holdUntil = Date.now() + 9000; show(i); }));
+    watch(task, (v) => { on = v; if (v) show(at < 0 ? 0 : at); else { clearTimeout(next); cancelAnimationFrame(raf); raf = 0; } });
+    marks[0].classList.add('on');
+  }
+
+  // ── the shop, drawn: Redeem puts the points on hold and the balance drops. Left alone, thirty points arrive and
+  // two rewards are redeemed, then it starts again. ──
+  const shop = document.querySelector('[data-shop]');
+  if (shop) {
+    const q = (k) => shop.querySelector('[data-k="' + k + '"]');
+    const btns = [...shop.querySelectorAll('.rdm')];
+    const rows = [...shop.querySelectorAll('[data-row]')];
+    const START = 590;
+    let bal = START, shownBal = START, raf = 0, ts = [], on = false, mine = 0;
+    const clear = () => { ts.forEach(clearTimeout); ts = []; };
+    const later = (f, ms) => ts.push(setTimeout(f, ms));
+    const paint = () => {
+      q('bal').textContent = String(Math.round(shownBal));
+      q('unit').setAttribute('dx', String(8 + String(Math.round(shownBal)).length * 22));
+      rows.forEach((r, i) => { if (!r.classList.contains('held')) r.classList.toggle('short', Number(btns[i].dataset.p) > bal); });
+    };
+    const count = () => {
+      raf = 0;
+      const d = bal - shownBal;
+      if (Math.abs(d) < 1 || still) { shownBal = bal; paint(); return; }
+      shownBal += d * 0.16; paint();
+      raf = requestAnimationFrame(count);
+    };
+    const go = () => { if (!raf) raf = requestAnimationFrame(count); };
+    const redeem = (i) => {
+      const r = rows[i], p = Number(btns[i].dataset.p);
+      if (r.classList.contains('held')) return;
+      if (p > bal) { r.classList.remove('no'); void r.getBoundingClientRect(); r.classList.add('no'); q('say').textContent = 'Not enough points yet.'; return; }
+      bal -= p; r.classList.add('held'); r.querySelector('.rt').textContent = 'On hold';
+      btns[i].setAttribute('aria-label', 'On hold'); q('say').textContent = p + ' points on hold. Balance ' + bal + '.';
+      go();
+    };
+    const reset = () => {
+      bal = START; shownBal = START; q('earn').classList.remove('on');
+      rows.forEach((r, i) => { r.classList.remove('held', 'no'); r.querySelector('.rt').textContent = 'Redeem for ' + btns[i].dataset.p; });
+      paint();
+    };
+    const demo = () => {
+      clear(); reset();
+      if (!on || still) return;
+      later(() => { q('earn').classList.add('on'); bal += 30; go(); }, 1400);
+      later(() => q('earn').classList.remove('on'), 3400);
+      later(() => { if (Date.now() > mine) redeem(0); }, 4200);
+      later(() => { if (Date.now() > mine) redeem(2); }, 6400);
+      later(demo, 10500);
+    };
+    btns.forEach((b, i) => b.addEventListener('click', () => { mine = Date.now() + 12000; clear(); redeem(i); later(demo, 12000); }));
+    watch(shop, (v) => { on = v; if (v) demo(); else clear(); });
+    reset();
+  }
+
+  // ── the water, drawn: pick a drink, add it, and it pours in and settles at the bottom as its own band while the
+  // page fills. Left alone it adds one now and then; at the day's amount it rests, then starts the day again. ──
+  const water = document.querySelector('[data-water]');
+  if (water) {
+    const NS = 'http://www.w3.org/2000/svg';
+    const q = (k) => water.querySelector('[data-k="' + k + '"]');
+    const chips = [...water.querySelectorAll('.chip')];
+    const marks = [...water.querySelectorAll('[data-chip]')];
+    const drinks = [['Water', 'water', '#3E86E0'], ['Coffee', 'coffee', '#8A5A3C'], ['Tea', 'tea', '#C99A3A'], ['Juice', 'juice', '#F0A04B']];
+    const GOAL = 68, PX = 3.1;
+    let pick = 1, total = 0, list = [], ts = [], on = false, mine = 0;
+    const clear = () => { ts.forEach(clearTimeout); ts = []; };
+    const later = (f, ms) => ts.push(setTimeout(f, ms));
+    const lay = () => {
+      const top = 400 - (total - 34) * 3.4; // the surface rises as the day fills
+      q('sea').style.translate = '0 ' + top + 'px';
+      const ny = (top - 400) + 'px';
+      q('num').style.translate = '0 ' + ny; q('oz').style.translate = (String(total).length > 1 ? 0 : -22) + 'px ' + ny;
+      q('num').textContent = String(total);
+      let y = 874;
+      list.forEach((b) => {
+        const hgt = b.oz * PX; y -= hgt;
+        b.rect.setAttribute('height', String(hgt + 1)); b.rect.style.translate = '0 ' + y + 'px';
+        b.text.style.translate = '0 ' + (y + hgt / 2 + 4) + 'px'; b.text.style.opacity = hgt >= 20 ? '1' : '0';
+      });
+    };
+    const add = (d, oz, quiet) => {
+      if (total + oz > GOAL) return false;
+      const rect = document.createElementNS(NS, 'rect'), text = document.createElementNS(NS, 'text');
+      rect.setAttribute('class', 'band'); rect.setAttribute('x', '0'); rect.setAttribute('width', '402'); rect.setAttribute('fill', drinks[d][2]); rect.setAttribute('fill-opacity', d ? '.92' : '.55');
+      rect.style.translate = '0 874px';
+      text.setAttribute('class', 'bl'); text.setAttribute('x', '22'); text.textContent = drinks[d][0] + ' · ' + oz + ' oz'; text.style.translate = '0 890px';
+      q('bands').append(rect, text);
+      list.push({ oz, rect, text }); total += oz;
+      if (!quiet && !still) {
+        const st = q('stream'); st.setAttribute('fill', drinks[d][2]); st.classList.add('go'); st.setAttribute('height', '880');
+        later(() => { st.classList.remove('go'); later(() => st.setAttribute('height', '0'), 300); }, 560);
+        later(lay, 420);
+      } else { void rect.getBoundingClientRect(); lay(); }
+      q('say').textContent = total + ' of ' + GOAL + ' ounces.';
+      return true;
+    };
+    const choose = (d) => {
+      pick = d;
+      marks.forEach((m, i) => m.classList.toggle('on', i === d));
+      chips.forEach((c, i) => c.setAttribute('aria-pressed', String(i === d)));
+      q('add').textContent = '+ Add 8 oz ' + drinks[d][1];
+      water.querySelector('.addb').setAttribute('aria-label', 'Add 8 ounces of ' + drinks[d][1]);
+    };
+    const reset = () => { q('bands').textContent = ''; list = []; total = 0; add(0, 9, true); add(0, 17, true); add(0, 8, true); choose(1); };
+    const demo = () => {
+      clear();
+      if (!on || still) return;
+      const order = [1, 0, 2, 0];
+      const stepIn = (n) => later(() => {
+        if (Date.now() < mine) return stepIn(n);
+        if (total + 8 > GOAL) { later(() => { reset(); demo(); }, 3800); return; }
+        choose(order[n % order.length]); later(() => add(pick, 8), 500); stepIn(n + 1);
+      }, 3200);
+      stepIn(0);
+    };
+    chips.forEach((c, i) => c.addEventListener('click', () => { mine = Date.now() + 9000; choose(i); }));
+    water.querySelector('.addb').addEventListener('click', () => { mine = Date.now() + 9000; if (!add(pick, 8)) { reset(); } });
+    watch(water, (v) => { on = v; if (v) demo(); else clear(); });
+    reset();
+  }
+
+  // ── the road home, drawn: the minutes and miles run down, the posts pass, and the porch light comes up ──
+  const road = document.querySelector('[data-road]');
+  if (road) {
+    const q = (k) => road.querySelector('[data-k="' + k + '"]');
+    const posts = [...road.querySelectorAll('.post')];
+    const LOOP = 12000, HOLD = 2200;
+    let t0 = 0, raf = 0, on = false;
+    const draw = (ms) => {
+      const k = Math.min(1, ms / LOOP);
+      const e = k * k * (3 - 2 * k);
+      const min = Math.max(0, Math.ceil(15 * (1 - k)));
+      q('min').textContent = k >= 1 ? 'Home' : min + ' min';
+      q('mi').textContent = (3.4 * (1 - k)).toFixed(1) + ' mi';
+      q('me').setAttribute('transform', 'translate(201 ' + (700 - 190 * e).toFixed(1) + ') scale(' + (1 - 0.3 * e).toFixed(3) + ')');
+      q('porch').setAttribute('r', String(30 + 150 * Math.pow(k, 3)));
+      q('porch').style.opacity = String(0.15 + 0.85 * Math.pow(k, 2));
+      q('win').style.opacity = String(0.15 + 0.85 * Math.pow(k, 4));
+      posts.forEach((p, i) => {
+        const side = i % 2 ? 1 : -1;
+        const u = ((Math.floor(i / 2) / 6) + (ms / 2600)) % 1;
+        const d = u * u;
+        const y = 438 + 436 * d;
+        p.setAttribute('transform', 'translate(' + (201 + side * (207 * d + 16 * d + 6)).toFixed(1) + ' ' + y.toFixed(1) + ') scale(' + (0.3 + 1.5 * d).toFixed(2) + ')');
+        p.style.opacity = String(Math.min(1, 0.2 + 2 * d));
+      });
+    };
+    const frame = (now) => {
+      raf = 0; if (!on) return;
+      let ms = now - t0;
+      if (ms > LOOP + HOLD) { t0 = now; ms = 0; }
+      draw(ms);
+      raf = requestAnimationFrame(frame);
+    };
+    draw(LOOP * 0.45);
+    if (!still) watch(road, (v) => { on = v; if (v && !raf) { t0 = performance.now(); raf = requestAnimationFrame(frame); } });
+  }
+
+  // ── the watch on a run, drawn: the numbers tick, Theo's cheer lands, then it rides along as a pill ──
+  const cheer = document.querySelector('[data-cheer]');
+  if (cheer) {
+    const q = (k) => cheer.querySelector('[data-k="' + k + '"]');
+    let sec = 18, iv = 0;
+    const draw = () => {
+      q('t').textContent = '0:' + String(sec).padStart(2, '0');
+      q('d').textContent = (sec * 0.0018).toFixed(2);
+      q('p').textContent = sec % 4 < 2 ? '8:58' : '8:57';
+      q('h').textContent = String(148 + (sec % 3 === 0 ? 1 : 0));
+      const n = sec - 18;
+      cheer.dataset.s = n < 3 ? '0' : n < 6 ? '1' : '2';
+    };
+    draw();
+    if (!still) watch(cheer, (v) => {
+      clearInterval(iv);
+      if (v) iv = setInterval(() => { sec = sec >= 30 ? 18 : sec + 1; draw(); }, 1000);
+    });
+    else { sec = 24; draw(); cheer.dataset.s = '2'; }
   }
 
   // ── the day told back: Luna's afternoon, drawn. It plays on its own while it's on screen; the scrubber and the

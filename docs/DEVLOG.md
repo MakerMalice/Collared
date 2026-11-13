@@ -306,3 +306,23 @@ touch, with no side card saying "Try it".
 - **What testers say** (`.voices`): three lines WRITTEN BY US as stand-ins, tagged "Placeholder quotes" on the page.
   The owner is collecting three real lines with consent. **Do not go live with the stand-ins**: swap all three, then
   remove the `.ph` tag and the comment above the section.
+
+## 12 November 2026, later still: round three (`stage-redo`, not pushed)
+
+Before-state: tag `stage-before-round3-2026-11-12` and branch `stage-redo-backup3-2026-11-12` (both at `cead6f4`).
+
+- **Slow Sub Studio (owner: "10 to 15 seconds to load").** Clips now begin loading 1,800 px before they reach the
+  screen (`FAR` in site.js) and play only when near it; a pair starts the moment both can play. The Sub Studio clips
+  are about 1 MB each, and the test link is a tunnel from one Mac, so the real site will be quicker still.
+- **End card.** The glowing ring is now the real mark (`#mark`, with its break), not a closed circle. It turns in and
+  breathes.
+- **Five more drawn screens** (same `.play` pattern as round two):
+  - **A task** (`.taskplay`): the Done when pills are on the task itself; each fills its own check and lands on
+    *Counted. He sees it now.* The side card is gone. The six task lines and readouts are the site's own examples.
+    The photo-proof recording (`tasks-proof.*`) is no longer used.
+  - **The shop** (`.shopplay`): a balance (the site's example, 590, with +30 arriving), the app's six rewards, and
+    Redeem puts points on hold and drops the balance; too dear and the row shakes. The floating +30 is gone.
+  - **Water** (`.waterplay`): choose a drink, add it, it pours behind the surface and settles at the bottom as its
+    own band while the page fills to the 68 oz asked for, then the day starts again.
+  - **The road home** (`.roadplay`) and **the watch cheer** (`.cheerplay`): drawn from their recordings, not touchable.
+- **Still a recording:** the open Duo (`duo-stage.*`, 760 px) and the Sub Studio pair (800 px, sharp).
