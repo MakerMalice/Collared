@@ -332,8 +332,7 @@ ul.mini li::before{content:"";position:absolute;left:0;top:.42em;width:10px;heig
   .ribbon .belt{animation:none}
   .ribbon .track[aria-hidden]{display:none}
   .hero .copy>*,.hero .ring,.hero .stage>*{animation:none!important}
-  .gtile,.gtile img,.gtile .veil,.hook,.panel,.mcard,.cmpc,.glyphs span{transition:none}
-  .endcard .closing{animation:none;transition:none}
+    .endcard .closing{animation:none;transition:none}
   [data-depth]{translate:none}
 }
 @media (max-width:1100px){
@@ -464,31 +463,6 @@ ul.mini li::before{content:"";position:absolute;left:0;top:.42em;width:10px;heig
 .heldplay .okay.hit{left:5%;top:89.2%;width:90%;height:6%;border-radius:99px;pointer-events:none}
 .heldplay[data-s="2"] .okay.hit{pointer-events:auto}
 /* the Glimpse thread (light) */
-.threadplay{background:#F4EFFF}
-.threadplay text{fill:#2A2733}
-.threadplay .dk .sb,.threadplay .dk .clock{fill:#17131F}
-.threadplay .tt{font:700 19px Nunito}
-.threadplay .e2e{font:700 12px Nunito;fill:#5F5A6E}
-.threadplay .day{font:700 11px Nunito;fill:#6B6678}
-.threadplay .msg{font:600 14.5px Nunito}
-.threadplay .ts{font:600 10px Nunito;fill:#6B6678}
-.threadplay .gll{font:800 12px Nunito;fill:#6B6678}
-.threadplay .ph{font:600 14px Nunito;fill:#8F899E}
-.threadplay .gl-lab,.threadplay .gtile{transition:opacity .35s ease,scale .6s cubic-bezier(.3,1.5,.5,1)}
-.threadplay[data-s="0"] .gl-lab,.threadplay[data-s="0"] .gtile{opacity:0}
-.threadplay[data-s="0"] .gtile{scale:.8;pointer-events:none}
-.threadplay .gtile{position:absolute;left:4.98%;top:57.67%;width:57.2%;height:auto;aspect-ratio:1;border-radius:11%;padding:0;border:0;overflow:hidden;cursor:pointer;background:#1c1714;box-shadow:0 0 0 0 rgba(116,68,255,.5);-webkit-tap-highlight-color:transparent}
-.threadplay[data-s="1"] .gtile{animation:landed 1.2s ease-out}
-@keyframes landed{0%{box-shadow:0 0 0 0 rgba(116,68,255,.55)}100%{box-shadow:0 0 0 22px rgba(116,68,255,0)}}
-.gtile img{width:100%;height:100%;object-fit:cover;filter:blur(16px) brightness(.5) saturate(.8);transform:scale(1.25);transition:filter .7s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
-.gtile .veil{position:absolute;inset:0;display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;color:rgba(255,255,255,.82);font:600 10.5px/1.2 Nunito;transition:opacity .35s ease}
-.gtile .veil svg{width:14%;height:auto;aspect-ratio:1;margin-bottom:2px}
-.gtile .veil b{font:800 12.5px/1.2 Nunito;color:#fff}
-.gtile .veil i{font-style:normal}
-.gtile[aria-pressed="true"] img{filter:none;transform:none}
-.gtile[aria-pressed="true"] .veil{opacity:0}
-.gtile:hover img{filter:blur(14px) brightness(.6) saturate(.9)}
-.gtile[aria-pressed="true"]:hover img{filter:none}
 .c-held .shots .phone{width:340px}
 @media (max-width:1100px){.c-held .shots .phone{width:300px}}
 @media (max-width:760px){.c-held .shots .phone{width:250px}}
@@ -506,36 +480,14 @@ ul.mini li::before{content:"";position:absolute;left:0;top:.42em;width:10px;heig
 @media (max-width:900px){.quotes{grid-template-columns:1fr}}
 @media (max-width:760px){.voices{padding:72px 0 calc(72px + var(--lap))}.quotes{margin-top:32px}.quotes figure{padding:24px}.quotes blockquote{font-size:17px}}
 @media (prefers-reduced-motion:reduce){
-  .play .st,.homeplay .collar,.homeplay .tickc,.homeplay .tickp,.heldplay .rings,.heldplay .fill,.heldplay .orb,.threadplay .gl-lab,.threadplay .gtile,.quotes figure{transition:none}
-  .heldplay[data-s="1"] .you,.heldplay[data-s="2"] .breath,.threadplay[data-s="1"] .gtile{animation:none}
-}
+  .play .st,.homeplay .collar,.homeplay .tickc,.homeplay .tickp,.heldplay .rings,.heldplay .fill,.heldplay .orb,  .heldplay[data-s="1"] .you,.heldplay[data-s="2"] .breath,}
 .duet .v>svg{transition:filter .8s ease}
 .duet .v.rest>svg{filter:brightness(.42) saturate(.7)}
 
 /* ───────────── round three: the shop, the water, a task, the road home and the watch are drawn too ───────────── */
-.shopplay,.shopplay text,.play .dk .sb,.play .dk .clock{fill:#17131F}
 .play .h{font:700 21px Nunito}
 .play .rd{font:600 12.5px Nunito;fill:#6B6678}
 .play .lk{font:800 14px Nunito;fill:#7444FF}
-.shopplay .ey{fill:#8F899E}
-.shopplay .bal{font:800 38px Nunito;letter-spacing:-.02em}
-.shopplay .pts2{font:700 15px Nunito;fill:#6B6678}
-.shopplay .rn{font:700 16px Nunito}
-.shopplay .rb{fill:#EDE7FB;transition:fill .25s}
-.shopplay .rt{font:800 13px Nunito;fill:#6A3BF0;transition:fill .25s}
-.shopplay [data-row].held .rb{fill:#7444FF}
-.shopplay [data-row].held .rt{fill:#fff}
-.shopplay [data-row].short .rb{fill:#F1EDF7}
-.shopplay [data-row].short .rt{fill:#A7A2B3}
-.shopplay [data-row].no{animation:nope .4s ease}
-@keyframes nope{25%{translate:-5px 0}75%{translate:5px 0}}
-.shopplay .ask{font:800 14.5px Nunito;fill:#6A3BF0}
-.shopplay .fp{font:600 11.5px Nunito;fill:#8F899E}
-.shopplay .earn{opacity:0;translate:0 10px;transition:opacity .4s ease,translate .6s cubic-bezier(.3,1.4,.5,1)}
-.shopplay .earn.on{opacity:1;translate:0 0}
-.shopplay .earnt{font:900 15px Nunito;fill:#fff}
-.shopplay .rdm{left:60.7%;width:33.3%;height:4.35%;border-radius:99px}
-.shopplay:has(.rdm:hover) [data-row]:not(.held):not(.short) .rb{fill:#EDE7FB}
 .roadplay{background:#0A0505}
 .roadplay .warm .sb,.roadplay .warm .clock{fill:#fff}
 .roadplay .rtime{font:300 56px Nunito;fill:#FF7A6B;letter-spacing:-.02em}
@@ -578,3 +530,10 @@ ul.mini li::before{content:"";position:absolute;left:0;top:.42em;width:10px;heig
   .ch.show.c-care .shots{gap:12px}
   .ch.show.c-care .shots .phone{width:min(168px,44vw)}
 }
+
+/* the +30 over the shop phone (back with the real shop capture) */
+.pts{left:auto;right:8%;top:auto;bottom:100%;margin-bottom:22px;font:900 22px/1 Nunito;color:#fff;background:#2E9D5E;padding:10px 16px;border-radius:999px;box-shadow:0 14px 30px -8px rgba(76,195,128,.6);animation:pts 7s infinite}
+@keyframes pts{0%,8%{opacity:0;transform:translateY(20px) scale(.8)}14%,40%{opacity:1;transform:none}52%,100%{opacity:0;transform:translateY(-24px)}}
+
+@media (prefers-reduced-motion:reduce){.pts{animation:none!important;opacity:1}}
+@media (max-width:760px){.pts{right:8%;margin-bottom:16px;font-size:16px;padding:8px 12px}.shots.duet:has(.pts){padding-top:64px}}

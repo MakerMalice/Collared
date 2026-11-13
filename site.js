@@ -189,26 +189,6 @@
     set(0);
   }
 
-  // ── the Glimpse thread, drawn: it follows the camera clip beside it (the Glimpse lands at 2.4 s) and opens by
-  // itself at 4 s unless you tapped it first; a tap blurs or clears it at any time. ──
-  const thread = document.querySelector('[data-thread]');
-  if (thread) {
-    const tile = thread.querySelector('[data-glimpse]');
-    let mine = false, last = 0;
-    const open = (o) => {
-      tile.setAttribute('aria-pressed', String(o));
-      tile.setAttribute('aria-label', o ? 'A Glimpse from Luna: a sunset through a window, Almost home. Tap to blur it again.' : 'A Private Glimpse from Luna. Tap to see it.');
-    };
-    tile.addEventListener('click', () => { mine = true; open(tile.getAttribute('aria-pressed') !== 'true'); });
-    thread._tick = (t) => {
-      if (t < last - 1) { mine = false; open(false); }
-      last = t;
-      const s = t < 2.4 ? 0 : 1;
-      if (thread.dataset.s !== String(s)) thread.dataset.s = String(s);
-      if (!mine && s === 1) { const want = t >= 4; if ((tile.getAttribute('aria-pressed') === 'true') !== want) open(want); }
-    };
-  }
-
   // ── Done when: the words and their pill move together on a calm timer. Hover, focus or a tap holds it; a pill
   // shows its own example. With Reduce Motion nothing moves by itself, and the pills still work. ──
   const dw = document.querySelector('[data-cycle]');
@@ -241,57 +221,6 @@
       if (hover || focus || !seen || document.hidden || Date.now() < heldUntil) return;
       show((at + 1) % words.length);
     }, 3200);
-  }
-
-  // ── the shop, drawn: Redeem puts the points on hold and the balance drops. Left alone, thirty points arrive and
-  // two rewards are redeemed, then it starts again. ──
-  const shop = document.querySelector('[data-shop]');
-  if (shop) {
-    const q = (k) => shop.querySelector('[data-k="' + k + '"]');
-    const btns = [...shop.querySelectorAll('.rdm')];
-    const rows = [...shop.querySelectorAll('[data-row]')];
-    const START = 590;
-    let bal = START, shownBal = START, raf = 0, ts = [], on = false, mine = 0;
-    const clear = () => { ts.forEach(clearTimeout); ts = []; };
-    const later = (f, ms) => ts.push(setTimeout(f, ms));
-    const paint = () => {
-      q('bal').textContent = String(Math.round(shownBal));
-      q('unit').setAttribute('dx', String(8 + String(Math.round(shownBal)).length * 22));
-      rows.forEach((r, i) => { if (!r.classList.contains('held')) r.classList.toggle('short', Number(btns[i].dataset.p) > bal); });
-    };
-    const count = () => {
-      raf = 0;
-      const d = bal - shownBal;
-      if (Math.abs(d) < 1 || still) { shownBal = bal; paint(); return; }
-      shownBal += d * 0.16; paint();
-      raf = requestAnimationFrame(count);
-    };
-    const go = () => { if (!raf) raf = requestAnimationFrame(count); };
-    const redeem = (i) => {
-      const r = rows[i], p = Number(btns[i].dataset.p);
-      if (r.classList.contains('held')) return;
-      if (p > bal) { r.classList.remove('no'); void r.getBoundingClientRect(); r.classList.add('no'); q('say').textContent = 'Not enough points yet.'; return; }
-      bal -= p; r.classList.add('held'); r.querySelector('.rt').textContent = 'On hold';
-      btns[i].setAttribute('aria-label', 'On hold'); q('say').textContent = p + ' points on hold. Balance ' + bal + '.';
-      go();
-    };
-    const reset = () => {
-      bal = START; shownBal = START; q('earn').classList.remove('on');
-      rows.forEach((r, i) => { r.classList.remove('held', 'no'); r.querySelector('.rt').textContent = 'Redeem for ' + btns[i].dataset.p; });
-      paint();
-    };
-    const demo = () => {
-      clear(); reset();
-      if (!on || still) return;
-      later(() => { q('earn').classList.add('on'); bal += 30; go(); }, 1400);
-      later(() => q('earn').classList.remove('on'), 3400);
-      later(() => { if (Date.now() > mine) redeem(0); }, 4200);
-      later(() => { if (Date.now() > mine) redeem(2); }, 6400);
-      later(demo, 10500);
-    };
-    btns.forEach((b, i) => b.addEventListener('click', () => { mine = Date.now() + 12000; clear(); redeem(i); later(demo, 12000); }));
-    watch(shop, (v) => { on = v; if (v) demo(); else clear(); });
-    reset();
   }
 
   // ── the road home, drawn: the minutes and miles run down, the posts pass, and the porch light comes up ──

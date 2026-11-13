@@ -334,3 +334,4 @@ Before-state: tag `stage-before-round4-2026-11-12` (at `8e4e9d3`).
 - **Water is the real recording again** (`water-pour.*`, 604 px): the app's own fluid is the point of that section. The drawn `.waterplay` is removed. The two phones are one size and level, so nothing hangs over the fact cards.
 - **Smart tasks is the demo phone with the Done when card over it again** (the card a little larger). The drawn `.taskplay` is removed; `tasks-proof.*` is back in use (still 400 px, wants a fresh capture).
 - Lesson: draw a screen only where the recording is soft AND the drawing loses nothing the app is proud of.
+- **Shop and the Glimpse thread are the real captures again too** (owner pick): both have sharp sources (1012 px still, 800 px clip), so the drawings only added tapping. The +30 pill and the landing clip with its finger are back; `.shopplay` and `.threadplay` are removed. Still drawn: Home (hero), Held, the day map, the road home, the watch cheer.
