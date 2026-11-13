@@ -209,47 +209,38 @@
     };
   }
 
-  // ── a task, drawn: the Done when pills are on the task itself. Each shows its own check filling, then "Counted."
-  // It moves through them by itself; a tap shows that one and holds it. ──
-  const task = document.querySelector('[data-task]');
-  if (task) {
-    const q = (k) => task.querySelector('[data-k="' + k + '"]');
-    const pills = [...task.querySelectorAll('.pill')];
-    const marks = [...task.querySelectorAll('[data-pill]')];
-    const kinds = [
-      ['Run 5 km before dinner.', (k) => (3.2 + 1.8 * k).toFixed(1) + ' km', 'of 5 km'],
-      ['Be home by 6:00 pm.', (k) => (k < 1 ? Math.ceil(9 * (1 - k)) + ' min' : 'Home'), 'from the door'],
-      ['Tap the tag by the door.', (k) => (k < 1 ? 'Hold near' : 'Tapped'), 'the tag by the door'],
-      ['8,000 steps by 9:00 pm.', (k) => Math.round(6400 + 1600 * k).toLocaleString('en-US'), 'of 8,000 steps'],
-      ['Make the bed. A photo when it is done.', (k) => (k < 1 ? 'Photo' : 'Sent'), 'taken right now'],
-      ['Stretch for ten minutes.', (k) => (k < 1 ? 'Waiting' : 'Done'), "on Luna's word"],
-    ];
-    let at = -1, t0 = 0, raf = 0, on = false, holdUntil = 0, next = 0;
-    const frame = (now) => {
-      raf = 0;
-      const k = Math.min(1, (now - t0) / 2400);
-      q('prog').style.strokeDasharray = (100 * (0.18 + 0.82 * k)).toFixed(1) + ' 100';
-      q('val').textContent = kinds[at][1](k);
-      if (k < 1) { if (on) raf = requestAnimationFrame(frame); return; }
-      task.classList.add('done');
-      q('say').textContent = 'Counted. He sees it now.';
-      clearTimeout(next);
-      next = setTimeout(() => { if (on && !still) show((at + 1) % kinds.length); }, Math.max(2600, holdUntil - Date.now()));
-    };
+  // ── Done when: the words and their pill move together on a calm timer. Hover, focus or a tap holds it; a pill
+  // shows its own example. With Reduce Motion nothing moves by itself, and the pills still work. ──
+  const dw = document.querySelector('[data-cycle]');
+  if (dw) {
+    const words = [...dw.querySelectorAll('.rot span')];
+    const pills = [...dw.querySelectorAll('.chips button')];
+    const live = dw.querySelector('.rot');
+    let at = 0, hover = false, focus = false, heldUntil = 0, seen = false;
     const show = (n) => {
-      at = n; clearTimeout(next); cancelAnimationFrame(raf); raf = 0;
-      task.classList.remove('done');
-      q('line').textContent = kinds[n][0]; q('sub').textContent = kinds[n][2]; q('say').textContent = '';
-      pills.forEach((p, i) => p.setAttribute('aria-pressed', String(i === n)));
-      marks.forEach((m, i) => m.classList.toggle('on', i === n));
-      t0 = performance.now() + 500;
-      if (still) { q('prog').style.strokeDasharray = '100 100'; q('val').textContent = kinds[n][1](1); task.classList.add('done'); return; }
-      q('prog').style.strokeDasharray = '18 100'; q('val').textContent = kinds[n][1](0);
-      if (on) raf = requestAnimationFrame(frame);
+      if (n === at) return;
+      words[at].classList.remove('on'); words[at].classList.add('out');
+      const was = words[at];
+      setTimeout(() => was.classList.remove('out'), 450);
+      at = n;
+      words[at].classList.add('on');
+      pills.forEach((p, k) => p.setAttribute('aria-pressed', String(k === at)));
     };
-    pills.forEach((p, i) => p.addEventListener('click', () => { holdUntil = Date.now() + 9000; show(i); }));
-    watch(task, (v) => { on = v; if (v) show(at < 0 ? 0 : at); else { clearTimeout(next); cancelAnimationFrame(raf); raf = 0; } });
-    marks[0].classList.add('on');
+    pills.forEach((p, k) => p.addEventListener('click', () => {
+      live.setAttribute('aria-live', 'polite');
+      heldUntil = Date.now() + 9000;
+      show(k);
+    }));
+    dw.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
+    dw.addEventListener('pointerleave', () => { hover = false; });
+    dw.addEventListener('focusin', () => { focus = true; });
+    dw.addEventListener('focusout', () => { focus = dw.contains(document.activeElement); });
+    if (IO) new IntersectionObserver(([e]) => { seen = e.isIntersecting; }).observe(dw);
+    else seen = true;
+    if (!still) setInterval(() => {
+      if (hover || focus || !seen || document.hidden || Date.now() < heldUntil) return;
+      show((at + 1) % words.length);
+    }, 3200);
   }
 
   // ── the shop, drawn: Redeem puts the points on hold and the balance drops. Left alone, thirty points arrive and
@@ -300,73 +291,6 @@
     };
     btns.forEach((b, i) => b.addEventListener('click', () => { mine = Date.now() + 12000; clear(); redeem(i); later(demo, 12000); }));
     watch(shop, (v) => { on = v; if (v) demo(); else clear(); });
-    reset();
-  }
-
-  // ── the water, drawn: pick a drink, add it, and it pours in and settles at the bottom as its own band while the
-  // page fills. Left alone it adds one now and then; at the day's amount it rests, then starts the day again. ──
-  const water = document.querySelector('[data-water]');
-  if (water) {
-    const NS = 'http://www.w3.org/2000/svg';
-    const q = (k) => water.querySelector('[data-k="' + k + '"]');
-    const chips = [...water.querySelectorAll('.chip')];
-    const marks = [...water.querySelectorAll('[data-chip]')];
-    const drinks = [['Water', 'water', '#3E86E0'], ['Coffee', 'coffee', '#8A5A3C'], ['Tea', 'tea', '#C99A3A'], ['Juice', 'juice', '#F0A04B']];
-    const GOAL = 68, PX = 3.1;
-    let pick = 1, total = 0, list = [], ts = [], on = false, mine = 0;
-    const clear = () => { ts.forEach(clearTimeout); ts = []; };
-    const later = (f, ms) => ts.push(setTimeout(f, ms));
-    const lay = () => {
-      const top = 400 - (total - 34) * 3.4; // the surface rises as the day fills
-      q('sea').style.translate = '0 ' + top + 'px';
-      const ny = (top - 400) + 'px';
-      q('num').style.translate = '0 ' + ny; q('oz').style.translate = (String(total).length > 1 ? 0 : -22) + 'px ' + ny;
-      q('num').textContent = String(total);
-      let y = 874;
-      list.forEach((b) => {
-        const hgt = b.oz * PX; y -= hgt;
-        b.rect.setAttribute('height', String(hgt + 1)); b.rect.style.translate = '0 ' + y + 'px';
-        b.text.style.translate = '0 ' + (y + hgt / 2 + 4) + 'px'; b.text.style.opacity = hgt >= 20 ? '1' : '0';
-      });
-    };
-    const add = (d, oz, quiet) => {
-      if (total + oz > GOAL) return false;
-      const rect = document.createElementNS(NS, 'rect'), text = document.createElementNS(NS, 'text');
-      rect.setAttribute('class', 'band'); rect.setAttribute('x', '0'); rect.setAttribute('width', '402'); rect.setAttribute('fill', drinks[d][2]); rect.setAttribute('fill-opacity', d ? '.92' : '.55');
-      rect.style.translate = '0 874px';
-      text.setAttribute('class', 'bl'); text.setAttribute('x', '22'); text.textContent = drinks[d][0] + ' · ' + oz + ' oz'; text.style.translate = '0 890px';
-      q('bands').append(rect, text);
-      list.push({ oz, rect, text }); total += oz;
-      if (!quiet && !still) {
-        const st = q('stream'); st.setAttribute('fill', drinks[d][2]); st.classList.add('go'); st.setAttribute('height', '880');
-        later(() => { st.classList.remove('go'); later(() => st.setAttribute('height', '0'), 300); }, 560);
-        later(lay, 420);
-      } else { void rect.getBoundingClientRect(); lay(); }
-      q('say').textContent = total + ' of ' + GOAL + ' ounces.';
-      return true;
-    };
-    const choose = (d) => {
-      pick = d;
-      marks.forEach((m, i) => m.classList.toggle('on', i === d));
-      chips.forEach((c, i) => c.setAttribute('aria-pressed', String(i === d)));
-      q('add').textContent = '+ Add 8 oz ' + drinks[d][1];
-      water.querySelector('.addb').setAttribute('aria-label', 'Add 8 ounces of ' + drinks[d][1]);
-    };
-    const reset = () => { q('bands').textContent = ''; list = []; total = 0; add(0, 9, true); add(0, 17, true); add(0, 8, true); choose(1); };
-    const demo = () => {
-      clear();
-      if (!on || still) return;
-      const order = [1, 0, 2, 0];
-      const stepIn = (n) => later(() => {
-        if (Date.now() < mine) return stepIn(n);
-        if (total + 8 > GOAL) { later(() => { reset(); demo(); }, 3800); return; }
-        choose(order[n % order.length]); later(() => add(pick, 8), 500); stepIn(n + 1);
-      }, 3200);
-      stepIn(0);
-    };
-    chips.forEach((c, i) => c.addEventListener('click', () => { mine = Date.now() + 9000; choose(i); }));
-    water.querySelector('.addb').addEventListener('click', () => { mine = Date.now() + 9000; if (!add(pick, 8)) { reset(); } });
-    watch(water, (v) => { on = v; if (v) demo(); else clear(); });
     reset();
   }
 

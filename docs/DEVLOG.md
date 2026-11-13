@@ -326,3 +326,11 @@ Before-state: tag `stage-before-round3-2026-11-12` and branch `stage-redo-backup
     own band while the page fills to the 68 oz asked for, then the day starts again.
   - **The road home** (`.roadplay`) and **the watch cheer** (`.cheerplay`): drawn from their recordings, not touchable.
 - **Still a recording:** the open Duo (`duo-stage.*`, 760 px) and the Sub Studio pair (800 px, sharp).
+
+## 12 November 2026, round four (owner: "the water being interactive is a real regression", and he preferred the Smart tasks card)
+
+Before-state: tag `stage-before-round4-2026-11-12` (at `8e4e9d3`).
+
+- **Water is the real recording again** (`water-pour.*`, 604 px): the app's own fluid is the point of that section. The drawn `.waterplay` is removed. The two phones are one size and level, so nothing hangs over the fact cards.
+- **Smart tasks is the demo phone with the Done when card over it again** (the card a little larger). The drawn `.taskplay` is removed; `tasks-proof.*` is back in use (still 400 px, wants a fresh capture).
+- Lesson: draw a screen only where the recording is soft AND the drawing loses nothing the app is proud of.
