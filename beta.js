@@ -178,16 +178,16 @@ const BETA_FORM_KEY = "collared-team-2026";
       ? "Please pick the phone you'd be testing on."
       : "Please pick the iPhone you'd be testing on."),
     storeEmail: () => {
-      if (value.storeEmail()) return "That doesn't look like an email address — please check it.";
+      if (value.storeEmail()) return "That doesn't look like an email address. Please check it.";
       return platform === "Android"
         ? "Please add the Google Play email your invite should go to."
         : "Please add the Apple ID email your TestFlight invite should go to.";
     },
     discord: () => "Please add your Discord username so we know who to reply to.",
-    appsUsed: () => `Please share a little more — ${MIN_CHARS} characters or so is plenty.`,
-    features: () => `Please share a little more — ${MIN_CHARS} characters or so is plenty.`,
+    appsUsed: () => `Please share a little more. ${MIN_CHARS} characters or so is plenty.`,
+    features: () => `Please share a little more. ${MIN_CHARS} characters or so is plenty.`,
     usage: () => "Please let us know who you'd be using Collared for.",
-    soda: () => "Please pick one — we don't make the rules.",
+    soda: () => "Please pick one. We don't make the rules.",
   };
 
   /* ── error plumbing ── */
@@ -291,7 +291,7 @@ const BETA_FORM_KEY = "collared-team-2026";
     input.addEventListener("input", () => {
       const n = input.value.trim().length;
       const ok = n >= MIN_CHARS;
-      countEl.textContent = ok ? `${n} characters` : `${n} characters — ${MIN_CHARS} minimum`;
+      countEl.textContent = ok ? `${n} characters` : `${n} characters, ${MIN_CHARS} minimum`;
       countEl.classList.toggle("is-ok", ok);
       if (ok) clearError(key);
       autoGrow();
@@ -384,11 +384,11 @@ const BETA_FORM_KEY = "collared-team-2026";
       if (platform === "Android") {
         successTitle.textContent = "You're on the Android list.";
         successText.textContent =
-          `Google Play invites go out in waves — keep an eye on ${storeEmail} and Discord.`;
+          `Google Play invites go out in waves. Keep an eye on ${storeEmail} and Discord.`;
       } else {
         successTitle.textContent = "You're on the list.";
         successText.textContent =
-          `TestFlight invites go out in waves — keep an eye on ${storeEmail} and Discord.`;
+          `TestFlight invites go out in waves. Keep an eye on ${storeEmail} and Discord.`;
       }
       form.hidden = true;
       progressEl.hidden = true;
@@ -397,7 +397,7 @@ const BETA_FORM_KEY = "collared-team-2026";
       successEl.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
     } catch (err) {
       formError.textContent =
-        "That didn't go through. Your answers are still here — please try again, or email tox@collared.app.";
+        "That didn't go through. Your answers are still here. Please try again, or email tox@collared.app.";
       formError.hidden = false;
       formError.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
     } finally {

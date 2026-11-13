@@ -212,3 +212,22 @@ footer.foot .legal p{margin:0}
   .btn:hover{transform:none}
   .phead[data-head] .in>*,.phead[data-head] .ring{animation:none}
 }
+
+/* ───────────── inner pages get Home's manners: accent second lines, stacked rounded sections, arrivals, small reactions ───────────── */
+.phead~section,.phead~.block,main>.phead~*{position:relative}
+main>section.block,main>section.endband,main>section.team-choose{border-radius:44px 44px 0 0;margin-top:-44px}
+main>section.phead:has(+section){padding-bottom:calc(64px + 44px)}
+main>section.block,main>section.team-choose{padding-bottom:calc(96px + 44px)}
+main>section.block:last-of-type,main>section.team-choose:last-of-type,main>section.endband{padding-bottom:96px}
+.block .h2 .l,.team-choose .h2 .l,.endband .h2 .l,.phead .h1 .l{opacity:1;color:var(--tint)}
+.js .rv{opacity:0;transform:translateY(20px)}
+.js .rv{transition:opacity .8s ease var(--d,0s),transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.js .rv.on{opacity:1;transform:none}
+.tile,.bp-card{transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .3s,background-color .3s}
+.tile:hover{transform:translateY(-3px);border-color:rgba(183,162,255,.3)}
+.bp-card:hover{transform:translateY(-2px)}
+@media (max-width:760px){
+  main>section.block,main>section.endband,main>section.team-choose{border-radius:30px 30px 0 0;margin-top:-30px}
+  main>section.phead:has(+section){padding-bottom:calc(40px + 30px)}
+}
+@media (prefers-reduced-motion:reduce){.tile,.bp-card{transition:none}.tile:hover,.bp-card:hover{transform:none}}

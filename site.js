@@ -354,7 +354,7 @@
   }
 
   // ── arriving: each chapter's words rise once, a beat apart, and its devices settle in after them ──
-  const groups = [...document.querySelectorAll('.act .in, .ch .copy, .ch.show .facts, .switch .head, .switch .cmp, .private .in, .more2 .in, .split2, .endcard .in')];
+  const groups = [...document.querySelectorAll('.act .in, .ch .copy, .ch.show .facts, .switch .head, .switch .cmp, .private .in, .voices .in, .quotes, .split2, .endcard .in, main > .phead ~ section > .in, main > .phead ~ section .grid3, main > .phead ~ section .cmp-table')];
   const devs = [...document.querySelectorAll('.ch .shots > *, .c-duo .phone.open, .watches > *')];
   const end = document.querySelector('.endcard');
   if (!still && IO) {

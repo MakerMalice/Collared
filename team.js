@@ -242,12 +242,12 @@ const TEAM_FORM_KEY = "collared-team-2026";
 
   const ERRORS = {
     discord: "Please add your Discord username so we know who to reply to.",
-    timezone: "Please tell us your timezone — the detect button fills it in for you.",
+    timezone: "Please tell us your timezone. The detect button fills it in for you.",
     hours: "Please choose roughly how many hours you can give each week.",
     availability: "Please select at least one time of day.",
-    moderated: "Please let us know either way — no experience is fine.",
+    moderated: "Please let us know either way. No experience is fine.",
     familiarity: "Please pick a number from 1 to 5.",
-    improvements: `Please share a little more — ${MIN_IMPROVEMENTS} characters or so is plenty.`,
+    improvements: `Please share a little more. ${MIN_IMPROVEMENTS} characters or so is plenty.`,
     volunteer: "Please let us know whether a volunteer role works for you.",
   };
 
@@ -312,7 +312,7 @@ const TEAM_FORM_KEY = "collared-team-2026";
       zone = "";
     }
     if (!zone) {
-      tzButton.textContent = "Couldn't detect — type it instead";
+      tzButton.textContent = "Couldn't detect. Type it instead";
       timezoneInput.focus();
       return;
     }
@@ -370,7 +370,7 @@ const TEAM_FORM_KEY = "collared-team-2026";
     const ok = n >= MIN_IMPROVEMENTS;
     improvementsCount.textContent = ok
       ? `${n} characters`
-      : `${n} characters — ${MIN_IMPROVEMENTS} minimum`;
+      : `${n} characters, ${MIN_IMPROVEMENTS} minimum`;
     improvementsCount.classList.toggle("is-ok", ok);
     if (ok) clearError("improvements");
     autoGrow();
@@ -463,7 +463,7 @@ const TEAM_FORM_KEY = "collared-team-2026";
       successEl.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
     } catch (err) {
       formError.textContent =
-        "That didn't go through. Your answers are still here — please try again, or email tox@collared.app.";
+        "That didn't go through. Your answers are still here. Please try again, or email tox@collared.app.";
       formError.hidden = false;
       formError.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
     } finally {
@@ -513,7 +513,7 @@ const TEAM_FORM_KEY = "collared-team-2026";
       field.classList.add("is-invalid");
       interestEmail.setAttribute("aria-invalid", "true");
       interestEmailError.textContent = interestEmail.value.trim()
-        ? "That doesn't look like an email address — please check it."
+        ? "That doesn't look like an email address. Please check it."
         : "Please add an email address so we can reach you.";
       interestEmailError.hidden = false;
     }

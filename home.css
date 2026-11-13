@@ -571,3 +571,27 @@
   .heldplay .bin,.heldplay .bout{transition:none}
 }
 .play .dk .sb,.play .dk .clock{fill:#17131F}
+
+/* round six */
+@media (max-width:760px){
+  /* the Duo cover in the hero sits wholly on the screen */
+  .hero .p2{left:28px;bottom:26px;width:118px}
+}
+/* the map's pause button: a finger-sized target on a small phone frame */
+.dayplay .pp{left:74%;top:70%;width:24%}
+@media (max-width:760px){
+  /* Sub Studio: the big peach circle sits behind the phones, not behind the words */
+  .c-studio .b1{width:340px;height:340px;right:-150px;top:auto;bottom:120px}
+  .c-studio .b2{width:220px;height:220px;right:auto;left:-110px;bottom:-90px}
+}
+@media (max-width:760px){
+  /* a little larger on the wider phones (Pro Max), the same on the Pro */
+  .shots .phone{width:min(250px,56vw)}
+  .shots.duet .phone{width:min(262px,59vw)}
+  .shots.duet{padding-left:calc(50vw - min(131px,29.5vw));padding-right:calc(50vw - min(131px,29.5vw))}
+  .ch.show .shots .phone{width:min(262px,59vw)}
+  .ch.show.c-care .shots .phone{width:min(182px,43.5vw)}
+  .c-loc .shots .phone:not(.sm){width:min(250px,56vw)}
+  .c-loc .shots .phone.sm{width:min(150px,34vw)}
+  .c-held .shots .phone{width:min(276px,64vw)}
+}

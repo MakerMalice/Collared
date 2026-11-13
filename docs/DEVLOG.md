@@ -349,3 +349,22 @@ Before-state: tag `stage-before-round5-2026-11-12` (at `98782e2`).
   here as SVG symbols (`#av-luna` and so on). They are drawings, not photographs of anyone: real faces, even public
   domain ones, should not be shown as members of an 18+ app. Friends who are "here" have a soft pulse, and the posts
   drift sideways. `social.jpg` is no longer used.
+
+## 12 November 2026, round six (`stage-redo`, not pushed)
+
+Before-state: tag `stage-before-round6-2026-11-12` (at `18e7816`).
+
+- **The open Duo is sharp:** `duo-stage.*` re-cut from the full recording (the app repo's
+  `design/promo/teaser/v4-captures/mp4/v4-duo-stage.mp4`, 2852 x 2006, seconds 4.0 to 13.5: the same cut as before,
+  found by matching frames) at 1520 x 1068, about 265 KB a format.
+- **Sub Studio's two clips are half the weight** (640 x 1392, 24 frames a second: about 410 to 570 KB each, from 0.85
+  to 1.1 MB), same length, no visible loss at the size they are shown.
+- **Hero on phones:** the Duo cover sits wholly on the screen.
+- **Inner pages (beta, team, the two compare pages, 404) have Home's manners:** stacked rounded sections, the second
+  headline line in the accent colour, arrivals (they now carry the `js` flag; site.js marks `main > .phead ~ section`),
+  small hover reactions, and no dashes as pauses in any visible words or form messages. Form `data-value`s are
+  untouched (they are what the form submits).
+- **Phone review at 402 x 874 (Pro) and 440 x 956 (Pro Max), every page.** No sideways scroll, no orphaned headline
+  words. Fixed from it: *end-to-end* no longer breaks across lines (non-breaking hyphens in prose), the map's pause
+  target is finger-sized, Sub Studio's peach circle no longer sits behind the words, and phones scale up a little on
+  the wider screen (`min(…px, …vw)` widths).
