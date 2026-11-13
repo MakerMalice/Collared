@@ -156,7 +156,6 @@
   if (held) {
     const hold = held.querySelector('.hold');
     const okay = held.querySelector('.okay.hit');
-    const breath = held.querySelector('[data-k="breath"]');
     const say = held.querySelector('[data-k="say"]');
     let ts = [], on = false, down = false, fillT = 0, br = 0;
     const clear = () => { ts.forEach(clearTimeout); ts = []; };
@@ -165,8 +164,8 @@
       held.dataset.s = String(n);
       okay.tabIndex = n === 2 ? 0 : -1; hold.tabIndex = n === 0 ? 0 : -1;
       clearInterval(br);
-      breath.textContent = 'Breathe in, gently';
-      if (n === 2 && !still) { let out = false; br = setInterval(() => { out = !out; breath.textContent = out ? 'And out, like a candle' : 'Breathe in, gently'; }, 3000); }
+      held.classList.remove('out');
+      if (n === 2 && !still) br = setInterval(() => held.classList.toggle('out'), 3000);
       say.textContent = n === 1 ? 'Sir has been told. Breathe here while you wait for Sir.' : n === 2 ? 'Sir is here.' : '';
     };
     const rest = () => { clear(); set(0); idle(); };

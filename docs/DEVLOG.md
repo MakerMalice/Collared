@@ -335,3 +335,17 @@ Before-state: tag `stage-before-round4-2026-11-12` (at `8e4e9d3`).
 - **Smart tasks is the demo phone with the Done when card over it again** (the card a little larger). The drawn `.taskplay` is removed; `tasks-proof.*` is back in use (still 400 px, wants a fresh capture).
 - Lesson: draw a screen only where the recording is soft AND the drawing loses nothing the app is proud of.
 - **Shop and the Glimpse thread are the real captures again too** (owner pick): both have sharp sources (1012 px still, 800 px clip), so the drawings only added tapping. The +30 pill and the landing clip with its finger are back; `.shopplay` and `.threadplay` are removed. Still drawn: Home (hero), Held, the day map, the road home, the watch cheer.
+
+## 12 November 2026, round five (`stage-redo`, not pushed)
+
+Before-state: tag `stage-before-round5-2026-11-12` (at `98782e2`).
+
+- **Held has more of the app's light:** a halo that breathes behind the circle, ripples that leave it with each breath,
+  Theo's steady beat as two quick rings off his orb once he is there, a thread between the two orbs, a warm floor glow,
+  and the breath line fading between *Breathe in, gently* and *And out, like a candle*.
+- **Read Together and Social are their own chapters again** (Read Together closes Part two; Social sits after the
+  privacy band). The two side-by-side cards (`.more2`) are gone. The belt follows the page order.
+- **Social is drawn with pictures** (`.socialplay`): Luna, Theo, Nova and Wren each have an illustrated portrait, drawn
+  here as SVG symbols (`#av-luna` and so on). They are drawings, not photographs of anyone: real faces, even public
+  domain ones, should not be shown as members of an 18+ app. Friends who are "here" have a soft pulse, and the posts
+  drift sideways. `social.jpg` is no longer used.
