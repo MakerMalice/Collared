@@ -29,18 +29,25 @@
 .bt-rate{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:2px 14px}
 .bt-rate+.bt-rate{margin-top:8px}
 .bt-rate .lab{font-weight:700}
-.bt-word{font:800 14px/1.2 Nunito;color:var(--tint);text-align:right}
-.bt-dots{display:flex}
-.bt-dots label{position:relative;width:46px;height:46px;display:grid;place-items:center;cursor:pointer;border-radius:50%;transition:background-color .18s}
-.bt-dots label:hover{background:rgba(183,162,255,.12)}
+.bt-rate{--c:var(--sub)}
+[data-score="1"]{--c:#F2788F}[data-score="2"]{--c:#FFAA8E}[data-score="3"]{--c:#FFD25E}[data-score="4"]{--c:#A8D5A2}[data-score="5"]{--c:#4CC380}
+.bt-word{font:800 14px/1.2 Nunito;color:var(--c);text-align:right}
+[data-score="0"] .bt-word{font-weight:600}
+.bt-ends{width:250px;margin:0 0 2px auto;display:flex;justify-content:space-between;color:var(--sub);font-size:13.5px}
+.bt-dots{display:flex;width:250px}
+.bt-dots label{position:relative;flex:1;height:50px;display:grid;place-items:center;cursor:pointer}
+.bt-dots label>*{grid-area:1/1}
 .bt-dots input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
-.bt-dots svg{width:27px;height:27px;transform:rotate(-90deg);transition:scale .25s cubic-bezier(.2,.8,.2,1);pointer-events:none}
-.bt-dots circle{fill:none;stroke-width:3.4}
-.bt-dots .a{stroke:rgba(255,255,255,.17)}
-.bt-dots .b{stroke:#8873C4;transition:stroke .2s}
-.bt-dots input:checked~svg{scale:1.22}
-.bt-dots input:checked~svg .b{stroke:#CBBBFF;stroke-width:4.2}
-.bt-dots input:focus-visible~svg{outline:3px solid var(--violet-d);outline-offset:5px;border-radius:50%}
+.bt-dots svg{width:42px;height:42px;transform:rotate(-90deg);pointer-events:none}
+.bt-dots circle{fill:none;stroke-width:3}
+.bt-dots .a{stroke:#45414F;transition:stroke .18s}
+.bt-dots label:hover .a{stroke:#6B6578}
+.bt-dots .b{stroke:var(--c);stroke-width:4.5;stroke-dasharray:0 200;opacity:0;transition:stroke-dasharray .45s cubic-bezier(.3,.7,.2,1)}
+.bt-dots span{font:800 15px/1 Nunito;color:#A9A4B5;pointer-events:none;transition:color .18s}
+.bt-dots input:checked~span{color:#fff}
+.bt-dots input:checked~svg .b{opacity:1}
+.bt-dots input:checked~svg .s1{stroke-dasharray:20 200}.bt-dots input:checked~svg .s2{stroke-dasharray:40 200}.bt-dots input:checked~svg .s3{stroke-dasharray:60 200}.bt-dots input:checked~svg .s4{stroke-dasharray:80 200}.bt-dots input:checked~svg .s5{stroke-dasharray:101 200}
+.bt-dots input:focus-visible~svg{outline:3px solid var(--violet-d);outline-offset:2px;border-radius:50%}
 #bt-more:not(:empty){margin-top:14px}
 #bt-more .bt-rate{animation:rise .4s cubic-bezier(.2,.7,.2,1) both}
 
@@ -120,20 +127,26 @@ input:checked~.bt-box svg{opacity:1;scale:1}
   .bt-head>div:last-child{flex:1;min-width:0}
   .bt-part{padding:22px 18px 24px;border-radius:24px}
   .bt-rate{grid-template-columns:minmax(0,1fr) auto}
-  .bt-dots{grid-column:1/-1;grid-row:2;justify-content:space-between;margin:0 -9px}
-  .bt-dots label{flex:1}
-  .bt-dots svg{width:31px;height:31px}
+  .bt-dots{grid-column:1/-1;grid-row:2;width:auto;margin:0 -5px}
+  .bt-ends{width:auto;margin:0 0 8px}
   .bt-rate+.bt-rate{margin-top:14px}
   .bt-go .btn{width:100%}
   .bt-go{justify-content:center}
 }
+@media (min-width:860px) and (max-width:1060px){
+  .bt-rate{grid-template-columns:minmax(0,1fr) auto}
+  .bt-dots{grid-column:1/-1;grid-row:2;width:auto;margin:0 -5px}
+  .bt-ends{width:auto;margin:0 0 8px}
+  .bt-rate+.bt-rate{margin-top:14px}
+}
 @media (prefers-reduced-motion:reduce){
-  .lit,[data-closed] .gap,.bt-dots svg,.bt-box svg,.bt-anon,.bt-chips button{transition:none}
+  .lit,[data-closed] .gap,.bt-dots .b,.bt-box svg,.bt-anon,.bt-chips button{transition:none}
   [data-closed] svg,#bt-more .bt-rate{animation:none}
   [data-closed] svg{filter:drop-shadow(0 0 18px rgba(156,125,255,.5))}
 }
 @media (forced-colors:active){
-  .bt-dots .b{stroke:GrayText}.bt-dots input:checked~svg .b{stroke:Highlight}
+  .bt-dots .a{stroke:GrayText}.bt-dots .b{stroke:Highlight}
   .rest{stroke:GrayText}.lit,.gap{stroke:Highlight}
   .bt-chips [aria-pressed="true"]{background:Highlight;color:HighlightText;forced-color-adjust:none}
 }
+@media (max-width:360px){.bt-page .nav .in{gap:7px}.nav-ring.bt-mini{width:28px;height:28px}}

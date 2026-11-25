@@ -43,7 +43,7 @@
     for (let n = 1; n <= 5; n++) {
       const l = el('label'); const i = el('input'); i.type = 'radio'; i.name = 'r-' + key; i.value = n; i.setAttribute('aria-label', WORDS[n] + ', ' + n + ' of 5');
       l.append(i);
-      l.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="a" cx="12" cy="12" r="8.8"/><circle class="b" cx="12" cy="12" r="8.8" pathLength="100" stroke-dasharray="' + n * 20 + ' 100"/></svg>');
+      l.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 44 44" aria-hidden="true"><circle class="a" cx="22" cy="22" r="18"/><circle class="b s' + n + '" cx="22" cy="22" r="18" pathLength="100"/></svg><span aria-hidden="true">' + n + '</span>');
       // A second tap on the same ring takes it back.
       let was = false;
       l.addEventListener('pointerdown', () => { was = i.checked; });
@@ -52,7 +52,7 @@
       i.addEventListener('keydown', (e) => { if (e.key === 'Backspace' || e.key === 'Delete') { i.checked = false; delete scores[key]; show(); changed(); } });
       dots.append(l);
     }
-    const show = () => { w.textContent = WORDS[scores[key] || 0]; f.querySelectorAll('input').forEach((x) => { x.checked = Number(x.value) === scores[key]; }); };
+    const show = () => { const v = scores[key] || 0; w.textContent = v ? WORDS[v] : 'Tap to rate'; f.dataset.score = v; f.querySelectorAll('input').forEach((x) => { x.checked = Number(x.value) === scores[key]; }); };
     f.append(lab, w, dots); show();
     return f;
   }
