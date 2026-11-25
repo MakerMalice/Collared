@@ -62,7 +62,7 @@
 .bt-wishes li:focus-within{border-color:var(--violet-d);box-shadow:0 0 0 4px rgba(116,68,255,.32)}
 .bt-wishes li.bad{border-color:var(--err)}
 .bt-wishes li::before{content:"";flex:none;width:13px;height:13px;margin-top:18px;border:3px solid var(--violet-d);border-radius:50%;box-sizing:border-box}
-.bt-wishes textarea{flex:1;min-width:0;border:0;background:none;color:var(--text);font:500 16px/1.45 Nunito;padding:13px 8px 13px 12px;resize:none;overflow:hidden;outline:none;display:block}
+.bt-wishes textarea{flex:1;min-width:0;min-height:50px;border:0;background:none;color:var(--text);font:500 16px/1.45 Nunito;padding:13px 8px 13px 12px;resize:none;overflow:hidden;outline:none;display:block}
 .bt-wishes textarea::placeholder{color:var(--sub);opacity:1}
 .bt-wishes button{flex:none;width:46px;height:48px;border:0;background:none;color:var(--sub);cursor:pointer;border-radius:14px}
 .bt-wishes button:hover{color:var(--text)}

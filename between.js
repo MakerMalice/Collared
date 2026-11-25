@@ -72,7 +72,8 @@
   // ── wishes ──
   const list = $('bt-wishes');
   const areas = () => [...list.querySelectorAll('textarea')];
-  const grow = (t) => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; };
+  // Not laid out yet (a hidden tab, a page still opening): leave it to the CSS, and measure when it is.
+  const grow = (t) => { t.style.height = ''; if (t.offsetWidth && t.scrollHeight > t.offsetHeight) t.style.height = t.scrollHeight + 2 + 'px'; };
   function number() { areas().forEach((t, i) => { t.setAttribute('aria-label', 'Wish ' + (i + 1)); t.nextSibling.setAttribute('aria-label', 'Remove wish ' + (i + 1)); t.nextSibling.hidden = areas().length === 1 && !t.value; }); $('bt-add').hidden = areas().length >= MAX.wishes; }
   function wish(text, after) {
     const li = el('li'), t = el('textarea'); t.rows = 1; t.value = text || ''; t.setAttribute('enterkeyhint', 'next'); t.setAttribute('aria-describedby', 'e-wish'); t.placeholder = list.children.length ? 'And another' : 'I wish the app could';
@@ -303,6 +304,15 @@
     if (!sure) { b.textContent = 'Tap again to clear it all'; sure = setTimeout(() => { sure = 0; b.textContent = 'Start over'; }, 4000); return; }
     clearTimeout(sure); sure = 0; b.textContent = 'Start over'; reset(); scrollTo({ top: 0 }); $('main').focus({ preventScroll: true });
   });
+
+  // Any change of width (a Duo opening, a turn, the first layout) measures every box again.
+  let wide = 0;
+  const regrow = () => { if (form.offsetWidth) { wide = form.offsetWidth; areas().forEach(grow); grow(bad); } };
+  if ('ResizeObserver' in window) new ResizeObserver(() => { if (form.offsetWidth !== wide) requestAnimationFrame(regrow); }).observe(form);
+  else addEventListener('resize', regrow);
+  addEventListener('pageshow', regrow);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) regrow(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(regrow);
 
   // ── what was left here last time ──
   let d = null;
