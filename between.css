@@ -75,10 +75,14 @@ textarea.tq-input{display:block;resize:none;min-height:132px;overflow:hidden}
 .tq-input[aria-invalid="true"]{border-color:var(--err)}
 .bt-count{font-size:14px;color:var(--sub);margin:8px 0 0;text-align:right}
 .bt-count.over{color:var(--err);font-weight:700}
-.bt-pic{display:flex;gap:18px;align-items:center}
-.bt-pic[hidden]{display:none}
-.bt-pic img{width:104px;height:132px;object-fit:cover;border-radius:16px;border:1px solid var(--field-line)}
-.bt-pic p{margin:0 0 12px;color:var(--sub);font-size:15px}
+.bt-pics{list-style:none;margin:0 0 12px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.bt-pics[hidden]{display:none}
+.bt-pics li{position:relative;aspect-ratio:3/4;border-radius:16px;overflow:hidden;background:var(--field);border:1px solid var(--field-line)}
+.bt-pics img{width:100%;height:100%;object-fit:cover}
+.bt-pics button{position:absolute;top:0;right:0;width:44px;height:44px;border:0;padding:0;background:none;cursor:pointer;display:grid;place-items:center}
+.bt-pics button span{width:28px;height:28px;border-radius:50%;background:rgba(14,10,26,.82);display:grid;place-items:center}
+.bt-pics button:focus-visible{outline-offset:-4px;border-radius:14px}
+.bt-pics svg{width:13px;height:13px;stroke:#fff;stroke-width:3;stroke-linecap:round}
 
 .bt-who{border-color:rgba(183,162,255,.34)}
 .bt-name{transition:opacity .25s}

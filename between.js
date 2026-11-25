@@ -1,11 +1,11 @@
 /* Collared · /between. Testers rate the app, list wishes, say what they don't like. Posts once, to the app's own function
    (`tester-note`), which hands it to the owner's Discord. No cookies, no analytics, nothing about who. The unsent draft stays
-   in this browser and goes when it sends. A picture is redrawn here first, so its location and camera details never leave. */
+   in this browser and goes when it sends. Pictures are redrawn here first, so their location and camera details never leave. */
 (() => {
   const ENDPOINT = 'https://msuqgzmyzmfonfexzfyu.supabase.co/functions/v1/tester-note';
   const KEY = 'collared-between-draft';
   const BITS = 14;
-  const MAX = { wishes: 20, wish: 300, bad: 4000, name: 40, pic: 1300000 };
+  const MAX = { wishes: 20, wish: 300, bad: 4000, name: 40, pic: 700000, batch: 10, bytes: 4000000 };
   const MAIN = [['look', 'Look and feel'], ['easy', 'Easy to use'], ['steady', 'Fast and steady']];
   const MORE = [['tasks', 'Tasks'], ['rewards', 'Rewards'], ['held', 'Held'], ['location', 'Location'], ['glimpses', 'Glimpses'], ['messages', 'Messages'], ['journal', 'Journal'], ['reading', 'Read Together'], ['movement', 'Movement'], ['care', 'Care'], ['studio', 'Sub Studio'], ['social', 'Social']];
   const WORDS = ['', 'Not for me', 'Rough', 'It’s fine', 'Good', 'Love it'];
@@ -22,7 +22,7 @@
     return [h.slice(0, 8), h.slice(8, 12), h.slice(12, 16), h.slice(16, 20), h.slice(20)].join('-');
   };
 
-  let scores = {}, used = [], picture = null, picUrl = '', id = uuid(), tried = '', sending = false;
+  let scores = {}, used = [], pictures = [], ids = [], id = uuid(), tried = '', sending = false;
 
   // ── the ring ──
   const rings = [$('bt-ring'), $('bt-ring2')];
@@ -129,34 +129,52 @@
     return first;
   }
 
-  // ── the picture: redrawn here, so only its pixels leave ──
-  const file = $('bt-file');
+  // ── the pictures: each one redrawn here, so only its pixels leave. One at a time, so a phone isn't flooded ──
+  const file = $('bt-file'), pics = $('bt-pics'), addText = $('bt-addpic').lastChild;
   $('bt-addpic').addEventListener('click', () => file.click());
-  $('bt-unpic').addEventListener('click', () => { unpic(); changed(); $('bt-addpic').focus(); });
-  function unpic() { picture = null; if (picUrl) URL.revokeObjectURL(picUrl); picUrl = ''; $('bt-pic').hidden = true; $('bt-addpic').hidden = false; file.value = ''; say('e-pic', ''); }
+  function dropPics() { pictures.forEach((p) => URL.revokeObjectURL(p.url)); pictures = []; pics.replaceChildren(); pics.hidden = true; file.value = ''; say('e-pic', ''); }
   const load = (f) => new Promise((res, rej) => { const u = URL.createObjectURL(f), i = new Image(); i.onload = () => { res(i); URL.revokeObjectURL(u); }; i.onerror = () => { URL.revokeObjectURL(u); rej(new Error('picture')); }; i.src = u; });
-  let turn = 0;
-  file.addEventListener('change', async () => {
-    const f = file.files[0]; if (!f) return;
-    const mine = ++turn;
-    say('e-pic', ''); $('bt-addpic').lastChild.textContent = 'Getting it ready';
-    try {
-      const img = await load(f);
-      let side = 1600, q = 0.84, blob = null;
-      for (let k = 0; k < 6; k++) {
-        const s = Math.min(1, side / Math.max(img.naturalWidth, img.naturalHeight));
-        const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(img.naturalWidth * s)); c.height = Math.max(1, Math.round(img.naturalHeight * s));
-        const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0, c.width, c.height);
-        blob = await new Promise((r) => c.toBlob(r, 'image/jpeg', q));
-        if (blob && blob.size <= MAX.pic) break;
-        side *= 0.8; q -= 0.06;
-      }
+  const label = () => pics.querySelectorAll('li').forEach((li, i) => { li.firstChild.alt = 'Picture ' + (i + 1); li.lastChild.setAttribute('aria-label', 'Remove picture ' + (i + 1)); });
+  async function redraw(f) {
+    const img = await load(f);
+    let side = 1600, q = 0.82, blob = null;
+    for (let k = 0; k < 8; k++) {
+      const s = Math.min(1, side / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(img.naturalWidth * s)); c.height = Math.max(1, Math.round(img.naturalHeight * s));
+      const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0, c.width, c.height);
+      blob = await new Promise((r) => c.toBlob(r, 'image/jpeg', q));
+      c.width = c.height = 0;
+      if (blob && blob.type === 'image/jpeg' && blob.size <= MAX.pic) return blob;
+      side *= 0.85; q = Math.max(0.55, q - 0.05);
+    }
+    throw new Error('picture');
+  }
+  function showPic(blob) {
+    const p = { blob, url: URL.createObjectURL(blob) };
+    const li = el('li'), im = el('img'), x = el('button'); im.src = p.url; x.type = 'button';
+    x.innerHTML = '<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></span>';
+    x.addEventListener('click', () => {
+      const i = pictures.indexOf(p); pictures.splice(i, 1); URL.revokeObjectURL(p.url); li.remove(); pics.hidden = !pictures.length; label(); changed();
+      $('bt-live').textContent = 'Picture removed.'; (pics.querySelectorAll('button')[Math.min(i, pictures.length - 1)] || $('bt-addpic')).focus();
+    });
+    li.append(im, x); pictures.push(p); pics.append(li); pics.hidden = false; label();
+  }
+  let turn = 0, queue = Promise.resolve(), waiting = 0;
+  file.addEventListener('change', () => {
+    const fs = [...file.files]; file.value = ''; if (!fs.length) return;
+    const mine = turn; let bad = 0; waiting += fs.length; say('e-pic', '');
+    const tell = () => { addText.textContent = waiting ? 'Getting ' + waiting + ' ready' : pictures.length ? 'Add more' : 'Add pictures'; };
+    tell();
+    fs.forEach((f) => { queue = queue.then(async () => {
       if (mine !== turn) return;
-      if (!blob || blob.size > MAX.pic) throw new Error('picture');
-      unpic(); picture = blob; picUrl = URL.createObjectURL(blob); $('bt-img').src = picUrl; $('bt-pic').hidden = false; $('bt-addpic').hidden = true;
-      $('bt-live').textContent = 'Picture added.'; changed();
-    } catch { if (mine === turn) { unpic(); say('e-pic', 'That picture couldn’t be opened here. A screenshot or a JPEG will work.'); } }
-    $('bt-addpic').lastChild.textContent = 'Add one picture';
+      try { const b = await redraw(f); if (mine === turn) { showPic(b); changed(); } } catch { bad++; }
+      if (mine === turn) { waiting--; tell(); }
+    }); });
+    queue = queue.then(() => {
+      if (mine !== turn) return;
+      $('bt-live').textContent = pictures.length + (pictures.length === 1 ? ' picture added.' : ' pictures added.');
+      if (bad) say('e-pic', (bad === 1 ? 'One picture' : bad + ' pictures') + ' couldn’t be opened here. A screenshot or a JPEG will work.');
+    });
   });
   const base64 = (blob) => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result).split(',')[1]); r.onerror = rej; r.readAsDataURL(blob); });
 
@@ -165,25 +183,25 @@
   const words = () => ({ scores, used, wishes: wishes(), bad: bad.value, name: nameBox.value, anon: anon.checked });
   let later = 0;
   function changed() {
-    const w = words(), some = Object.keys(scores).length || w.wishes.length || w.bad.trim() || picture;
+    const w = words(), some = Object.keys(scores).length || w.wishes.length || w.bad.trim() || pictures.length;
     light([Object.keys(scores).length > 0, w.wishes.length > 0, !!w.bad.trim()]);
     $('bt-clear').hidden = !(some || used.length || w.name || w.anon);
     say('bt-error', '');
     // Changed since the last try: it is a new note, so an answer about the old one can't swallow it.
-    if (tried && tried !== sig()) { id = uuid(); tried = ''; }
+    if (tried && tried !== sig()) { id = uuid(); ids = []; tried = ''; }
     clearTimeout(later); later = setTimeout(save, 250);
     work();
   }
   function save() { try { localStorage.setItem(KEY, JSON.stringify({ ...words(), id, tried })); } catch { /* private window */ } }
   const forget = () => { clearTimeout(later); try { localStorage.removeItem(KEY); } catch { /* private window */ } };
-  const sig = () => JSON.stringify([words(), picture ? picture.size : 0]);
+  const sig = () => JSON.stringify([words(), pictures.map((p) => p.blob.size)]);
   addEventListener('pagehide', () => { if (!form.hidden && !$('bt-clear').hidden) save(); });
 
   // ── the small piece of work that makes floods slow, done while they write ──
   let job = null;
-  function work() {
-    if (job && job.id === id) return job.p;
-    const j = { id, p: null }; job = j;
+  function work(want = id) {
+    if (job && job.id === want) return job.p;
+    const j = { id: want, p: null }; job = j;
     j.p = (async () => {
       const enc = new TextEncoder();
       for (let n = 0; ; n += 64) {
@@ -204,39 +222,55 @@
   function stop(text) { say('bt-error', text); $('bt-error').scrollIntoView({ block: 'nearest', behavior: still() ? 'auto' : 'smooth' }); }
   const KEPT = ' Your words are safe on this device. Press Send again in a bit.';
 
+  async function post(text) {
+    let error = 'later';
+    for (let k = 0; k < 4; k++) {
+      const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 90000);
+      try {
+        const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: text, credentials: 'omit', referrerPolicy: 'no-referrer', cache: 'no-store', signal: ctl.signal });
+        const d = await r.json().catch(() => ({}));
+        error = r.ok && d.ok ? '' : d.error || 'later';
+      } finally { clearTimeout(t); }
+      if (error !== 'busy') break;
+      await wait(4000);
+    }
+    return error;
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (sending) return;
     say('bt-error', '');
     const w = words();
-    if (!Object.keys(scores).length && !w.wishes.length && !w.bad.trim() && !picture) { stop('Nothing here yet. One rating, one wish or one sentence is enough.'); return; }
+    if (!Object.keys(scores).length && !w.wishes.length && !w.bad.trim() && !pictures.length && !waiting) { stop('Nothing here yet. One rating, one wish or one sentence is enough.'); return; }
     const first = check();
     if (first) return go(first);
     if (!w.anon && !w.name.trim()) { who.classList.add('need'); say('e-who', 'Type your Discord name, or tick Stay anonymous.'); return go(nameBox); }
     if (navigator.onLine === false) return stop('You’re offline.' + KEPT);
     busy(true);
-    const note = { id, scores: { ...scores }, wishes: w.wishes, dislike: w.bad.trim(), website: $('bt-website').value };
-    if (w.anon) note.anonymous = true; else note.name = w.name.trim();
+    while (waiting) { await queue; }
+    // Discord takes ten pictures a message: a big set goes as several, each with its own id, so a second press never repeats one.
+    const sets = [[]]; let bytes = 0;
+    pictures.forEach((p) => { if (sets[sets.length - 1].length >= MAX.batch || (bytes && bytes + p.blob.size > MAX.bytes)) { sets.push([]); bytes = 0; } sets[sets.length - 1].push(p); bytes += p.blob.size; });
+    while (ids.length < sets.length) ids.push(ids.length ? uuid() : id);
     tried = sig(); save();
     let error = 'later';
     try {
-      note.work = await work();
-      if (picture) note.picture = await base64(picture);
-      const text = JSON.stringify(note);
-      for (let k = 0; k < 4; k++) {
-        const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 45000);
-        try {
-          const r = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: text, credentials: 'omit', referrerPolicy: 'no-referrer', cache: 'no-store', signal: ctl.signal });
-          const d = await r.json().catch(() => ({}));
-          error = r.ok && d.ok ? '' : d.error || 'later';
-        } finally { clearTimeout(t); }
-        if (error !== 'busy') break;
-        await wait(4000);
+      for (let s = 0; s < sets.length; s++) {
+        if (sets.length > 1) send.textContent = 'Sending ' + (s + 1) + ' of ' + sets.length;
+        const note = { id: ids[s], website: $('bt-website').value };
+        if (s === 0) Object.assign(note, { scores: { ...scores }, wishes: w.wishes, dislike: w.bad.trim() });
+        if (w.anon) note.anonymous = true; else note.name = w.name.trim();
+        if (sets.length > 1) Object.assign(note, { note: id.slice(0, 4), part: s + 1, of: sets.length });
+        if (sets[s].length) note.pictures = await Promise.all(sets[s].map((p) => base64(p.blob)));
+        note.work = await work(ids[s]);
+        error = await post(JSON.stringify(note));
+        if (error) break;
       }
     } catch { error = navigator.onLine === false ? 'offline' : 'later'; }
     busy(false);
     if (!error) return done();
-    if (error === 'bad_picture' || error === 'too_large') { say('e-pic', 'That picture couldn’t be sent. Try another, or send without it.'); return go($('bt-unpic')); }
+    if (error === 'bad_picture' || error === 'too_large') { say('e-pic', 'One of those pictures couldn’t be sent. Remove it and press Send again.'); return go($('bt-addpic')); }
     const why = { offline: 'You’re offline.', full: 'A lot of notes came in at once.', off: 'This page is resting right now.', busy: 'It’s still on its way.' }[error] || 'It didn’t go through.';
     stop(why + KEPT);
     send.focus({ preventScroll: true });
@@ -256,7 +290,7 @@
     $('bt-main').replaceChildren(); MAIN.forEach(([k, t]) => $('bt-main').append(rate(k, t)));
     list.replaceChildren(); wish('');
     bad.value = ''; bad.style.height = ''; nameBox.value = ''; anon.checked = false; who.classList.remove('anon', 'need');
-    turn++; unpic(); id = uuid(); tried = ''; job = null; say('bt-error', ''); check(); light([0, 0, 0]); $('bt-clear').hidden = true;
+    turn++; waiting = 0; dropPics(); addText.textContent = 'Add pictures'; id = uuid(); ids = []; tried = ''; job = null; say('bt-error', ''); check(); light([0, 0, 0]); $('bt-clear').hidden = true;
     forget();
   }
   $('bt-again').addEventListener('click', () => {
